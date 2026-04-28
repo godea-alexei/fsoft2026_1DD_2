@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="XfNO69Vs137E99Mwnja7">
+    <mxGraphModel dx="860" dy="439" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Hvds09JUvx4Q8HG9juac-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Console Interface&amp;nbsp;&lt;div&gt;&lt;br&gt;&lt;div&gt;Menus, input validation, output formatting&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="246" x="354" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Hvds09JUvx4Q8HG9juac-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Application Layer&amp;nbsp;&lt;div&gt;&lt;br&gt;| UserService | SearchService | MusicService      |&lt;br&gt;| PlaylistService | AlbumService | ArtistService  |&lt;br&gt;| PublisherService | PlaybackService |&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="290" x="332" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="Hvds09JUvx4Q8HG9juac-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&amp;nbsp;Domain Layer&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;User | Music | Album | Artist | Publisher&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="310" x="322" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="Hvds09JUvx4Q8HG9juac-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Persistence Layer&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Repositories / FileManager&amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;meter aqui ficheiros com os nomes reais&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="290" x="332" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="Hvds09JUvx4Q8HG9juac-5" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="476.5" y="150" as="sourcePoint" />
+            <mxPoint x="476.5" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hvds09JUvx4Q8HG9juac-7" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="476.5" y="350" as="sourcePoint" />
+            <mxPoint x="476.5" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hvds09JUvx4Q8HG9juac-8" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="476.5" y="570" as="sourcePoint" />
+            <mxPoint x="476.5" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
