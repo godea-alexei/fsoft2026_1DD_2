@@ -1,11 +1,11 @@
 
 #include "View.h"
-#include "AlbumView.h"
-#include "ArtistaView.h"
+//#include "AlbumView.h"
+//#include "ArtistaView.h"
 #include "ContaView.h"
-#include "ListaReproducaoView.h"
-#include "MusicaView.h"
-#include "PesquisaView.h"
+//#include "ListaReproducaoView.h"
+//#include "MusicaView.h"
+//#include "PesquisaView.h"
 #include "Utils.h"
 #include <iostream>
 #include <string>
@@ -16,12 +16,14 @@ class Controller{
 
 	private:
 		View view;
-		AlbumView albumView;
-		ArtistaView artistaView;
 		ContaView contaView;
+		/*AlbumView albumView;
+		ArtistaView artistaView;
+
 		ListaReproducaoView listadereproducao;
 		MusicaView musicaView;
 		PesquisaView pesquisaView;
+		*/
 		Utils utils;
 
 		void runConta();
