@@ -40,12 +40,7 @@ add_executable(Gestor_e_Biblioteca_de_Musica
         Headers/model/Pessoa.h
         Headers/model/Utilizador.h
         Headers/model/UtilizadorContainer.h
-        Headers/views/Albumview.h
-        Headers/views/ArtistaView.h
         Headers/views/ContaView.h
-        Headers/views/ListaReproducaoView.h
-        Headers/views/MusicaView.h
-        Headers/views/PesquisaView.h
         Headers/views/Utils.h
         Headers/views/View.h
         Headers/views/BaseView.h
@@ -69,12 +64,7 @@ add_executable(Gestor_e_Biblioteca_de_Musica
         Sources/model/Pessoa.cpp
         Sources/model/Utilizador.cpp
         Sources/model/UtilizadorContainer.cpp
-        Sources/views/AlbumView.cpp
-        Sources/views/ArtistaView.cpp
         Sources/views/ContaView.cpp
-        Sources/views/ListaReproducaoView.cpp
-        Sources/views/MusicaView.cpp
-        Sources/views/PesquisaView.cpp
         Sources/views/Utils.cpp
         Sources/views/View.cpp
         Sources/views/BaseView.cpp
