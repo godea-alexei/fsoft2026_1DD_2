@@ -70,7 +70,9 @@ add_executable(Gestor_e_Biblioteca_de_Musica
         Sources/views/BaseView.cpp
         main.cpp
         Sources/views/BaseView.cpp
-        Headers/views/BaseView.h)
+        Headers/views/BaseView.h
+        Sources/repo/Repositorio.cpp
+        Headers/repo/Repositorio.h)
 
 target_link_libraries(Gestor_e_Biblioteca_de_Musica winmm)
 
