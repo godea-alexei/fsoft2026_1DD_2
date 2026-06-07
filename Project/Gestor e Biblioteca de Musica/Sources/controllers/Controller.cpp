@@ -130,37 +130,7 @@ void Controller::runMusica() {
             case 2:
             {
 
-                string nome;
-                int dur;
-                int ano;
-                string letra;
-                string genero;
-                string caminho;
-                string artst;
-                string album;
-
-                cout << " Por favor insira (sem espaços): "  << endl;
-
-                cout << "Nome: ";
-                cin >> nome;
-                cout << "\n Duracao em minutos: ";
-                cin >> dur;
-                cout << "\n Ano de lancamento: ";
-                cin >> ano;
-                cout << "\n Letra: ";
-                cin >> letra;
-                cout << "\n Genero Musical: ";
-                cin >> genero;
-                cout << "\n Caminho absoluto do ficheiro audio: ";
-                cin >> caminho;
-                cout << "\n Nome do artista: ";
-                cin >> artst;
-                cout << "\n Nome do album: ";
-                cin >> album;
-
-                Musica m = Musica(nome, dur, ano, letra, genero, caminho, artst, album);
-
-                Repositorio::guardarMusica(m);
+               
 
                 break;
 
