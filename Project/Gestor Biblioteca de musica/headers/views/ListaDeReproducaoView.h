@@ -1,8 +1,0 @@
-//
-// Created by faixe on 19/05/2026.
-//
-
-#ifndef LISTADEREPRODUCAOVIEW_H
-#define LISTADEREPRODUCAOVIEW_H
-
-#endif //LISTADEREPRODUCAOVIEW_H

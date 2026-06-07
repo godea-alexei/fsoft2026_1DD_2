@@ -1,8 +1,0 @@
-//
-// Created by faixe on 19/05/2026.
-//
-
-#ifndef UTILIZADORCONTAINER_H
-#define UTILIZADORCONTAINER_H
-
-#endif //UTILIZADORCONTAINER_H

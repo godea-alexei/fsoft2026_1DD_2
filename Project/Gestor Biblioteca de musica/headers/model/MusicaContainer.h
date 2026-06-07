@@ -1,7 +1,0 @@
-#ifndef MUSICACONTAINER_H
-#define MUSICACONTAINER_H
-
-#endif //MUSICACONTAINER_H
-
-
-
