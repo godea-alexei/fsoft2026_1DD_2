@@ -1,6 +1,0 @@
-#ifndef LISTAREPRODUCAOCONTAINER_H
-#define LISTAREPRODUCAOCONTAINER_H
-
-class ListaReproducaoContainer {};
-
-#endif //LISTAREPRODUCAOCONTAINER_H

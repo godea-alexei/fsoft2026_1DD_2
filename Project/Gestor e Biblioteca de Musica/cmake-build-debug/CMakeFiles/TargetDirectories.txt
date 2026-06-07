@@ -1,3 +1,0 @@
-C:/Users/godea/Desktop/Gestor e Biblioteca de Musica/cmake-build-debug/CMakeFiles/Gestor_e_Biblioteca_de_Musica.dir
-C:/Users/godea/Desktop/Gestor e Biblioteca de Musica/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/godea/Desktop/Gestor e Biblioteca de Musica/cmake-build-debug/CMakeFiles/rebuild_cache.dir
