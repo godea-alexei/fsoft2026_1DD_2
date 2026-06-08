@@ -1,54 +1,75 @@
-#include "ArtistaContainer.h"
+#include "AlbumContainer.h"
+#include "BaseView.h"
 #include <iostream>
 using namespace std;
 
-ArtistaContainer::ArtistaContainer() {
+AlbumContainer::AlbumContainer() {
 }
 
-ArtistaContainer::~ArtistaContainer() {
-    for (int i = 0; i < (int)artistas.size(); i++) {
-        delete artistas[i];
+AlbumContainer::~AlbumContainer() {
+    for (Album* a : albuns) {
+        delete a;
     }
-    artistas.clear();
+    albuns.clear();
 }
 
-// Creates a new artist and adds it to the vector.
-void ArtistaContainer::adicionarArtista(string nome) {
-    if (procurarArtista(nome) != nullptr) {
-        cout << "An artist named \"" << nome << "\" already exists." << endl;
+void AlbumContainer::adicionarAlbum() {
+    string nome;
+    cout << "Nome do album: ";
+    getline(cin, nome);
+
+    if (procurarAlbum(nome) != nullptr) {
+        cout << "Ja existe um album chamado \"" << nome << "\"." << endl;
         return;
     }
 
-    // Creates the artist in memory and stores its address in the vector.
-    Artista* novo = new Artista(nome);
-    artistas.push_back(novo);
-    cout << "Artist \"" << nome << "\" added successfully." << endl;
+    int duracao;
+    int dataDeLancamento;
+    cout << "Duracao (em segundos): ";
+    cin >> duracao;
+    cout << "Ano de lancamento: ";
+    cin >> dataDeLancamento;
+    cin.ignore();  // limpa o Enter depois do cin >>
+
+    Album* novo = new Album(nome, duracao, dataDeLancamento);
+    albuns.push_back(novo);
+    cout << "Album \"" << nome << "\" adicionado com sucesso." << endl;
 }
 
-// Searches for an artist by name and removes it from the vector.
-void ArtistaContainer::removerArtista(string nome) {
-    for (int i = 0; i < (int)artistas.size(); i++) {
-        if (artistas[i]->getNome() == nome) {
-            delete artistas[i];                    // frees the memory
-            artistas.erase(artistas.begin() + i);
-            cout << "Artist \"" << nome << "\" removed." << endl;
+void AlbumContainer::removerAlbum() {
+    string nome;
+    cout << "Nome do album a remover: ";
+    getline(cin, nome);
+
+    list<Album*>::iterator it;
+    for (it = albuns.begin(); it != albuns.end(); it++) {
+        if ((*it)->getNome() == nome) {
+            delete *it;
+            albuns.erase(it);
+            cout << "Album \"" << nome << "\" removido." << endl;
             return;
         }
     }
-    cout << "There is no artist named \"" << nome << "\"." << endl;
+    cout << "Nao existe nenhum album chamado \"" << nome << "\"." << endl;
 }
 
-// Searches for an artist by name.
-// Returns the pointer to the artist, or nullptr if it doesn't exist.
-Artista* ArtistaContainer::procurarArtista(string nome) {
-    for (int i = 0; i < (int)artistas.size(); i++) {
-        if (artistas[i]->getNome() == nome) {
-            return artistas[i];
+Album* AlbumContainer::procurarAlbum(string nome) {
+    for (Album* a : albuns) {
+        if (a->getNome() == nome) {
+            return a;
         }
     }
-    return nullptr;   // none found
+    return nullptr;
 }
 
-vector<Artista*>& ArtistaContainer::getAll() {
-    return artistas;
+list<Album*>& AlbumContainer::getAll() {
+    if (albuns.size() == 0) {
+        cout << "Nao existem albuns." << endl;
+    } else {
+        for (Album* a : albuns) {
+            listarAtributos(*a);
+            cout << endl;
+        }
+    }
+    return albuns;
 }
