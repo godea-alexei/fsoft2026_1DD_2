@@ -3,13 +3,16 @@
 #include <string>
 #include <iostream>
 
-Editora::Editora(std::string nom) {
-    this->nome = nom;
+using namespace std;
+
+Editora::Editora() {
 }
 
-Editora::Editora(std::string nom, list<Artista> &artsts) {
+Editora::Editora(string nome) {
+    this->nome = nome;
+}
 
-    this->nome = nom;
-    this->artistas = artsts;
+string Editora::getNome() const {
+    return nome;
 
 }

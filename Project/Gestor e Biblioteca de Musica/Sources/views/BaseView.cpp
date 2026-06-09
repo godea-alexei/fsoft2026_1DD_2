@@ -91,7 +91,7 @@ void listarAtributos(Musica musica)
 void listarAtributos(Editora editora)
 {
 
-    std::cout << "Nome da Editora: " << editora.nome << std::endl;
+    std::cout << "Nome da Editora: " << editora.getNome() << std::endl;
     std::cout << "Lista de Artistas:" << std::endl;
     if (editora.artistas.size() > 0) {
         for (const auto& artista : editora.artistas) {
@@ -101,3 +101,4 @@ void listarAtributos(Editora editora)
         std::cout << "  Nenhum artista associado a editora" << std::endl;
     }
 }
+

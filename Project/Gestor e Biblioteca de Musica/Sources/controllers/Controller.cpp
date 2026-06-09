@@ -4,12 +4,15 @@
 #include "Controller.h"
 #include "Utils.h"
 #include "../../Headers/repo/Repositorio.h"
+#include "ContaView.h"
+#include "UtilizadorContainer.h"
+#include "EditoraContainer.h"
 using namespace std;
 
 Controller::Controller(){}
 
 //implementa os menus
-void Controller::run(){
+void Controller::runConta(){
     int op = -1;
     do{
         op = this->view.menuPrincipal();
@@ -29,6 +32,7 @@ void Controller::run(){
             case 7: runPartilhar();
                 break;
             default:
+                utilizadorAtual = nullptr;
                 break;
         }
     }while(op!=0);
@@ -38,19 +42,76 @@ void Controller::run(){
 // ─────────────────────────────────────────────
 //  CONTA
 // ─────────────────────────────────────────────
-void Controller::runConta() {
+void Controller::run() {
     int op = -1;
     do {
         op = this->view.menuConta();
         switch(op) {
-            case 1: // Criar Conta
+            case 1: runRegisto();
                 break;
-            case 2: // Iniciar Sessao
+            case 2: runLogin();
                 break;
             default:
                 break;
         }
     } while(op != 0);
+}
+
+// ─────────────────────────────────────────────
+//  Gestão de Registo
+// ─────────────────────────────────────────────
+
+void Controller::runRegisto() {
+    ContaView contaView;
+
+    string nome = contaView.getNome();
+    int anoNascimento = contaView.getAnoNascimento();
+    string palavraPasse = contaView.getPalavraPasse();
+    string palavraPasseConfirmation = contaView.getPalavraPasseConfirmation();
+
+    if (utilizadorContainer.existeUtilizador(nome)) {
+        cout << "Já existe um utilizador com o nome " << nome << "." << endl;
+        return;
+    }
+
+    if (!Utilizador::validarPalavraPasse(
+        palavraPasse,
+        palavraPasseConfirmation)) {
+        contaView.falhaRegisto();
+        return;
+    }
+
+    Utilizador utilizador(
+    nome,
+    anoNascimento,
+    palavraPasse);
+
+    utilizadorContainer.adicionarUtilizador(utilizador);
+    contaView.sucessoRegisto();
+}
+
+// ─────────────────────────────────────────────
+//  Gestão de Login
+// ─────────────────────────────────────────────
+void Controller::runLogin() {
+    ContaView contaView;
+    bool isLogged = false;
+
+
+    string nome = contaView.getNome();
+    string palavraPasse = contaView.getPalavraPasse();
+
+    if (utilizadorContainer.autenticar(nome, palavraPasse)) {
+        Utilizador* u = utilizadorContainer.procurarUtilizador(nome);
+        utilizadorAtual = u;
+        contaView.sucessoLogin();
+        cout << "Bem vindo/a, " << nome << "!!" << endl;
+        isLogged = true;
+    }
+    else contaView.falhaLogin();
+
+    if (isLogged == true) runConta();
+
 }
 
 // ─────────────────────────────────────────────
@@ -61,7 +122,7 @@ void Controller::runEscolherPesquisa() {
     do {
         op = this->view.menuEscolhaPesquisa();
         switch(op) {
-            case 1: // Pesquisa (pesquisar musica por campo)
+            case 1: runPesquisa();
                 break;
             case 2: // Pesquisar Album
                 break;
@@ -171,11 +232,44 @@ void Controller::runEditora() {
     do {
         op = this->view.menuEditora();
         switch(op) {
-            case 1: // Ver Editoras
+            case 1:
+                {
+                    const auto& editoras = editoraContainer.getEditoras();
+
+                    if (editoras.empty()) {
+                        cout << "Ainda não foram adicionadas editoras.\n";
+                        break;
+                    }
+
+                    cout << ">>> EDITORAS <<<" << endl;
+                    for (const auto& e : editoras) {
+                        cout << "- " << e.getNome() << endl;
+                    }
+                }
                 break;
-            case 2: // Adicionar Editora
+            case 2:
+                {
+                    string nome = Utils::getString("Digite o nome da editora");
+
+                    if (editoraContainer.existeEditora(nome)) {
+                        cout << "Essa editora já foi adicionada...\n";
+                        break;
+                    }
+
+                    editoraContainer.adicionarEditora(nome);
+                    cout << "Editora adicionada com sucesso!" << endl;
+                }
                 break;
-            case 3: // Remover Editora
+            case 3:
+                {
+                    string nome = Utils::getString("Digite o nome da editora que quer remover");
+
+                    if (editoraContainer.removerEditora(nome)) {
+                        cout << "A editora " << nome << " foi removida com sucesso." << endl;
+                    }
+                    else
+                        cout << "A editora não foi encontrada." << endl;
+                }
                 break;
             default:
                 break;

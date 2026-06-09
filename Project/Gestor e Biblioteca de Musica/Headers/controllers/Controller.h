@@ -1,9 +1,12 @@
 #include "View.h"
 #include "ContaView.h"
 #include "Utils.h"
+#include "UtilizadorContainer.h"
 #include <iostream>
 #include <string>
 #include <list>
+
+#include "EditoraContainer.h"
 
 
 class Controller{
@@ -12,6 +15,10 @@ class Controller{
 		View view;
 		ContaView contaView;
 		Utils utils;
+		UtilizadorContainer utilizadorContainer;
+		EditoraContainer editoraContainer;
+
+		Utilizador* utilizadorAtual = nullptr;
 
 		void runConta();
 		void runPesquisa();
@@ -22,6 +29,9 @@ class Controller{
 		void runEditora();
 		void runArtista();
 		void runPartilhar();
+
+		void runRegisto();
+		void runLogin();
 
 	public:
 		Controller();

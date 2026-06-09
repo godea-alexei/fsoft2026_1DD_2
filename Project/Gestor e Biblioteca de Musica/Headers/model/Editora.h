@@ -1,17 +1,20 @@
 #ifndef EDITORA_H
 #define EDITORA_H
+#include <vector>
+
 #include "Artista.h"
+#include <string>
 
 class Editora {
+public:
+    std::string nome;
+    std::vector<Artista> artistas;
 
-    public:
+    Editora();
+    Editora(std::string nome);
 
-        std::string nome;
-        list<Artista> artistas;
+    std::string getNome() const;
 
-        Editora(std::string nom);
-        Editora(std::string nom, list<Artista> &artsts);
-        ~Editora();
 
 
 };
