@@ -165,6 +165,7 @@ void Controller::runMusica() {
                     break;
 
                 }
+
             case 3: // Remover Musica
                 {
                     string nome;
