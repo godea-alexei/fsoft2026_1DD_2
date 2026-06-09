@@ -9,6 +9,7 @@ class Editora {
         std::string nome;
         list<Artista> artistas;
 
+        Editora();
         Editora(std::string nom);
         Editora(std::string nom, list<Artista> &artsts);
         ~Editora();

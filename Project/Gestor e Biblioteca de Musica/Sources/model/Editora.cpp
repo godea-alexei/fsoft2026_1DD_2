@@ -3,6 +3,9 @@
 #include <string>
 #include <iostream>
 
+
+Editora::Editora(){}
+
 Editora::Editora(std::string nom) {
     this->nome = nom;
 }

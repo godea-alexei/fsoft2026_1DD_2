@@ -18,6 +18,7 @@ class Musica{
 
         std::string verLetra();
         void reproduzir();
+        Musica();
         Musica(std::string nom, int dur, int ano, std::string let, std::string gen, std::string cam, string artst, string nomeAlbm);
         ~Musica();
 
