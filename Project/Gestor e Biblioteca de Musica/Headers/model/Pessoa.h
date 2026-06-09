@@ -3,14 +3,12 @@
 #include <string>
 
 class Pessoa{
-
     public:
-
         std::string nome;
         int anoNascimento;
 
-        std::string getNome();
-        int getIdade();
+        std::string getNome() const;
+        int getIdade () const;
         Pessoa();
         Pessoa(std::string nome, int ano);
         ~Pessoa();

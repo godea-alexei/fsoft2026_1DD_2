@@ -1,7 +1,23 @@
-#ifndef VIEWCONTA_H
-#define VIEWCONTA_H
+#ifndef CONTAVIEW_H
+#define CONTAVIEW_H
+
+#include <string>
 
 
-class ContaView {};
+class ContaView {
+public:
+    ContaView();
 
-#endif //VIEWCONTA_H
+    std::string getNome();
+    int getAnoNascimento();
+    std::string getPalavraPasse();
+    std::string getPalavraPasseConfirmation();
+
+    void sucessoRegisto();
+    void sucessoLogin();
+    void falhaRegisto();
+    void falhaLogin();
+};
+
+
+#endif //CONTAVIEW_H

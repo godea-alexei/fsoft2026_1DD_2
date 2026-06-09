@@ -1,8 +1,5 @@
 #ifndef VIEW_H
 #define VIEW_H
-using namespace std;
-
-
 
 class View{
 
@@ -18,6 +15,7 @@ class View{
         int menuArtista();
         int menuEditora();
         int menuLista();
+
 
 };
 
