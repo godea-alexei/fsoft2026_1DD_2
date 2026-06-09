@@ -2,9 +2,10 @@
 #include <string>
 #include <iostream>
 #include <windows.h>
-#pragma comment(lib, "winmm.lib")
+//#pragma comment(lib, "winmm.lib")
 using namespace std;
 
+Musica::Musica(){}
 
 Musica::Musica(string nom, int dur, int ano, string let, string gen, string cam, string artst, string nomeAlbm){
     this->nome = nom;
