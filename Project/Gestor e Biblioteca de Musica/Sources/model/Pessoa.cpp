@@ -6,8 +6,8 @@ Pessoa::Pessoa() {
 
 }
 
-Pessoa::Pessoa(std::string nom, int ano) {
-    this->nome = nom;
+Pessoa::Pessoa(std::string nome, int ano) {
+    this->nome = nome;
     this->anoNascimento = ano;
 }
 
@@ -25,4 +25,9 @@ int Pessoa::getIdade() const{
     return ano - anoNascimento;
 
 }
+
+int Pessoa::getAnoNascimento() const {
+    return anoNascimento;
+}
+
 

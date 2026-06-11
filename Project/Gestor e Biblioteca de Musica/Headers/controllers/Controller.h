@@ -6,7 +6,11 @@
 #include <string>
 #include <list>
 
+#include "AlbumContainer.h"
+#include "Artistacontainer.h"
 #include "EditoraContainer.h"
+#include "ListaReproducaoContainer.h"
+#include "repo/Repositorio.h"
 
 
 class Controller{
@@ -17,6 +21,11 @@ class Controller{
 		Utils utils;
 		UtilizadorContainer utilizadorContainer;
 		EditoraContainer editoraContainer;
+		ArtistaContainer artistaContainer;
+		ListaReproducaoContainer listaReproducaoContainer;
+		Repositorio repositorio;
+
+
 
 		Utilizador* utilizadorAtual = nullptr;
 
@@ -32,6 +41,8 @@ class Controller{
 
 		void runRegisto();
 		void runLogin();
+
+		void runRelacionarArtista();
 
 	public:
 		Controller();

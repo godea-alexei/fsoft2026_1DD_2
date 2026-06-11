@@ -3,20 +3,33 @@
 #include <string>
 #include <list>
 #include <Musica.h>
-using namespace  std;
+#include <vector>
+
 
 class ListaReproducao {
+protected:
+    std::string nome;
+    int dataCriacao;
+    vector<Musica> musicas;
 
-
-    public:
-        std::string nome;
-        int duracao;
-        int anoCriacao;
-        list<Musica> musicas;
+public:
 
     ListaReproducao();
-    ListaReproducao(std::string nom, int dur, int ano);
-    ListaReproducao(std::string nom, int dur, int ano, list<Musica> &mus);
+
+    ListaReproducao(std::string nome , int dataCriacao);
+
+    std::string getNome() const;
+
+    int getDataCriacao() const;
+
+    int getDuracao() const;
+
+    void adicionarMusica(const Musica& musica);
+
+    bool removerMusica(const string& titulo);
+
+    const std::vector<Musica>& getMusicas() const;
+
     ~ListaReproducao();
 
 };

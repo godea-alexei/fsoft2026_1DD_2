@@ -14,8 +14,8 @@ class Album : public ListaReproducao {
         string artista;
 
         Album();
-        Album(std::string nom, int dur, int ano, std::string nomeArtst);
-        Album(std::string nom, int dur, int ano, std::list<Musica>& mus, std::string nomeArtst);
+        Album(std::string nome, int duracao, int ano, std::string nomeArtista);
+        Album(std::string nome, int duracao, int ano, std::list<Musica>& mus, std::string nomeArtista);
         ~Album();
 
 };

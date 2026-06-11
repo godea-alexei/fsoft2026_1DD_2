@@ -22,11 +22,11 @@ class Repositorio {
         static string diretorioJSON;
 
         static void carregarMusicas();
-        static void carregarEditoras();
-        static void carregarArtistas();
+        std::vector<Editora> carregarEditoras();
+        std::vector<Artista> carregarArtistas();
         static void carregarAlbums();
-        static void carregarUtilizadores();
-        static void carregarListas();
+        std::vector<Utilizador> carregarUtilizadores();
+        std::vector<ListaReproducao> carregarListas();
         static void carregarAlbuns();
 
         static void guardarMusica(Musica m);

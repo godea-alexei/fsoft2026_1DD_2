@@ -18,6 +18,9 @@ public:
     Artista(std::string nome, int ano, list<Album> &alb);
     ~Artista();
 
+    std::string getNome() const;
+    int getAno();
+
 };
  
 #endif

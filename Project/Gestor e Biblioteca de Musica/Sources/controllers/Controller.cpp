@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <ctime>
 #include "Controller.h"
 #include "Utils.h"
 #include "../../Headers/repo/Repositorio.h"
@@ -9,7 +10,16 @@
 #include "EditoraContainer.h"
 using namespace std;
 
-Controller::Controller(){}
+Controller::Controller() {
+    vector<Utilizador> utilizadores = repositorio.carregarUtilizadores();
+    vector<ListaReproducao> listas = repositorio.carregarListas();
+
+    for (const auto& u : utilizadores) {
+        utilizadorContainer.adicionarUtilizador(u);
+    }
+
+
+}
 
 //implementa os menus
 void Controller::runConta(){
@@ -87,6 +97,9 @@ void Controller::runRegisto() {
     palavraPasse);
 
     utilizadorContainer.adicionarUtilizador(utilizador);
+
+    repositorio.guardarUtilizador(utilizador);
+
     contaView.sucessoRegisto();
 }
 
@@ -126,15 +139,69 @@ void Controller::runEscolherPesquisa() {
                 break;
             case 2: // Pesquisar Album
                 break;
-            case 3: // Pesquisar Editora
+            case 3: {
+                    string nome = Utils::getString("Insira o nome da editora");
+                    Editora* editora = editoraContainer.procurar(nome);
+                    if (editora == nullptr) {
+                        cout << "Editora nao encontrada.\n";
+                        break;
+                    }
+                    cout << ">>> " << nome << " <<<" << endl;
+                    const auto& artistas = editora->getArtistas();
+                    if (artistas.empty()) {
+                        cout << "Sem artistas associados.\n";
+                    }
+                    else {
+                        for (const auto& a : artistas) {
+                            cout << "- " << a.getNome() << endl;
+                        }
+                    }
+                    //FALTA METER AQUI O CODIGO DE RELACIONAR ARTISTAS COM EDITORAS
+
+                }
                 break;
-            case 4: // Pesquisar Artista
+            case 4:
+                {
+                    string nome = Utils::getString("Insira o nome do artista");
+                    Artista* artista = artistaContainer.procurarArtista(nome);
+                    if (artista == nullptr) {
+                        cout << "Artista nao encontrado.\n";
+                        break;
+                    }
+                    cout << ">>> " << nome << " <<<" << endl;
+                    // PRIMEIRO FAZER A CLASSE ALBUMS E SO DEPOIS RELACIONAR COM ARTISTA
+                    // const auto& albums = artista->getAlbums();
+                    // if (albums.empty()) {
+                    //     cout << "Sem artistas associados.\n";
+                    // }
+                    // else {
+                    //     for (const auto& a : albums) {
+                    //         cout << "- " << a.getTitulo() << endl;
+                    //     }
+                    // }
+                }
                 break;
             default:
                 break;
         }
     } while(op != 0);
 }
+
+// ─────────────────────────────────────────────
+//  Relacionar Artistas com editoras
+// ─────────────────────────────────────────────
+// void Controller::runRelacionarArtista() {
+//     int opcao = -1;
+//     do {
+//         opcao = this->view.ArtistaEmEditora();
+//         switch(opcao) {
+//             case 1:
+//                 string nomeArtista = Utils::getString("Insira o nome do artista");
+//                 if (Editora->existeArtista)
+//         }
+//     }
+// }
+
 
 // ─────────────────────────────────────────────
 //  PESQUISA  (2º nível — pesquisar música por campo)
@@ -166,11 +233,51 @@ void Controller::runListaReproducao() {
     do {
         op = this->view.menuLista();
         switch(op) {
-            case 1: // Ver Listas de Reproducao
+            case 1: {
+                const auto& listas = listaReproducaoContainer.getListas();
+
+                if (listas.empty()) {
+                    cout << "Ainda nao foram adicionadas listas de reproducao.\n";
+                    break;
+                }
+
+                cout << ">>> LISTAS DE REPRODUCAO <<<" << endl;
+                for (const auto& l : listas) {
+                    cout << "- " << l.getNome() << endl;
+                }
+                }
                 break;
-            case 2: // Adicionar Lista de Reproducao
+            case 2: {
+                string nome = Utils::getString("Digite o nome da Lista de Reproducao");
+
+                if (listaReproducaoContainer.existeLista(nome)) {
+                    cout << "Essa Lista de Reproducao ja foi adicionada...\n";
+                    break;
+                }
+
+                time_t t = time(0);
+                tm* now = localtime(&t);
+                int ano = now->tm_year + 1900;
+
+                ListaReproducao lista(nome, ano);
+
+                listaReproducaoContainer.adicionarLista(lista);
+
+                repositorio.guardarLista(lista);
+
+                cout << "Lista de Reproducao criada com sucesso!" << endl;
+                }
                 break;
-            case 3: // Remover Lista de Reproducao
+            case 3: {
+                    string nome = Utils::getString("Digite o nome da Lista de Reproducao que quer remover");
+
+                    if (listaReproducaoContainer.removerLista(nome)) {
+                        repositorio.eliminarLista(nome);
+                        cout << "A Lista de Reproducao " << nome << " foi removida com sucesso." << endl;
+                    }
+                    else
+                        cout << "A Lista de Reproducao nao foi encontrada." << endl;
+                }
                 break;
             default:
                 break;
@@ -275,7 +382,7 @@ void Controller::runEditora() {
                     const auto& editoras = editoraContainer.getEditoras();
 
                     if (editoras.empty()) {
-                        cout << "Ainda não foram adicionadas editoras.\n";
+                        cout << "Ainda nao foram adicionadas editoras.\n";
                         break;
                     }
 
@@ -290,7 +397,7 @@ void Controller::runEditora() {
                     string nome = Utils::getString("Digite o nome da editora");
 
                     if (editoraContainer.existeEditora(nome)) {
-                        cout << "Essa editora já foi adicionada...\n";
+                        cout << "Essa editora ja foi adicionada...\n";
                         break;
                     }
 
@@ -306,7 +413,7 @@ void Controller::runEditora() {
                         cout << "A editora " << nome << " foi removida com sucesso." << endl;
                     }
                     else
-                        cout << "A editora não foi encontrada." << endl;
+                        cout << "A editora nao foi encontrada." << endl;
                 }
                 break;
             default:
@@ -323,11 +430,46 @@ void Controller::runArtista() {
     do {
         op = this->view.menuArtista();
         switch(op) {
-            case 1: // Ver Artista
+            case 1:
+                {
+                    const auto& artistas = artistaContainer.getArtistas();
+
+                    if (artistas.empty()) {
+                        cout << "Ainda nao foram adicionados artistas.\n";
+                        break;
+                    }
+
+                    cout << ">>> ARTISTAS <<<" << endl;
+                    for (const auto& a : artistas) {
+                        cout << "- " << a.getNome() << ": " << a.getIdade() << " anos" << endl;
+                    }
+                }
+
                 break;
-            case 2: // Adicionar Artista
+            case 2:
+                {
+                    string nome = Utils::getString("Digite o nome do artista");
+                    int ano = Utils::getNumber("Digite a data de nascimento/fundacao do artista");
+
+                    if (artistaContainer.existeArtista(nome)) {
+                        cout << "Esse artista ja foi adicionado...\n";
+                        break;
+                    }
+
+                    artistaContainer.adicionarArtista(Artista(nome, ano));
+                    cout << "Artista adicionado com sucesso!" << endl;
+                }
                 break;
-            case 3: // Remover Artista
+            case 3:
+                {
+                    string nome = Utils::getString("Digite o nome do artista que quer remover");
+
+                    if (artistaContainer.removerArtista(nome)) {
+                        cout << "O artista " << nome << " foi removido com sucesso." << endl;
+                    }
+                    else
+                        cout << "O artista nao foi encontrado." << endl;
+                }
                 break;
             default:
                 break;
