@@ -9,6 +9,7 @@ class Pessoa{
 
         std::string getNome() const;
         int getIdade () const;
+        int getAnoNascimento() const;
         Pessoa();
         Pessoa(std::string nome, int ano);
         ~Pessoa();

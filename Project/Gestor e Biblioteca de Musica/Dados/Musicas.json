@@ -28,5 +28,15 @@
         "nome": "asdfghjk",
         "nomeAlbum": "llllll",
         "nomeArtista": "dfdg"
+    },
+    {
+        "caminho": "",
+        "dataDeLancamento": -437905612,
+        "duracao": 0,
+        "genero": "",
+        "letra": "",
+        "nome": "0",
+        "nomeAlbum": "",
+        "nomeArtista": ""
     }
 ]

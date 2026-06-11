@@ -16,6 +16,8 @@ class View{
         int menuEditora();
         int menuLista();
 
+        int ArtistaEmEditora();
+
 
 };
 

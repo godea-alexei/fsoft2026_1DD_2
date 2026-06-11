@@ -22,6 +22,10 @@ class Musica{
         Musica(std::string nom, int dur, int ano, std::string let, std::string gen, std::string cam, string artst, string nomeAlbm);
         ~Musica();
 
+        int getDuracao() const;
+
+        std::string getNome() const;
+
 };
 
 #endif //MUSICA_H

@@ -132,9 +132,9 @@ void Repositorio::guardarArtista(Artista a) {
     for (Album album : a.albums){
 
         json jasonAlbum = json::array();
-        jasonAlbum["nomeAlbum"] = album.nome;
-        jasonAlbum["duracao"] = album.duracao;
-        jasonAlbum["anoCriacao"] = album.anoCriacao;
+        jasonAlbum["nomeAlbum"] = album.getNome();
+        jasonAlbum["duracao"] = album.getDuracao();
+        jasonAlbum["anoCriacao"] = album.getDataCriacao();
         jasonAlbum["nomeArtista"] = a.nome;
         jsonArrayArtistas.push_back(jasonAlbum);
 
@@ -163,13 +163,13 @@ void Repositorio::guardarAlbum(Album a) {
     json jsonArray = lerFicheiroJSON(caminho);
 
     json j;
-    j["nomeAlbum"] = a.nome;
-    j["duracao"] = a.duracao;
-    j["anoCriacao"] = a.anoCriacao;
+    j["nomeAlbum"] = a.getNome();
+    j["duracao"] = a.getDuracao();
+    j["anoCriacao"] = a.getDataCriacao();
     j["nomeArtista"] = a.artista;
 
     json jsonArrayMusicas = json::array();
-    for (Musica m : a.musicas){
+    for (Musica m : a.getMusicas()){
 
         json jasonMusica = json::array();
         jasonMusica["nome"]             = m.nome;
@@ -198,10 +198,33 @@ void Repositorio::guardarAlbum(Album a) {
 
 }
 
-void Repositorio::guardarUtilizador(Utilizador u) {
+void Repositorio::guardarUtilizador(Utilizador u)
+{
+    string caminho =
+        diretorioJSON + "Utilizadores.json";
 
+    json jsonArray =
+        lerFicheiroJSON(caminho);
 
+    json j;
 
+    j["nome"] = u.getNome();
+    j["anoNascimento"] = u.getAnoNascimento();
+    j["palavraPasse"] = u.getPalavraPasse();
+
+    jsonArray.push_back(j);
+
+    ofstream outFile(caminho);
+
+    if(outFile.is_open())
+    {
+        outFile << jsonArray.dump(4);
+        outFile.close();
+    }
+    else
+    {
+        cout << "Erro escrita.\n";
+    }
 }
 
 void Repositorio::guardarLista(ListaReproducao l) {
@@ -210,12 +233,12 @@ void Repositorio::guardarLista(ListaReproducao l) {
     json jsonArray = lerFicheiroJSON(caminho);
 
     json j;
-    j["nomeAlbum"] = l.nome;
-    j["duracao"] = l.duracao;
-    j["anoCriacao"] = l.anoCriacao;
+    j["nomeAlbum"] = l.getNome();
+    j["duracao"] = l.getDuracao();
+    j["anoCriacao"] = l.getDataCriacao();
 
     json jsonArrayMusicas = json::array();
-    for (Musica m : l.musicas){
+    for (Musica m : l.getMusicas()){
 
         json jasonMusica = json::array();
         jasonMusica["nome"]             = m.nome;
@@ -337,28 +360,35 @@ void Repositorio::eliminarAlbum(string n) {
 
 }
 
-void Repositorio::eliminarUtilizador(string n) {
+void Repositorio::eliminarUtilizador(
+    string nome)
+{
+    string caminho =
+        diretorioJSON + "Utilizadores.json";
 
-    /*
-    string caminho = diretorioJSON + "utilizadores.json";
-    json jsonArray = lerFicheiroJSON(caminho);
+    json jsonArray =
+        lerFicheiroJSON(caminho);
 
-    for (int i = 0; i < jsonArray.size(); i++) {
-        if (jsonArray[i]["nome"] == n) {
-            jsonArray.erase(i);
+    for(auto it = jsonArray.begin();
+        it != jsonArray.end();)
+    {
+        if((*it)["nome"] == nome)
+        {
+            it = jsonArray.erase(it);
+        }
+        else
+        {
+            ++it;
         }
     }
 
     ofstream outFile(caminho);
-    if (outFile.is_open()) {
+
+    if(outFile.is_open())
+    {
         outFile << jsonArray.dump(4);
         outFile.close();
-    } else {
-        cout << "Erro escrita.\n";
     }
-
-    cout << "Elemento eliminado com sucesso";
-    */
 }
 
 void Repositorio::eliminarLista(string n) {
@@ -436,9 +466,34 @@ void Repositorio::carregarEditoras() {
     }
     */
 
+vector<Utilizador> Repositorio::carregarUtilizadores()
+{
+    vector<Utilizador> utilizadores;
+
+    string caminho =
+        diretorioJSON + "Utilizadores.json";
+
+    json jsonArray =
+        lerFicheiroJSON(caminho);
+
+    for(auto& j : jsonArray)
+    {
+        Utilizador u(
+            j["nome"],
+            j["anoNascimento"],
+            j["palavraPasse"]
+        );
+
+        utilizadores.push_back(u);
+    }
+
+    return utilizadores;
 }
+
+
 void Repositorio::carregarArtistas(){}
 void Repositorio::carregarAlbums(){}
-void Repositorio::carregarUtilizadores(){}
-void Repositorio::carregarListas(){}
+void Repositorio::carregarListas() {
+
+}
 void Repositorio::carregarAlbuns(){}

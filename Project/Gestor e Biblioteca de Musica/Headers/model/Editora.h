@@ -15,6 +15,14 @@ public:
 
     std::string getNome() const;
 
+    void adicionarArtista(const Artista& artista);
+
+    bool removerArtista(const string& nome);
+
+    bool existeArtista(const string& nome);
+
+    const std::vector<Artista>& getArtistas() const;
+
 
 
 };

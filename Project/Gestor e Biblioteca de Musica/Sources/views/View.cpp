@@ -146,6 +146,16 @@ int View::menuPartilha() {
     return op;
 }
 
-
+int View::ArtistaEmEditora() {
+    int op = -1;
+    do {
+        cout << "\n\n1 - Adicionar Artista à Editora\n";
+        cout << "2 - Remover Artista da Editora\n";
+        cout << "\n0 - Voltar ao Menu de Pesquisa\n";
+        op = Utils::getNumber("Opcao");
+    }
+    while (op < 0 || op > 2);
+    return op;
+}
 
 

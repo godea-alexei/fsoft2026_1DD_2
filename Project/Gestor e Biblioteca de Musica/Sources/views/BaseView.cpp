@@ -15,11 +15,11 @@ void listarObjeto(Artista artista)
 }
 void listarObjeto(ListaReproducao listaReproducao)
 {
-    std::cout << "Lista de Reproducao: " << listaReproducao.nome << std::endl;
+    std::cout << "Lista de Reproducao: " << listaReproducao.getNome() << std::endl;
 }
 void listarObjeto(Album album)
 {
-    std::cout << "Album: " << album.nome << std::endl;
+    std::cout << "Album: " << album.getNome() << std::endl;
 }
 void listarObjeto(Musica musica)
 {
@@ -39,7 +39,7 @@ void listarAtributos(Artista artista)
     std::cout << "Albums: " << std::endl;
     if (artista.albums.size() > 0){
         for (const auto& album : artista.albums) {
-            std::cout << "Nome do album: " << album.nome  << std::endl;
+            std::cout << "Nome do album: " << album.getNome()  << std::endl;
         }
     }else {
         std::cout << "O artista nao possui albums" << std::endl;
@@ -48,12 +48,12 @@ void listarAtributos(Artista artista)
 
 void listarAtributos(ListaReproducao listaReproducao)
 {
-    std::cout << "Nome: " << listaReproducao.nome << std::endl;
-    std::cout << "Ano de criacao: " << listaReproducao.anoCriacao << std::endl;
-    std::cout << "Duracao: " << listaReproducao.duracao << std::endl;
+    std::cout << "Nome: " << listaReproducao.getNome() << std::endl;
+    std::cout << "Ano de criacao: " << listaReproducao.getDataCriacao() << std::endl;
+    std::cout << "Duracao: " << listaReproducao.getDuracao() << std::endl;
     std::cout << "Audio: " << std::endl;
-    if (listaReproducao.musicas.size() > 0){
-        for (const auto& musica : listaReproducao.musicas) {
+    if (listaReproducao.getMusicas().size() > 0){
+        for (const auto& musica : listaReproducao.getMusicas()) {
             std::cout << "Nome da Musica: " << musica.nome  << std::endl;
         }
     }else {
@@ -63,12 +63,12 @@ void listarAtributos(ListaReproducao listaReproducao)
 
 void listarAtributos(Album album)
 {
-    std::cout << "Nome: " << album.nome << std::endl;
-    std::cout << "Ano de lancamento: " << album.anoCriacao << std::endl;
-    std::cout << "Duracao: " << album.duracao << std::endl;
+    std::cout << "Nome: " << album.getNome() << std::endl;
+    std::cout << "Ano de lancamento: " << album.getDataCriacao() << std::endl;
+    std::cout << "Duracao: " << album.getDuracao() << std::endl;
     std::cout << "Audio: " << std::endl;
-    if (album.musicas.size() > 0){
-        for (const auto& musica : album.musicas) {
+    if (album.getMusicas().size() > 0){
+        for (const auto& musica : album.getMusicas()) {
             std::cout << "Nome da Musica: " << musica.nome  << std::endl;
         }
     }else {

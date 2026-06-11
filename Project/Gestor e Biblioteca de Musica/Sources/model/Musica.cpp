@@ -28,6 +28,14 @@ string Musica::verLetra(){
 
 };
 
+int Musica::getDuracao() const {
+    return duracao;
+}
+
+string Musica::getNome() const {
+    return nome;
+}
+
 void Musica::reproduzir(){
 
     PlaySound(caminho.c_str(), NULL, SND_FILENAME | SND_SYNC);
