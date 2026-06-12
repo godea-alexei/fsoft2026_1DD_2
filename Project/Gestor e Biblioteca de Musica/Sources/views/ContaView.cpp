@@ -30,7 +30,7 @@ void ContaView::sucessoRegisto() {
 }
 
 void ContaView::sucessoLogin() {
-    cout << "\nSessão iniciada com sucesso!\n";
+    cout << "\nSessao iniciada com sucesso!\n";
 }
 
 void ContaView::falhaRegisto() {

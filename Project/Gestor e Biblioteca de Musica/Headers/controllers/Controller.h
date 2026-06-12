@@ -10,6 +10,7 @@
 #include "Artistacontainer.h"
 #include "EditoraContainer.h"
 #include "ListaReproducaoContainer.h"
+#include "MusicaContainer.h"
 #include "repo/Repositorio.h"
 
 
@@ -23,7 +24,10 @@ class Controller{
 		EditoraContainer editoraContainer;
 		ArtistaContainer artistaContainer;
 		ListaReproducaoContainer listaReproducaoContainer;
+		AlbumContainer albumContainer;
+		MusicaContainer musicaContainer;
 		Repositorio repositorio;
+
 
 
 

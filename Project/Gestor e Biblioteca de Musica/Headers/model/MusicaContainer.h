@@ -3,15 +3,23 @@
 #include <list>
 #include <string>
 #include <Musica.h>
-using namespace std;
+#include <vector>
 
 class MusicaContainer {
+private:
+    std::vector<Musica> musicas;
 
-    public:
-        int adicionarMusica(std::string nome, int duracao, int dataDeLancamento, std::string letra);
-        int removerMusica(std::string nome);
-        Musica procurarMusica(std::string nome);
-        std::list<Musica> getAll();
+public:
+    MusicaContainer();
+    void adicionarMusica(const Musica& musica);
+    bool removerMusica(const std::string& nome);
+    bool existeMusica(const std::string& nome);
+    Musica* procurarMusica(const std::string& nome);
+    const std::vector<Musica>& getMusicas() const;
+
+
+
+
 
 
 

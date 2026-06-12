@@ -3,21 +3,19 @@
 #include <list>
 #include <string>
 #include "ListaReproducao.h"
+
 using namespace std;
 
 
 class Album : public ListaReproducao {
+private:
+    int anoLancamento;
 
-
-    public:
-
-        string artista;
-
+public:
         Album();
-        Album(std::string nome, int duracao, int ano, std::string nomeArtista);
-        Album(std::string nome, int duracao, int ano, std::list<Musica>& mus, std::string nomeArtista);
-        ~Album();
+        Album(std::string nome, int anoLancamento);
 
+        int getAnoLancamento() const;
 };
 
 #endif //ALBUM_H
