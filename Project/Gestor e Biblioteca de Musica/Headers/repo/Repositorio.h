@@ -1,10 +1,10 @@
 #ifndef GESTOR_E_BIBLIOTECA_DE_MUSICA_REPOSITORIO_H
 #define GESTOR_E_BIBLIOTECA_DE_MUSICA_REPOSITORIO_H
 #include <Musica.h>
-#include <Artista.h>
+#include <Artistacontainer.h>
 #include <Album.h>
 #include <ListaReproducao.h>
-#include <Editora.h>
+#include <EditoraContainer.h>
 #include <Utilizador.h>
 #include <string.h>
 #include <nlohmann/json.hpp>
@@ -22,16 +22,15 @@ class Repositorio {
         static string diretorioJSON;
 
         static void carregarMusicas();
-        std::vector<Editora> carregarEditoras();
+        void carregarEditoras(EditoraContainer& editoraContainer, ArtistaContainer& artistaContainer);
         std::vector<Artista> carregarArtistas();
-        static void carregarAlbums();
         std::vector<Utilizador> carregarUtilizadores();
         std::vector<ListaReproducao> carregarListas();
-        static void carregarAlbuns();
+        std::vector<Album> carregarAlbuns();
 
         static void guardarMusica(Musica m);
-        static void guardarEditora(Editora e);
-        static void guardarArtista(Artista a);
+        static void guardarEditora(const Editora& e);
+        static void guardarArtista(const Artista& a);
         static void guardarAlbum(Album a);
         static void guardarUtilizador(Utilizador u);
         static void guardarLista(ListaReproducao l);

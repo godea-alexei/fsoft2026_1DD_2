@@ -23,7 +23,7 @@ void listarObjeto(Album album)
 }
 void listarObjeto(Musica musica)
 {
-    std::cout << "Musica: " << musica.nome << std::endl;
+    std::cout << "Musica: " << musica.getNome() << std::endl;
 }
 void listarObjeto(Editora editora)
 {
@@ -54,7 +54,7 @@ void listarAtributos(ListaReproducao listaReproducao)
     std::cout << "Audio: " << std::endl;
     if (listaReproducao.getMusicas().size() > 0){
         for (const auto& musica : listaReproducao.getMusicas()) {
-            std::cout << "Nome da Musica: " << musica.nome  << std::endl;
+            std::cout << "Nome da Musica: " << musica->getNome()  << std::endl;
         }
     }else {
         std::cout << "A lista de reproducao nao possui musicas" << std::endl;
@@ -69,7 +69,7 @@ void listarAtributos(Album album)
     std::cout << "Audio: " << std::endl;
     if (album.getMusicas().size() > 0){
         for (const auto& musica : album.getMusicas()) {
-            std::cout << "Nome da Musica: " << musica.nome  << std::endl;
+            std::cout << "Nome da Musica: " << musica->getNome()  << std::endl;
         }
     }else {
         std::cout << "A lista de reproducao nao possui musicas" << std::endl;
@@ -78,14 +78,13 @@ void listarAtributos(Album album)
 
 void listarAtributos(Musica musica)
 {
-    std::cout << "Nome: " << musica.nome << std::endl;
-    std::cout << "Duração: " << musica.duracao << std::endl;
-    std::cout << "Data de Lançamento: " << musica.dataDeLancamento << std::endl;
-    std::cout << "Letra: " << musica.letra << std::endl;
-    std::cout << "Género: " << musica.genero << std::endl;
-    std::cout << "Caminho: " << musica.caminho << std::endl;
-    std::cout << "Artista: " << musica.nomeArtista << std::endl;
-    std::cout << "Álbum: " << musica.nomeAlbum << std::endl;
+    std::cout << "Nome: " << musica.getNome() << std::endl;
+    std::cout << "Duração: " << musica.getDuracao() << std::endl;
+    std::cout << "Ano de Lançamento: " << musica.getAnoDeLancamento() << std::endl;
+    std::cout << "Letra: " << musica.getLetra() << std::endl;
+    std::cout << "Género: " << musica.getGenero() << std::endl;
+    std::cout << "Caminho: " << musica.getCaminho() << std::endl;
+    std::cout << "Artista: " << musica.getNomeArtista() << std::endl;
 }
 
 void listarAtributos(Editora editora)
@@ -95,7 +94,7 @@ void listarAtributos(Editora editora)
     std::cout << "Lista de Artistas:" << std::endl;
     if (editora.artistas.size() > 0) {
         for (const auto& artista : editora.artistas) {
-            std::cout << artista.nome << std::endl;
+            std::cout << artista->getNome() << std::endl;
         }
     } else {
         std::cout << "  Nenhum artista associado a editora" << std::endl;

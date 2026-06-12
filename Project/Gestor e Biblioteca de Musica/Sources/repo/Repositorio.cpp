@@ -7,6 +7,7 @@
 #include <fstream>
 
 #include "MusicaContainer.h"
+
 using namespace std;
 
 #include <nlohmann/json.hpp>
@@ -22,15 +23,13 @@ json Repositorio::lerFicheiroJSON(string caminho) {
 
     json jsonArr = json::array();
 
-    // --- 1. READ EXISTING DATA ---
     ifstream inFile(caminho);
     if (inFile.is_open()) {
         string fileContent;
-        // Read the entire file into a string
+
         fileContent.assign((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
         inFile.close();
 
-        // Only parse if the file actually has text inside it
         if (!fileContent.empty()) {
             try {
                 jsonArr = json::parse(fileContent);
@@ -38,7 +37,7 @@ json Repositorio::lerFicheiroJSON(string caminho) {
                     jsonArr = json::array();
                 }
             } catch (const json::parse_error& e) {
-                jsonArr = json::array(); // Reset if file was corrupted text
+                jsonArr = json::array();
             }
         }
     }
@@ -56,14 +55,13 @@ void Repositorio::guardarMusica(Musica m) {
 
     // --- 2. CREATE THE NEW SONG OBJECT ---
     json j;
-    j["nome"]             = m.nome;
-    j["duracao"]          = m.duracao;
-    j["dataDeLancamento"] = m.dataDeLancamento;
-    j["letra"]            = m.letra;
-    j["genero"]           = m.genero;
-    j["caminho"]          = m.caminho;
-    j["nomeArtista"]      = m.nomeArtista;
-    j["nomeAlbum"]        = m.nomeAlbum;
+    j["nome"]             = m.getNome();
+    j["duracao"]          = m.getDuracao();
+    j["anoDeLancamento"] = m.getAnoDeLancamento();
+    j["letra"]            = m.getLetra();
+    j["genero"]           = m.getGenero();
+    j["caminho"]          = m.getCaminho();
+    j["nomeArtista"]      = m.getNomeArtista();
 
     // --- 3. ADD TO ARRAY ---
     jsonArray.push_back(j);
@@ -78,35 +76,32 @@ void Repositorio::guardarMusica(Musica m) {
     }
 
     //Copiar ficheiro audio
-    std::ifstream src(m.caminho, std::ios::binary);
-    std::ofstream dst(diretorioJSON + "Audio/" + m.nome + ".mp3", std::ios::binary);
+    std::ifstream src(m.getCaminho(), std::ios::binary);
+    std::ofstream dst(diretorioJSON + "Audio/" + m.getNome() + ".mp3", std::ios::binary);
     dst << src.rdbuf();
 
 }
 
-void Repositorio::guardarEditora(Editora e) {
+void Repositorio::guardarEditora(const Editora& e) {
 
     string caminho = diretorioJSON + "Editoras.json";
     json jsonArray = lerFicheiroJSON(caminho);
 
-    // --- 2. CREATE THE NEW SONG OBJECT ---
     json j;
-    j["nome"]= e.nome;
+    j["nome"]= e.getNome();
 
-    // --- 3. CREATE AN ARRAY FOR THE ARTISTS ---
     json jsonArrayArtista = json::array();
-    for (const auto& artista : e.artistas) {
-        json jArtista;
-        jArtista["nome"] = artista.nome;
-        jsonArrayArtista.push_back(jArtista);
+    for (const auto& artista : e.getArtistas()) {
+        if (artista != nullptr) {
+            jsonArrayArtista.push_back(artista->getNome());
+        }
+
     }
 
     j["artistas"] = jsonArrayArtista;
 
-    // --- 3. ADD TO ARRAY ---
     jsonArray.push_back(j);
 
-    // --- 4. SAVE BACK TO FILE ---
     ofstream outFile(caminho);
     if (outFile.is_open()) {
         outFile << jsonArray.dump(4);
@@ -114,72 +109,59 @@ void Repositorio::guardarEditora(Editora e) {
     } else {
         cout << "Erro escrita.\n";
     }
-
 
 }
 
-void Repositorio::guardarArtista(Artista a) {
+void Repositorio::guardarArtista(const Artista& a)
+{
+    string caminho =
+        diretorioJSON + "Artistas.json";
 
-    string caminho = diretorioJSON + "Artistas.json";
-    json jsonArray = lerFicheiroJSON(caminho);
+    json jsonArray =
+        lerFicheiroJSON(caminho);
 
-    // --- 2. CREATE THE NEW SONG OBJECT ---
     json j;
-    j["nome"]             = a.nome;
-    j["anoNascimento"]    = a.anoNascimento;
 
-    json jsonArrayArtistas = json::array();
-    for (Album album : a.albums){
+    j["nome"] = a.getNome();
+    j["anoNascimento"] =
+        a.getAnoNascimento();
 
-        json jasonAlbum = json::array();
-        jasonAlbum["nomeAlbum"] = album.getNome();
-        jasonAlbum["duracao"] = album.getDuracao();
-        jasonAlbum["anoCriacao"] = album.getDataCriacao();
-        jasonAlbum["nomeArtista"] = a.nome;
-        jsonArrayArtistas.push_back(jasonAlbum);
-
-    }
-    j["Albuns"] = jsonArrayArtistas;
-
-
-    // --- 3. ADD TO ARRAY ---
     jsonArray.push_back(j);
 
-    // --- 4. SAVE BACK TO FILE ---
     ofstream outFile(caminho);
-    if (outFile.is_open()) {
+
+    if(outFile.is_open())
+    {
         outFile << jsonArray.dump(4);
         outFile.close();
-    } else {
+    }
+    else
+    {
         cout << "Erro escrita.\n";
     }
-
-
 }
 
 void Repositorio::guardarAlbum(Album a) {
 
-    string caminho = diretorioJSON + "Albums.json";
+    string caminho = diretorioJSON + "Albuns.json";
     json jsonArray = lerFicheiroJSON(caminho);
 
     json j;
     j["nomeAlbum"] = a.getNome();
     j["duracao"] = a.getDuracao();
-    j["anoCriacao"] = a.getDataCriacao();
-    j["nomeArtista"] = a.artista;
+    j["anoCriacao"] = a.getAnoLancamento();
 
     json jsonArrayMusicas = json::array();
-    for (Musica m : a.getMusicas()){
+    for (Musica* m : a.getMusicas()){
 
         json jasonMusica = json::array();
-        jasonMusica["nome"]             = m.nome;
-        jasonMusica["duracao"]          = m.duracao;
-        jasonMusica["dataDeLancamento"] = m.dataDeLancamento;
-        jasonMusica["letra"]            = m.letra;
-        jasonMusica["genero"]           = m.genero;
-        jasonMusica["caminho"]          = m.caminho;
-        jasonMusica["nomeArtista"]      = m.nomeArtista;
-        jasonMusica["nomeAlbum"]        = m.nomeAlbum;
+        jasonMusica["nome"]             = m->getNome();
+        jasonMusica["duracao"]          = m->getDuracao();
+        jasonMusica["anoDeLancamento"] = m->getAnoDeLancamento();
+        jasonMusica["letra"]            = m->getLetra();
+        jasonMusica["genero"]           = m->getGenero();
+        jasonMusica["caminho"]          = m->getCaminho();
+        jasonMusica["nomeArtista"]      = m->getNomeArtista();
         jsonArrayMusicas.push_back(jasonMusica);
 
     }
@@ -238,17 +220,16 @@ void Repositorio::guardarLista(ListaReproducao l) {
     j["anoCriacao"] = l.getDataCriacao();
 
     json jsonArrayMusicas = json::array();
-    for (Musica m : l.getMusicas()){
+    for (Musica* m : l.getMusicas()){
 
         json jasonMusica = json::array();
-        jasonMusica["nome"]             = m.nome;
-        jasonMusica["duracao"]          = m.duracao;
-        jasonMusica["dataDeLancamento"] = m.dataDeLancamento;
-        jasonMusica["letra"]            = m.letra;
-        jasonMusica["genero"]           = m.genero;
-        jasonMusica["caminho"]          = m.caminho;
-        jasonMusica["nomeArtista"]      = m.nomeArtista;
-        jasonMusica["nomeAlbum"]        = m.nomeAlbum;
+        jasonMusica["nome"]             = m->getNome();
+        jasonMusica["duracao"]          = m->getDuracao();
+        jasonMusica["dataDeLancamento"] = m->getAnoDeLancamento();
+        jasonMusica["letra"]            = m->getLetra();
+        jasonMusica["genero"]           = m->getNome();
+        jasonMusica["caminho"]          = m->getCaminho();
+        jasonMusica["nomeArtista"]      = m->getNomeArtista();
         jsonArrayMusicas.push_back(jasonMusica);
 
     }
@@ -287,59 +268,72 @@ void Repositorio::eliminarMusica(string n) {
         cout << "Erro escrita.\n";
     }
 
-    cout << "Elemento eliminado com sucesso";
-
 }
 
-void Repositorio::eliminarEditora(string n) {
+void Repositorio::eliminarEditora(string nome)
+{
+    string caminho =
+        diretorioJSON + "Editoras.json";
 
-    string caminho = diretorioJSON + "Editoras.json";
-    json jsonArray = lerFicheiroJSON(caminho);
+    json jsonArray =
+        lerFicheiroJSON(caminho);
 
-    for (int i = 0; i < jsonArray.size(); i++) {
-        if (jsonArray[i]["nome"] == n) {
-            jsonArray.erase(i);
+    for(auto it = jsonArray.begin();
+        it != jsonArray.end();
+        ++it)
+    {
+        if((*it)["nome"] == nome)
+        {
+            jsonArray.erase(it);
+            break;
         }
     }
 
     ofstream outFile(caminho);
-    if (outFile.is_open()) {
+
+    if(outFile.is_open())
+    {
         outFile << jsonArray.dump(4);
         outFile.close();
-    } else {
+    }
+    else
+    {
         cout << "Erro escrita.\n";
     }
-
-    cout << "Elemento eliminado com sucesso";
-
 }
 
-void Repositorio::eliminarArtista(string n) {
+void Repositorio::eliminarArtista(
+    string nome)
+{
+    string caminho =
+        diretorioJSON + "Artistas.json";
 
-    string caminho = diretorioJSON + "Artistas.json";
-    json jsonArray = lerFicheiroJSON(caminho);
+    json jsonArray =
+        lerFicheiroJSON(caminho);
 
-    for (int i = 0; i < jsonArray.size(); i++) {
-        if (jsonArray[i]["nome"] == n) {
-            jsonArray.erase(i);
+    for(auto it = jsonArray.begin();
+        it != jsonArray.end();
+        ++it)
+    {
+        if((*it)["nome"] == nome)
+        {
+            jsonArray.erase(it);
+            break;
         }
     }
 
     ofstream outFile(caminho);
-    if (outFile.is_open()) {
+
+    if(outFile.is_open())
+    {
         outFile << jsonArray.dump(4);
         outFile.close();
-    } else {
-        cout << "Erro escrita.\n";
     }
-
-    cout << "Elemento eliminado com sucesso";
-
 }
 
 void Repositorio::eliminarAlbum(string n) {
 
-    string caminho = diretorioJSON + "Albums.json";
+    string caminho = diretorioJSON + "Albuns.json";
     json jsonArray = lerFicheiroJSON(caminho);
 
     for (int i = 0; i < jsonArray.size(); i++) {
@@ -355,8 +349,6 @@ void Repositorio::eliminarAlbum(string n) {
     } else {
         cout << "Erro escrita.\n";
     }
-
-    cout << "Elemento eliminado com sucesso";
 
 }
 
@@ -410,8 +402,6 @@ void Repositorio::eliminarLista(string n) {
         cout << "Erro escrita.\n";
     }
 
-    cout << "Elemento eliminado com sucesso";
-
 }
 
 
@@ -440,31 +430,54 @@ void Repositorio::carregarMusicas() {
     */
 }
 
-void Repositorio::carregarEditoras() {
-
-}
-    /*
+void Repositorio::carregarEditoras(
+    EditoraContainer& editoraContainer,
+    ArtistaContainer& artistaContainer)
+{
     string caminho = diretorioJSON + "Editoras.json";
+
     json jsonArray = lerFicheiroJSON(caminho);
 
-    for (json j : jsonArray) {
+    for(const auto& j : jsonArray)
+    {
+        string nomeEditora = j["nome"];
 
-        Editora e;
-        e.nome = j["nome"];
-        for (json j2 : j["artistas"]) {
+        Editora editora(nomeEditora);
 
-            Artista a2;
-            a2.nome = j2["nome"];
-            a2.anoNascimento = j2["anoNascimento"];
-            for ()
-            a2.albums = j2["albums"];
+        if(j.contains("artistas"))
+        {
+            for(const auto& nomeArtistaJson : j["artistas"])
+            {
+                string nomeArtista;
 
+                if(nomeArtistaJson.is_string())
+                {
+                    nomeArtista = nomeArtistaJson;
+                }
+                else
+                {
+                    nomeArtista =
+                        nomeArtistaJson["nome"];
+                }
+
+                Artista* artista =
+                    artistaContainer
+                    .procurarArtista(
+                        nomeArtista);
+
+                if(artista != nullptr)
+                {
+                    editora.adicionarArtista(
+                        artista);
+                }
+            }
         }
 
-        //EditoraContainer editoras.push_back(e);
-
+        editoraContainer.adicionarEditora(
+            editora);
     }
-    */
+}
+
 
 vector<Utilizador> Repositorio::carregarUtilizadores()
 {
@@ -491,9 +504,47 @@ vector<Utilizador> Repositorio::carregarUtilizadores()
 }
 
 
-void Repositorio::carregarArtistas(){}
-void Repositorio::carregarAlbums(){}
-void Repositorio::carregarListas() {
+vector<Artista> Repositorio::carregarArtistas()
+{
+    vector<Artista> artistas;
 
+    string caminho =
+        diretorioJSON + "Artistas.json";
+
+    json jsonArray =
+        lerFicheiroJSON(caminho);
+
+    for(auto& j : jsonArray)
+    {
+        Artista a(
+            j["nome"],
+            j["anoNascimento"]
+        );
+
+        artistas.push_back(a);
+    }
+
+    return artistas;
 }
-void Repositorio::carregarAlbuns(){}
+
+std::vector<ListaReproducao> Repositorio::carregarListas() {
+    vector<ListaReproducao> listas;
+    return listas;
+}
+std::vector<Album> Repositorio::carregarAlbuns() {
+    vector<Album> albums;
+
+    string caminho = diretorioJSON + "Albuns.json";
+
+    json jsonArray = lerFicheiroJSON(caminho);
+
+    for (auto& j : jsonArray) {
+        Album a(
+            j["nome"],
+            j["anoLancamento"]
+        );
+
+        albums.push_back(a);
+    }
+    return albums;
+}

@@ -3,6 +3,7 @@
 #include <string>
 #include <list>
 #include <Musica.h>
+#include <Utilizador.h>
 #include <vector>
 
 
@@ -10,13 +11,14 @@ class ListaReproducao {
 protected:
     std::string nome;
     int dataCriacao;
-    vector<Musica> musicas;
+    std::string criador;
+    vector<Musica*> musicas;
 
 public:
 
     ListaReproducao();
 
-    ListaReproducao(std::string nome , int dataCriacao);
+    ListaReproducao(std::string nome , int dataCriacao, std::string criador);
 
     std::string getNome() const;
 
@@ -24,13 +26,19 @@ public:
 
     int getDuracao() const;
 
-    void adicionarMusica(const Musica& musica);
+    void adicionarMusica(Musica* musica);
+
+    Musica* procurarMusica(const std::string& titulo);
+
+    bool existeMusica(const std::string& titulo) const;
 
     bool removerMusica(const string& titulo);
 
-    const std::vector<Musica>& getMusicas() const;
+    const std::vector<Musica*>& getMusicas() const;
 
     ~ListaReproducao();
+
+    std::string getCriador() const;
 
 };
 

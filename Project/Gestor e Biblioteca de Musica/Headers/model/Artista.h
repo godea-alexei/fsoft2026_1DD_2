@@ -8,7 +8,8 @@ using namespace std;
 
 
 class Artista : public Pessoa {
- 
+private:
+    std::vector<Album*> albuns;
 public:
 
     list<Album> albums;
@@ -20,6 +21,12 @@ public:
 
     std::string getNome() const;
     int getAno();
+
+    void adicionarAlbum(Album* album);
+    bool removerAlbum(const std::string& nome);
+    bool existeAlbum(const std::string& nome) const;
+    Album* procurarAlbum(const std::string& nome);
+    const std::vector<Album*>& getAlbuns() const;
 
 };
  

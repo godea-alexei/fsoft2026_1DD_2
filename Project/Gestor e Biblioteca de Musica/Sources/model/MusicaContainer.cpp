@@ -2,6 +2,50 @@
 #include <string>
 #include <ctime>
 
+using namespace std;
+
+MusicaContainer::MusicaContainer() {
+
+}
+
+void MusicaContainer::adicionarMusica(const Musica &musica) {
+    musicas.push_back(musica);
+}
+
+Musica *MusicaContainer::procurarMusica(const std::string &nome) {
+    for (auto& musica : musicas) {
+        if (musica.getNome() == nome) {
+            return &musica;
+        }
+    }
+    return nullptr;
+}
+
+bool MusicaContainer::existeMusica(const std::string &nome) {
+    for (const auto& musica : musicas) {
+        if (musica.getNome() == nome) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool MusicaContainer::removerMusica(const std::string &nome) {
+    for (auto it = musicas.begin(); it != musicas.end(); it++) {
+        if (it->getNome() == nome) {
+            musicas.erase(it);
+            return true;
+        }
+    }
+    return false;
+}
+
+const vector<Musica> &MusicaContainer::getMusicas() const {
+    return musicas;
+}
+
+
+
 /*
 
 

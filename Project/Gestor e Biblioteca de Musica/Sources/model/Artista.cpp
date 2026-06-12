@@ -32,5 +32,40 @@ Artista::Artista(string nome, int ano, list<Album> &a) : Pessoa(nome, ano) {
 
 }
 
+void Artista::adicionarAlbum(Album *album) {
+    albuns.push_back(album);
+}
+
+bool Artista::existeAlbum(const string& nome) const {
+    for (const auto& album : albuns) {
+        if (album->getNome() == nome) return true;
+    }
+    return false;
+}
+
+Album *Artista::procurarAlbum(const std::string &nome) {
+    for (auto& album : albuns) {
+        if (album->getNome() == nome) return album;
+    }
+    return nullptr;
+}
+
+bool Artista::removerAlbum(const std::string &nome) {
+    for (auto it = albuns.begin(); it != albuns.end(); it++) {
+        if ((*it)->getNome() == nome) {
+            albuns.erase(it);
+            return true;
+        }
+    }
+    return false;
+}
+
+const std::vector<Album *> &Artista::getAlbuns() const {
+    return albuns;
+}
+
+
+
+
 Artista::~Artista(){}
 

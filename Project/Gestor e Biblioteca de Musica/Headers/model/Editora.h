@@ -8,20 +8,22 @@
 class Editora {
 public:
     std::string nome;
-    std::vector<Artista> artistas;
+    std::vector<Artista*> artistas;
 
     Editora();
     Editora(std::string nome);
 
     std::string getNome() const;
 
-    void adicionarArtista(const Artista& artista);
+    void adicionarArtista(Artista* artista);
 
     bool removerArtista(const string& nome);
 
     bool existeArtista(const string& nome);
 
-    const std::vector<Artista>& getArtistas() const;
+    Artista* procurarArtista(const std::string& nome);
+
+    const std::vector<Artista*>& getArtistas() const;
 
 
 
