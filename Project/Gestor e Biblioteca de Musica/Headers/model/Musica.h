@@ -7,20 +7,21 @@ class Musica{
 
     public:
 
-        std::string nome;
+        string nome;
         int duracao;
         int dataDeLancamento;
-        std::string letra;
-        std::string genero;
-        std::string caminho;
+        string letra;
+        string genero;
+        string caminho;
         string nomeArtista;
         string nomeAlbum;
 
-        std::string verLetra();
-        void reproduzir();
+        string verLetra();
+        string obterNome();
         Musica();
-        Musica(std::string nom, int dur, int ano, std::string let, std::string gen, std::string cam, string artst, string nomeAlbm);
+        Musica(string nom, int dur, int ano, string let, string gen, string cam, string artst, string nomeAlbm);
         ~Musica();
+        void reproduzir();
 
 };
 

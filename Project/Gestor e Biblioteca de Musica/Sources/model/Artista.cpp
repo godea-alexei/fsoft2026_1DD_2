@@ -15,7 +15,7 @@ Artista::Artista(string nome, int ano) : Pessoa(nome, ano) {
 
 }
 
-Artista::Artista(string nome, int ano, list<Album> &a) : Pessoa(nome, ano) {
+Artista::Artista(string nome, int ano, vector<Album> &a) : Pessoa(nome, ano) {
 
     this->nome = nome;
     this->anoNascimento = ano;

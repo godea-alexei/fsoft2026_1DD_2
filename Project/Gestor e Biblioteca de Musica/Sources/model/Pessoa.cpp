@@ -13,13 +13,11 @@ Pessoa::Pessoa(std::string nom, int ano) {
 
 Pessoa::~Pessoa(){}
 
-std::string Pessoa::getNome(){
-
+std::string Pessoa::getNome() const{
     return nome;
-
 }
 
-int Pessoa::getIdade(){
+int Pessoa::getIdade() const{
 
     time_t t = time(0);
     tm* now = localtime(&t);

@@ -89,6 +89,7 @@ int View::menuMusica() {
         cout << "1 - Ver Musicas\n";
         cout << "2 - Adicionar Musica\n";
         cout << "3 - Remover Musica\n";
+        cout << "4 - Reproduzir Musica\n";
         cout << "\n0 - Voltar ao Menu Principal\n";
         op = Utils::getNumber("Opcao");
     } while (op < 0 || op > 3);
@@ -145,4 +146,7 @@ int View::menuPartilha() {
     } while (op < 0 || op > 2);
     return op;
 }
+
+
+
 

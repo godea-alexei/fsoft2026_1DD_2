@@ -1,21 +1,21 @@
 #ifndef MUSICACONTAINER_H
 #define MUSICACONTAINER_H
-#include <list>
-#include <string>
+#include <vector>
 #include <Musica.h>
 using namespace std;
 
 class MusicaContainer {
 
     public:
-        int adicionarMusica(std::string nome, int duracao, int dataDeLancamento, std::string letra);
-        int removerMusica(std::string nome);
-        Musica procurarMusica(std::string nome);
-        std::list<Musica> getAll();
 
+        static std::vector<Musica> musicas;
 
+        static void adicionarMusica();
+        static int removerMusica();
+        static Musica procurarMusica();
+        static void getAll();
+        static void reproduzirMusica();
 
 };
-
 
 #endif //MUSICACONTAINER_H

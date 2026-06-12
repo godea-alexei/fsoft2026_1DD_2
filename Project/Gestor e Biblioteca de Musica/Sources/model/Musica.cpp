@@ -28,10 +28,15 @@ string Musica::verLetra(){
 
 };
 
+string Musica::obterNome() {
+    return this->nome;
+};
+
 void Musica::reproduzir(){
 
     PlaySound(caminho.c_str(), NULL, SND_FILENAME | SND_SYNC);
 
 };
+
 
 

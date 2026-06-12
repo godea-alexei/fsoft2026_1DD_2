@@ -11,11 +11,11 @@ class Artista : public Pessoa {
  
 public:
 
-    list<Album> albums;
+    vector<Album> albums;
 
     Artista();
     Artista(std::string nome, int ano);
-    Artista(std::string nome, int ano, list<Album> &alb);
+    Artista(std::string nome, int ano, vector<Album> &alb);
     ~Artista();
 
 };

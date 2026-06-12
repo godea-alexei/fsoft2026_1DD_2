@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.0)
+cmake_minimum_required(VERSION 3.31.6)
 project(Gestor_e_Biblioteca_de_Musica)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -13,20 +13,6 @@ include_directories(Sources)
 
 add_executable(Gestor_e_Biblioteca_de_Musica
         Headers/controllers/Controller.h
-        Headers/exceptions/CancelarAdicaoAlbumException.h
-        Headers/exceptions/CancelarAdicaoArtistaException.h
-        Headers/exceptions/CancelarAdicaoEditoraException.h
-        Headers/exceptions/CancelarAdicaoMusicaException.h
-        Headers/exceptions/CancelarCriacaoContaException.h
-        Headers/exceptions/CancelarCriacaoListaException.h
-        Headers/exceptions/CancelarInicioSessaoException.h
-        Headers/exceptions/CancelarPartilhaListaException.h
-        Headers/exceptions/CancelarPartilhaMusicaException.h
-        Headers/exceptions/CancelarPesquisaMusicaException.h
-        Headers/exceptions/CancelarRemocaoAlbumException.h
-        Headers/exceptions/CancelarRemocaoArtistaException.h
-        Headers/exceptions/CancelarRemocaoEditoraException.h
-        Headers/exceptions/CancelarRemocaoMusicaException.h
         Headers/model/Album.h
         Headers/model/AlbumContainer.h
         Headers/model/Artista.h
@@ -45,12 +31,6 @@ add_executable(Gestor_e_Biblioteca_de_Musica
         Headers/views/View.h
         Headers/views/BaseView.h
         Sources/controllers/Controller.cpp
-        Sources/exceptions/CancelarAdicaoAlbumException.cpp
-        Sources/exceptions/CancelarCriacaoContaException.cpp
-        Sources/exceptions/CancelarInicioSessaoException.cpp
-        Sources/exceptions/CancelarPartilhaMusicaException.cpp
-        Sources/exceptions/CancelarPesquisaMusicaException.cpp
-        Sources/exceptions/CancelarRemocaoAlbumException.cpp
         Sources/model/Album.cpp
         Sources/model/AlbumContainer.cpp
         Sources/model/Artista.cpp
@@ -72,7 +52,15 @@ add_executable(Gestor_e_Biblioteca_de_Musica
         Sources/views/BaseView.cpp
         Headers/views/BaseView.h
         Sources/repo/Repositorio.cpp
-        Headers/repo/Repositorio.h)
+        Headers/repo/Repositorio.h
+        Sources/exceptions/ElementoJaExiste.cpp
+        Headers/exceptions/ElementoJaExiste.h
+        Sources/exceptions/ElementoNaoExiste.cpp
+        Headers/exceptions/ElementoNaoExiste.h
+        Sources/exceptions/ForaDosLimites.cpp
+        Headers/exceptions/ForaDosLimites.h
+        Sources/exceptions/InseridoTipoIncorreto.cpp
+        Headers/exceptions/InseridoTipoIncorreto.h)
 
 target_link_libraries(Gestor_e_Biblioteca_de_Musica winmm)
 

@@ -3,6 +3,7 @@
 #include <string>
 #include <list>
 #include <Musica.h>
+#include <vector>
 using namespace  std;
 
 class ListaReproducao {
@@ -12,7 +13,7 @@ class ListaReproducao {
         std::string nome;
         int duracao;
         int anoCriacao;
-        list<Musica> musicas;
+        vector<Musica> musicas;
 
     ListaReproducao();
     ListaReproducao(std::string nom, int dur, int ano);
