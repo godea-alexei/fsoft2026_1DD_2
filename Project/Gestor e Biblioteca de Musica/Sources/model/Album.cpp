@@ -1,16 +1,15 @@
 #include <list>
 #include <string>
 #include <Album.h>
+using namespace std;
 
-// Construtor padrão — chama o construtor padrão do pai
-Album::Album() : ListaReproducao(), artista("") {}
+Album::Album(string nome, int anoLancamento) : ListaReproducao(nome, anoLancamento, "") {
+    this->anoLancamento = anoLancamento;
+}
 
-// Construtor sem músicas
-Album::Album(std::string nom, int dur, int ano, std::string nomeArtst)
-    : ListaReproducao(nom, dur, ano), artista(nomeArtst) {}
+int Album::getAnoLancamento() const {
+    return anoLancamento;
+}
 
-// Construtor com lista de músicas
-Album::Album(std::string nom, int dur, int ano, std::list<Musica>& mus, std::string nomeArtst)
-    : ListaReproducao(nom, dur, ano, mus), artista(nomeArtst) {}
 
-Album::~Album() {}
+

@@ -16,23 +16,20 @@ using namespace std;
 
 string Repositorio::diretorioJSON = "../Dados/";
 
-
 Repositorio::Repositorio(){}
 
 json Repositorio::lerFicheiroJSON(string caminho) {
 
     json jsonArr = json::array();
 
-    // --- 1. READ EXISTING DATA ---
     ifstream inFile(caminho);
 
     if (inFile.is_open()) {
         string fileContent;
-        // Read the entire file into a string
+
         fileContent.assign((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
         inFile.close();
 
-        // Only parse if the file actually has text inside it
         if (!fileContent.empty()) {
             try {
                 jsonArr = json::parse(fileContent);
@@ -40,7 +37,7 @@ json Repositorio::lerFicheiroJSON(string caminho) {
                     jsonArr = json::array();
                 }
             } catch (const json::parse_error& e) {
-                jsonArr = json::array(); // Reset if file was corrupted text
+                jsonArr = json::array();
             }
         }
     }
@@ -58,14 +55,13 @@ void Repositorio::guardarMusica(Musica m) {
 
     // --- 2. CREATE THE NEW SONG OBJECT ---
     json j;
-    j["nome"]             = m.nome;
-    j["duracao"]          = m.duracao;
-    j["dataDeLancamento"] = m.dataDeLancamento;
-    j["letra"]            = m.letra;
-    j["genero"]           = m.genero;
-    j["caminho"]          = m.caminho;
-    j["nomeArtista"]      = m.nomeArtista;
-    j["nomeAlbum"]        = m.nomeAlbum;
+    j["nome"]             = m.getNome();
+    j["duracao"]          = m.getDuracao();
+    j["anoDeLancamento"] = m.getAnoDeLancamento();
+    j["letra"]            = m.getLetra();
+    j["genero"]           = m.getGenero();
+    j["caminho"]          = m.getCaminho();
+    j["nomeArtista"]      = m.getNomeArtista();
 
     // --- 3. ADD TO ARRAY ---
     jsonArray.push_back(j);
@@ -80,35 +76,33 @@ void Repositorio::guardarMusica(Musica m) {
     }
 
     //Copiar ficheiro audio
-    std::ifstream src(m.caminho, std::ios::binary);
-    std::ofstream dst(diretorioJSON + "Audio/" + m.nome + ".mp3", std::ios::binary);
+    std::ifstream src(m.getCaminho(), std::ios::binary);
+    std::ofstream dst(diretorioJSON + "Audio/" + m.getNome() + ".mp3", std::ios::binary);
     dst << src.rdbuf();
 
 }
 
-void Repositorio::guardarEditora(Editora e) {
+void Repositorio::guardarEditora(const Editora& e) {
 
     string caminho = diretorioJSON + "Editoras.json";
     json jsonArray = lerFicheiroJSON(caminho);
 
     // --- 2. CREATE THE NEW OBJECT ---
     json j;
-    j["nome"]= e.nome;
+    j["nome"]= e.getNome();
 
-    // --- 3. CREATE AN ARRAY FOR THE ARTISTS ---
     json jsonArrayArtista = json::array();
-    for (const auto& artista : e.artistas) {
-        json jArtista;
-        jArtista["nome"] = artista.nome;
-        jsonArrayArtista.push_back(jArtista);
+    for (const auto& artista : e.getArtistas()) {
+        if (artista != nullptr) {
+            jsonArrayArtista.push_back(artista->getNome());
+        }
+
     }
 
     j["artistas"] = jsonArrayArtista;
 
-    // --- 3. ADD TO ARRAY ---
     jsonArray.push_back(j);
 
-    // --- 4. SAVE BACK TO FILE ---
     ofstream outFile(caminho);
     if (outFile.is_open()) {
         outFile << jsonArray.dump(4);
@@ -117,15 +111,16 @@ void Repositorio::guardarEditora(Editora e) {
         cout << "Erro escrita.\n";
     }
 
-
 }
 
-void Repositorio::guardarArtista(Artista a) {
+void Repositorio::guardarArtista(const Artista& a)
+{
+    string caminho =
+        diretorioJSON + "Artistas.json";
 
-    string caminho = diretorioJSON + "Artistas.json";
-    json jsonArray = lerFicheiroJSON(caminho);
+    json jsonArray =
+        lerFicheiroJSON(caminho);
 
-    // --- 2. CREATE THE NEW SONG OBJECT ---
     json j;
     j["nome"]             = a.nome;
     j["anoNascimento"]    = a.anoNascimento;
@@ -143,31 +138,30 @@ void Repositorio::guardarArtista(Artista a) {
     }
     j["albuns"] = jsonArrayAlbuns;
 
-    // --- 3. ADD TO ARRAY ---
     jsonArray.push_back(j);
 
-    // --- 4. SAVE BACK TO FILE ---
     ofstream outFile(caminho);
-    if (outFile.is_open()) {
+
+    if(outFile.is_open())
+    {
         outFile << jsonArray.dump(4);
         outFile.close();
-    } else {
+    }
+    else
+    {
         cout << "Erro escrita.\n";
     }
-
-
 }
 
 void Repositorio::guardarAlbum(Album a) {
 
-    string caminho = diretorioJSON + "Albums.json";
+    string caminho = diretorioJSON + "Albuns.json";
     json jsonArray = lerFicheiroJSON(caminho);
 
     json j;
-    j["nomeAlbum"] = a.nome;
-    j["duracao"] = a.duracao;
-    j["anoCriacao"] = a.anoCriacao;
-    j["nomeArtista"] = a.artista;
+    j["nomeAlbum"] = a.getNome();
+    j["duracao"] = a.getDuracao();
+    j["anoCriacao"] = a.getAnoLancamento();
 
     json jsonArrayMusicas = json::array();
     for (Musica m : a.musicas){
@@ -197,10 +191,33 @@ void Repositorio::guardarAlbum(Album a) {
 
 }
 
-void Repositorio::guardarUtilizador(Utilizador u) {
+void Repositorio::guardarUtilizador(Utilizador u)
+{
+    string caminho =
+        diretorioJSON + "Utilizadores.json";
 
+    json jsonArray =
+        lerFicheiroJSON(caminho);
 
+    json j;
 
+    j["nome"] = u.getNome();
+    j["anoNascimento"] = u.getAnoNascimento();
+    j["palavraPasse"] = u.getPalavraPasse();
+
+    jsonArray.push_back(j);
+
+    ofstream outFile(caminho);
+
+    if(outFile.is_open())
+    {
+        outFile << jsonArray.dump(4);
+        outFile.close();
+    }
+    else
+    {
+        cout << "Erro escrita.\n";
+    }
 }
 
 void Repositorio::guardarLista(ListaReproducao l) {
@@ -209,9 +226,9 @@ void Repositorio::guardarLista(ListaReproducao l) {
     json jsonArray = lerFicheiroJSON(caminho);
 
     json j;
-    j["nomeAlbum"] = l.nome;
-    j["duracao"] = l.duracao;
-    j["anoCriacao"] = l.anoCriacao;
+    j["nomeAlbum"] = l.getNome();
+    j["duracao"] = l.getDuracao();
+    j["anoCriacao"] = l.getDataCriacao();
 
     json jsonArrayMusicas = json::array();
     for (Musica m : l.musicas){
@@ -287,10 +304,14 @@ void Repositorio::eliminarEditora(string n, MusicaContainer mC, EditoraContainer
     }
 
     ofstream outFile(caminho);
-    if (outFile.is_open()) {
+
+    if(outFile.is_open())
+    {
         outFile << jsonArray.dump(4);
         outFile.close();
-    } else {
+    }
+    else
+    {
         cout << "Erro escrita.\n";
     }
 
@@ -328,11 +349,11 @@ void Repositorio::eliminarArtista(string n, ArtistaContainer aC, AlbumContainer 
     }
 
     ofstream outFile(caminho);
-    if (outFile.is_open()) {
+
+    if(outFile.is_open())
+    {
         outFile << jsonArray.dump(4);
         outFile.close();
-    } else {
-        cout << "Erro escrita.\n";
     }
 
     for (int i = 0; i < aC.artistas.size(); i++) {
@@ -358,7 +379,7 @@ void Repositorio::eliminarArtista(string n, ArtistaContainer aC, AlbumContainer 
 
 void Repositorio::eliminarAlbum(string n, AlbumContainer aC, MusicaContainer mC) {
 
-    string caminho = diretorioJSON + "Albums.json";
+    string caminho = diretorioJSON + "Albuns.json";
     json jsonArray = lerFicheiroJSON(caminho);
 
     for (int i = 0; i < jsonArray.size(); i++) {
@@ -399,28 +420,35 @@ void Repositorio::eliminarAlbum(string n, AlbumContainer aC, MusicaContainer mC)
 
 }
 
-void Repositorio::eliminarUtilizador(string n) {
+void Repositorio::eliminarUtilizador(
+    string nome)
+{
+    string caminho =
+        diretorioJSON + "Utilizadores.json";
 
-    /*
-    string caminho = diretorioJSON + "utilizadores.json";
-    json jsonArray = lerFicheiroJSON(caminho);
+    json jsonArray =
+        lerFicheiroJSON(caminho);
 
-    for (int i = 0; i < jsonArray.size(); i++) {
-        if (jsonArray[i]["nome"] == n) {
-            jsonArray.erase(i);
+    for(auto it = jsonArray.begin();
+        it != jsonArray.end();)
+    {
+        if((*it)["nome"] == nome)
+        {
+            it = jsonArray.erase(it);
+        }
+        else
+        {
+            ++it;
         }
     }
 
     ofstream outFile(caminho);
-    if (outFile.is_open()) {
+
+    if(outFile.is_open())
+    {
         outFile << jsonArray.dump(4);
         outFile.close();
-    } else {
-        cout << "Erro escrita.\n";
     }
-
-    cout << "Elemento eliminado com sucesso";
-    */
 }
 
 void Repositorio::eliminarLista(string n, ListaReproducaoContainer lC) {
@@ -489,9 +517,14 @@ void Repositorio::carregarMusicas(MusicaContainer mC) {
 void Repositorio::carregarEditoras(EditoraContainer eC, ArtistaContainer aC) {
 
     string caminho = diretorioJSON + "Editoras.json";
+
     json jsonArray = lerFicheiroJSON(caminho);
 
-    for (json j : jsonArray) {
+    for(const auto& j : jsonArray)
+    {
+        string nomeEditora = j["nome"];
+
+        Editora editora(nomeEditora);
 
         Editora e = Editora(j["nome"]);
 
@@ -552,8 +585,21 @@ void Repositorio::carregarAlbums(AlbumContainer aC, MusicaContainer mC) {
 
         //aC.albums.push_back(a);
 
+    json jsonArray =
+        lerFicheiroJSON(caminho);
+
+    for(auto& j : jsonArray)
+    {
+        Utilizador u(
+            j["nome"],
+            j["anoNascimento"],
+            j["palavraPasse"]
+        );
+
+        utilizadores.push_back(u);
     }
 
+    return utilizadores;
 }
 
 void Repositorio::carregarUtilizadores(){}

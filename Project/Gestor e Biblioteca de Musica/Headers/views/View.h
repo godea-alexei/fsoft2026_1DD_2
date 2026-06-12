@@ -16,6 +16,11 @@ class View{
         int menuEditora();
         int menuLista();
 
+        int artistaEmEditora();
+        int albumEmArtista();
+        int musicaEmAlbum();
+        int musicaEmLista();
+
 
 };
 

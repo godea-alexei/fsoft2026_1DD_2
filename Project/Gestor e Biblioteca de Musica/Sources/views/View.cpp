@@ -47,9 +47,10 @@ int View::menuEscolhaPesquisa() {
         cout << "2 - Pesquisar Album\n";
         cout << "3 - Pesquisar Editora\n";
         cout << "4 - Pesquisar Artista\n";
+        cout << "5 - Pesquisar Listas de Reproducao\n";
         cout << "\n0 - Voltar ao Menu Principal\n";
         op = Utils::getNumber("Opcao");
-    } while (op < 0 || op > 4);
+    } while (op < 0 || op > 5);
     return op;
 }
 
@@ -57,14 +58,12 @@ int View::menuEscolhaPesquisa() {
 int View::menuPesquisa() {
     int op = -1;
     do {
-        cout << "\n\n>>> Pesquisar Musica <<<\n";
-        cout << "1 - Por Titulo\n";
-        cout << "2 - Por Album\n";
-        cout << "3 - Por Artista\n";
-        cout << "4 - Por Editora\n";
-        cout << "\n0 - Voltar ao Menu de pesquisa\n";
+        cout << "\n\n1 - Reproduzir Musica\n";
+        cout << "2 - Ver Letra\n";
+        cout << "\n0 - Voltar ao Menu de Pesquisa\n";
         op = Utils::getNumber("Opcao");
-    } while (op < 0 || op > 4);
+    }
+    while (op < 0 || op > 2);
     return op;
 }
 
@@ -126,7 +125,7 @@ int View::menuArtista() {
     int op = -1;
     do {
         cout << "\n\n>>> Artistas <<<\n";
-        cout << "1 - Ver Artista\n";
+        cout << "1 - Ver Artistas\n";
         cout << "2 - Adicionar Artista\n";
         cout << "3 - Remover Artista\n";
         cout << "\n0 - Voltar ao Menu Principal\n";
@@ -144,6 +143,54 @@ int View::menuPartilha() {
         cout << "\n0 - Voltar ao Menu Principal\n";
         op = Utils::getNumber("Opcao");
     } while (op < 0 || op > 2);
+    return op;
+}
+
+int View::artistaEmEditora() {
+    int op = -1;
+    do {
+        cout << "\n\n1 - Adicionar Artista a Editora\n";
+        cout << "2 - Remover Artista da Editora\n";
+        cout << "\n0 - Voltar ao Menu de Pesquisa\n";
+        op = Utils::getNumber("Opcao");
+    }
+    while (op < 0 || op > 2);
+    return op;
+}
+
+int View::albumEmArtista() {
+    int op = -1;
+    do {
+        cout << "\n\n1 - Adicionar Album ao Artista\n";
+        cout << "2 - Remover Album do Artista\n";
+        cout << "\n0 - Voltar ao Menu de Pesquisa\n";
+        op = Utils::getNumber("Opcao");
+    }
+    while (op < 0 || op > 2);
+    return op;
+}
+
+int View::musicaEmAlbum() {
+    int op = -1;
+    do {
+        cout << "\n\n1 - Adicionar Musica ao Album\n";
+        cout << "2 - Remover Musica do Album\n";
+        cout << "\n0 - Voltar ao Menu de Pesquisa\n";
+        op = Utils::getNumber("Opcao");
+    }
+    while (op < 0 || op > 2);
+    return op;
+}
+
+int View::musicaEmLista() {
+    int op = -1;
+    do {
+        cout << "\n\n1 - Adicionar Musica a Lista de Reproducao\n";
+        cout << "2 - Remover Musica da Lista de Reproducao\n";
+        cout << "\n0 - Voltar ao Menu de Pesquisa\n";
+        op = Utils::getNumber("Opcao");
+    }
+    while (op < 0 || op > 2);
     return op;
 }
 

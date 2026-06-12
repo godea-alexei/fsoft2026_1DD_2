@@ -2,53 +2,41 @@
 #include <iostream>
 using namespace std;
 
-ArtistaContainer::ArtistaContainer() {
+
+
+void ArtistaContainer::adicionarArtista(const Artista &artista) {
+    artistas.push_back(artista);
 }
 
-ArtistaContainer::~ArtistaContainer() {
-    for (int i = 0; i < (int)artistas.size(); i++) {
-        delete artistas[i];
+bool ArtistaContainer::existeArtista(const std::string &nome) const {
+    for (const auto&  a : artistas) {
+        if (a.getNome() == nome) return true;
     }
-    artistas.clear();
+    return false;
 }
 
-// Creates a new artist and adds it to the vector.
-void ArtistaContainer::adicionarArtista(string nome, int ano) {
-    if (procurarArtista(nome) != nullptr) {
-        cout << "An artist named \"" << nome << "\" already exists." << endl;
-        return;
+Artista* ArtistaContainer::procurarArtista(const std::string& nome) {
+    for(auto& a : artistas)
+    {
+        if(a.getNome() == nome)
+            return &a;
     }
 
-    // Creates the artist in memory and stores its address in the vector.
-    Artista* novo = new Artista(nome, ano);
-    artistas.push_back(novo);
-    cout << "Artist \"" << nome << "\" added successfully." << endl;
+    return nullptr;
 }
 
-// Searches for an artist by name and removes it from the vector.
-void ArtistaContainer::removerArtista(string nome) {
-    for (int i = 0; i < (int)artistas.size(); i++) {
-        if (artistas[i]->getNome() == nome) {
-            delete artistas[i];                    // frees the memory
-            artistas.erase(artistas.begin() + i);
-            cout << "Artist \"" << nome << "\" removed." << endl;
-            return;
+
+bool ArtistaContainer::removerArtista(const string& nome) {
+    for (auto it = artistas.begin(); it != artistas.end(); it++) {
+        if (it->getNome() == nome) {
+            artistas.erase(it);
+            return true;
         }
     }
-    cout << "There is no artist named \"" << nome << "\"." << endl;
+    return false;
 }
 
-// Searches for an artist by name.
-// Returns the pointer to the artist, or nullptr if it doesn't exist.
-Artista* ArtistaContainer::procurarArtista(string nome) {
-    for (int i = 0; i < (int)artistas.size(); i++) {
-        if (artistas[i]->getNome() == nome) {
-            return artistas[i];
-        }
-    }
-    return nullptr;   // none found
-}
 
-vector<Artista*>& ArtistaContainer::getAll() {
+const std::vector<Artista>& ArtistaContainer::getArtistas() const {
     return artistas;
 }

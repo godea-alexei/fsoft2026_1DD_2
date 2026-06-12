@@ -4,21 +4,44 @@
 #include <list>
 #include <Musica.h>
 #include <vector>
+#include <Utilizador.h>
 using namespace  std;
 
+
 class ListaReproducao {
-
-
-    public:
-        std::string nome;
-        int duracao;
-        int anoCriacao;
-        vector<Musica> musicas;
-
+  
+  public:
+  
+    std::string nome;
+    int dataCriacao;
+    std::string criador;
+    vector<Musica*> musicas;
+    int duracao;
+    //int anoCriacao;
+  
     ListaReproducao();
-    ListaReproducao(std::string nom, int dur, int ano);
-    ListaReproducao(std::string nom, int dur, int ano, list<Musica> &mus);
+
+    ListaReproducao(std::string nome , int dataCriacao, std::string criador);
+
+    std::string getNome() const;
+
+    int getDataCriacao() const;
+
+    int getDuracao() const;
+
+    void adicionarMusica(Musica* musica);
+
+    Musica* procurarMusica(const std::string& titulo);
+
+    bool existeMusica(const std::string& titulo) const;
+
+    bool removerMusica(const string& titulo);
+
+    const std::vector<Musica*>& getMusicas() const;
+
     ~ListaReproducao();
+
+    std::string getCriador() const;
 
 };
 

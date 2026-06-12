@@ -1,22 +1,26 @@
 #include "Musica.h"
 #include <string>
 #include <iostream>
-#include <windows.h>
-//#pragma comment(lib, "winmm.lib")
+
 using namespace std;
 
 Musica::Musica(){}
 
-Musica::Musica(string nom, int dur, int ano, string let, string gen, string cam, string artst, string nomeAlbm){
-    this->nome = nom;
-    this->duracao = dur;
-    this->dataDeLancamento = ano;
-    this->letra = let;
-    this->genero = gen;
-    this->caminho = cam;
-    this->nomeArtista = artst;
-    this->nomeAlbum = nomeAlbm;
-
+Musica::Musica(
+    string nome,
+    int duracao,
+    int anoDeLancamento,
+    string letra,
+    string genero,
+    string caminho,
+    string nomeArtista){
+    this->nome = nome;
+    this->duracao = duracao;
+    this->anoDeLancamento = anoDeLancamento;
+    this->letra = letra;
+    this->genero = genero;
+    this->caminho = caminho;
+    this->nomeArtista = nomeArtista;
 };
 
 Musica::~Musica(){}
@@ -28,15 +32,45 @@ string Musica::verLetra(){
 
 };
 
-string Musica::obterNome() {
-    return this->nome;
-};
+int Musica::getDuracao() const {
+    return duracao;
+}
+
+string Musica::getNome() const {
+    return nome;
+}
 
 void Musica::reproduzir(){
+    string comando = "start \"\" \"" + caminho + "\"";
+    system(comando.c_str());
 
-    PlaySound(caminho.c_str(), NULL, SND_FILENAME | SND_SYNC);
 
 };
+
+int Musica::getAnoDeLancamento() const {
+    return anoDeLancamento;
+}
+
+string Musica::getCaminho() const {
+    return caminho;
+}
+
+string Musica::getGenero() const {
+    return genero;
+}
+
+string Musica::getLetra() const {
+    return letra;
+}
+
+std::string Musica::getNomeArtista() const {
+    return nomeArtista;
+}
+
+
+
+
+
 
 
 

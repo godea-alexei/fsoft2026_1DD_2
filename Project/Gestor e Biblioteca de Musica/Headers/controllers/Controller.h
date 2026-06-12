@@ -11,6 +11,13 @@
 #include "EditoraContainer.h"
 #include "AlbumContainer.h"
 
+#include "AlbumContainer.h"
+#include "Artistacontainer.h"
+#include "EditoraContainer.h"
+#include "ListaReproducaoContainer.h"
+#include "MusicaContainer.h"
+#include "repo/Repositorio.h"
+
 
 class Controller{
 
@@ -18,6 +25,18 @@ class Controller{
 		View view;
 		ContaView contaView;
 		Utils utils;
+		UtilizadorContainer utilizadorContainer;
+		EditoraContainer editoraContainer;
+		ArtistaContainer artistaContainer;
+		ListaReproducaoContainer listaReproducaoContainer;
+		AlbumContainer albumContainer;
+		MusicaContainer musicaContainer;
+		Repositorio repositorio;
+
+
+
+
+		Utilizador* utilizadorAtual = nullptr;
 
 		Utilizador* utilizadorAtual = nullptr;
 
@@ -33,6 +52,8 @@ class Controller{
 
 		void runRegisto();
 		void runLogin();
+
+		void runRelacionarArtista();
 
 	public:
 

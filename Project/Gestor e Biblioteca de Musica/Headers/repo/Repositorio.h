@@ -1,10 +1,10 @@
 #ifndef GESTOR_E_BIBLIOTECA_DE_MUSICA_REPOSITORIO_H
 #define GESTOR_E_BIBLIOTECA_DE_MUSICA_REPOSITORIO_H
 #include <Musica.h>
-#include <Artista.h>
+#include <Artistacontainer.h>
 #include <Album.h>
 #include <ListaReproducao.h>
-#include <Editora.h>
+#include <EditoraContainer.h>
 #include <Utilizador.h>
 #include "MusicaContainer.h"
 #include "ListaReproducaoContainer.h"
@@ -36,8 +36,8 @@ class Repositorio {
         static void carregarTudo(MusicaContainer mC, EditoraContainer eC, ArtistaContainer aC, AlbumContainer alC, ListaReproducaoContainer lC);
 
         static void guardarMusica(Musica m);
-        static void guardarEditora(Editora e);
-        static void guardarArtista(Artista a);
+        static void guardarEditora(const Editora& e);
+        static void guardarArtista(const Artista& a);
         static void guardarAlbum(Album a);
         static void guardarUtilizador(Utilizador u);
         static void guardarLista(ListaReproducao l);

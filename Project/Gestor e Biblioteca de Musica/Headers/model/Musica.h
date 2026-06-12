@@ -4,24 +4,40 @@
 using namespace std;
 
 class Musica{
+  
+  private:
+  
+      std::string nome;
+      int duracao;
+      int anoDeLancamento;
+      std::string letra;
+      std::string genero;
+      std::string caminho;
+      std::string nomeArtista;
 
     public:
 
-        string nome;
-        int duracao;
-        int dataDeLancamento;
-        string letra;
-        string genero;
-        string caminho;
-        string nomeArtista;
         string nomeAlbum;
 
-        string verLetra();
-        string obterNome();
+        //string verLetra();
+        //string obterNome();
+  
         Musica();
         Musica(string nom, int dur, int ano, string let, string gen, string cam, string artst, string nomeAlbm);
         ~Musica();
+
         void reproduzir();
+
+        int getAnoDeLancamento() const;
+        int getDuracao() const;
+        std::string getNome() const;
+        std::string getLetra() const;
+        std::string getGenero() const;
+        std::string getCaminho() const;
+        std::string getNomeArtista() const;
+
+
+
 
 };
 

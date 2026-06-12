@@ -16,6 +16,7 @@ public:
 
     const vector<Editora>& getEditoras() const;
 
+    //Editora* procurar(const std::string& nome);
 };
 
 #endif //EDITORACONTAINER_H
