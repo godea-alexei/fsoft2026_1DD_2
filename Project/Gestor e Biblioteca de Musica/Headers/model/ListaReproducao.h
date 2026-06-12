@@ -3,19 +3,22 @@
 #include <string>
 #include <list>
 #include <Musica.h>
-#include <Utilizador.h>
 #include <vector>
+#include <Utilizador.h>
+using namespace  std;
 
 
 class ListaReproducao {
-protected:
+  
+  public:
+  
     std::string nome;
     int dataCriacao;
     std::string criador;
     vector<Musica*> musicas;
-
-public:
-
+    int duracao;
+    //int anoCriacao;
+  
     ListaReproducao();
 
     ListaReproducao(std::string nome , int dataCriacao, std::string criador);

@@ -1,108 +1,126 @@
 #include "MusicaContainer.h"
+#include "Musica.h"
+#include "../Headers/repo/Repositorio.h"
 #include <string>
 #include <ctime>
-
+#include <iostream>
+#include <list>
 using namespace std;
 
-MusicaContainer::MusicaContainer() {
+std::vector<Musica> MusicaContainer::musicas;
 
-}
+void MusicaContainer::adicionarMusica(){
 
-void MusicaContainer::adicionarMusica(const Musica &musica) {
-    musicas.push_back(musica);
-}
+    string nome;
+    int dur;
+    int ano;
+    string letra;
+    string genero;
+    string caminho;
+    string artst;
+    string album;
 
-Musica *MusicaContainer::procurarMusica(const std::string &nome) {
-    for (auto& musica : musicas) {
-        if (musica.getNome() == nome) {
-            return &musica;
-        }
+    cout << " Por favor insira: "  << endl;
+    cout << "Nome: ";
+    getline(std::cin, nome);;
+    cout << "\n Duracao em minutos: ";
+    cin >> dur;
+    cout << "\n Ano de lancamento: ";
+    cin >> ano;
+    cout << "\n Letra: ";
+    getline(std::cin, letra);
+    cout << "\n Genero Musical: ";
+    getline(std::cin, genero);
+    cout << "\n Caminho absoluto do ficheiro audio: ";
+    getline(std::cin, caminho);
+    cout << "\n Nome do artista: ";
+    getline(std::cin, artst);
+    cout << "\n Nome do album: ";
+    getline(std::cin, album);
+
+    if(dur == 0 || ano == 0){
+        cout << "\n exceção dados fora dos limites ";
     }
-    return nullptr;
-}
 
-bool MusicaContainer::existeMusica(const std::string &nome) {
-    for (const auto& musica : musicas) {
-        if (musica.getNome() == nome) {
-            return true;
-        }
-    }
-    return false;
-}
+    Musica m = Musica(nome, dur, ano, letra, genero, caminho, artst, album);
 
-bool MusicaContainer::removerMusica(const std::string &nome) {
-    for (auto it = musicas.begin(); it != musicas.end(); it++) {
-        if (it->getNome() == nome) {
-            musicas.erase(it);
-            return true;
-        }
-    }
-    return false;
-}
-
-const vector<Musica> &MusicaContainer::getMusicas() const {
-    return musicas;
-}
-
-
-
-/*
-
-
-
-int adicionarMusica(std::string nome, int duracao, int dataDeLancamento, std::string letra){
-
-    Musica musica = Musica(nome, duracao, dataDeLancamento);
-    if(musica.namo.empty() || musica.duracao == 0 || p.dataDeLancamento == 0){
-
-        return 0;
-        //add to persistence
-
-    }else{
-       std::cout << "Não pode haver compos vazios." << std::endl;
-       return 1;
-    }
+    Repositorio::guardarMusica(m);
 
 };
 
-//listaMusica  adicionar paaaaaa
-int removerMusica(std::string nome){
 
-    for(int i = 0; i < listaMusica.size(); i++){
-        if(listaMusica[i].getNome() == nome){
-            listaMusica.remove(listaMusica[i]);
-            //remover da persistencia
+
+int MusicaContainer::removerMusica(){
+/*
+    string nome;
+    cout << " Por favor insira: "  << endl;
+    cout << "Nome da musica a remover: ";
+    getline(std::cin, nome);
+
+    for(int i = 0; i < musicas.size(); i++){
+        if(musicas[i].obterNome() == nome){
+            Repositorio::eliminarMusica(nome, *this);
             return 1;
         }
     }
-
-    std::cout << "Musica nao encontrada." << std::endl;
+    std::cout << "EXCEÇÃO Musica nao encontrada." << std::endl;
     return 0;
-
+*/
+    return 0;
 };
 
 
-//listaMusica  adicionar paaaaaa
-Musica procurarMusica(std::string nome){
 
-    for(int i = 0; i < listaMusica.size(); i++){
-        if(listaMusica[i].getNome() == nome){
-              return listaMusica[i];
+Musica MusicaContainer::procurarMusica(){
+
+    string nome;
+    cout << " Por favor insira: "  << endl;
+    cout << "Nome da musica: ";
+    getline(std::cin, nome);;
+
+    for(int i = 0; i < musicas.size(); i++){
+        if(musicas[i].obterNome() == nome){
+              return musicas[i];
         }
     }
-    //throw exception
+    std::cout << "EXCEÇÃO Musica nao encontrada." << std::endl;
+
+    return Musica(); //RETIRAR
+};
+
+
+
+void MusicaContainer::getAll(){
+
+    for (int i = 0; i < musicas.size(); i++) {
+
+        cout << "Nome: " << musicas[i].nome << endl;
+        cout << "\n Duracao em minutos: " << musicas[i].duracao << endl;
+        cout << "\n Ano de lancamento: " << musicas[i].dataDeLancamento << endl;
+        cout << "\n Letra: " << musicas[i].letra << endl;
+        cout << "\n Genero Musical: " << musicas[i].genero << endl;
+        cout << "\n Nome do artista: " << musicas[i].nomeArtista << endl;
+        cout << "\n Nome do album: " << musicas[i].nomeAlbum << endl;
+
+    }
+
+};
+
+
+void MusicaContainer::reproduzirMusica(){
+
+    string n;
+    cout << " Por favor insira: "  << endl;
+    cout << "Nome da musica a reproduzir: " << endl;
+    getline(std::cin, n);
+
+    for (int i = 0; i < musicas.size(); i++) {
+        if (musicas[i].nome == n) {
+            musicas[i].reproduzir();
+        }
+    }
 
 };
 
 
 
-std::list<Musica> getAll(){
-
-    return listaMusica;
-
-};
-
-
-
-
-*/

@@ -1,8 +1,0 @@
-//
-// Created by faixe on 19/05/2026.
-//
-
-#ifndef CANCELARREMOCAOEDITORA_H
-#define CANCELARREMOCAOEDITORA_H
-
-#endif //CANCELARREMOCAOEDITORA_H

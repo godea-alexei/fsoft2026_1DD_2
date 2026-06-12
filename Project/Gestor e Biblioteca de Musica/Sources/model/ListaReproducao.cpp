@@ -6,8 +6,6 @@ using namespace std;
 
 ListaReproducao::ListaReproducao() {
 
-}
-
 ListaReproducao::ListaReproducao(string nome, int dataCriacao, string criador) {
     this->nome = nome;
     this->dataCriacao = dataCriacao;

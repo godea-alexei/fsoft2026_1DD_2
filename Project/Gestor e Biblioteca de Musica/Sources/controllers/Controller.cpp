@@ -499,8 +499,22 @@ void Controller::runMusica() {
     do {
         op = this->view.menuMusica();
         switch(op) {
+            /*
             case 1:
-                {
+                MusicaContainer::removerMusica();
+                break;
+            case 2: //adicionar musica
+                MusicaContainer::adicionarMusica();
+                break;
+            case 3: // Remover Musica
+                MusicaContainer::removerMusica();
+                break;
+            case 4: // reproduzir Musica
+                MusicaContainer::reproduzirMusica();
+                break;
+              */
+          case 1:    
+            {
                     const auto& musicas = musicaContainer.getMusicas();
 
                     if (musicas.empty()) {
@@ -512,8 +526,9 @@ void Controller::runMusica() {
                     for (const auto& m : musicas) {
                         cout << "- " << m.getNome() << " ("<< m.getAnoDeLancamento() << "): " << m.getNomeArtista() << endl;
                     }
-                }
-                break;
+              
+                    break;    
+            }
             case 2:
                 {
                     string nome = Utils::getString("Digite o Titulo da Musica");
