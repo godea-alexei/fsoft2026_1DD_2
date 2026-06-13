@@ -6,9 +6,10 @@ using namespace std;
 
 ListaReproducao::ListaReproducao() {
 
-ListaReproducao::ListaReproducao(string nome, int dataCriacao, string criador) {
+}
+
+ListaReproducao::ListaReproducao(string nome, string criador) {
     this->nome = nome;
-    this->dataCriacao = dataCriacao;
     this->criador = criador;
 }
 
@@ -18,10 +19,6 @@ string ListaReproducao::getNome() const {
 
 string ListaReproducao::getCriador() const {
     return criador;
-}
-
-int ListaReproducao::getDataCriacao() const {
-    return dataCriacao;
 }
 
 int ListaReproducao::getDuracao() const {

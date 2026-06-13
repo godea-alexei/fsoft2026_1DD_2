@@ -1,8 +1,9 @@
 [
     {
-        "Musicas": [],
-        "anoCriacao": 2026,
-        "duracao": 0,
-        "nomeAlbum": "Gui Box"
+        "Musicas": [
+            "Advanced Corpse Tumor"
+        ],
+        "criador": "Ricardo",
+        "nomeLista": "Metal"
     }
 ]

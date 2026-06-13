@@ -7,39 +7,19 @@
 #include <list>
 using namespace std;
 
-std::vector<Musica> MusicaContainer::musicas;
+MusicaContainer::MusicaContainer() {
 
-void MusicaContainer::adicionarMusica(){
+}
 
-    string nome;
-    int dur;
-    int ano;
-    string letra;
-    string genero;
-    string caminho;
-    string artst;
-    string album;
+void MusicaContainer::adicionarMusica(const Musica &musica) {
+    musicas.push_back(musica);
+}
 
-    cout << " Por favor insira: "  << endl;
-    cout << "Nome: ";
-    getline(std::cin, nome);;
-    cout << "\n Duracao em minutos: ";
-    cin >> dur;
-    cout << "\n Ano de lancamento: ";
-    cin >> ano;
-    cout << "\n Letra: ";
-    getline(std::cin, letra);
-    cout << "\n Genero Musical: ";
-    getline(std::cin, genero);
-    cout << "\n Caminho absoluto do ficheiro audio: ";
-    getline(std::cin, caminho);
-    cout << "\n Nome do artista: ";
-    getline(std::cin, artst);
-    cout << "\n Nome do album: ";
-    getline(std::cin, album);
-
-    if(dur == 0 || ano == 0){
-        cout << "\n exceção dados fora dos limites ";
+Musica *MusicaContainer::procurarMusica(const std::string &nome) {
+    for (Musica& m : musicas) {
+        if (m.getNome() == nome) {
+            return &m;
+        }
     }
 
     Musica m = Musica(nome, dur, ano, letra, genero, caminho, artst, album);
@@ -50,24 +30,15 @@ void MusicaContainer::adicionarMusica(){
 
 
 
-int MusicaContainer::removerMusica(){
-/*
-    string nome;
-    cout << " Por favor insira: "  << endl;
-    cout << "Nome da musica a remover: ";
-    getline(std::cin, nome);
-
-    for(int i = 0; i < musicas.size(); i++){
-        if(musicas[i].obterNome() == nome){
-            Repositorio::eliminarMusica(nome, *this);
-            return 1;
+bool MusicaContainer::removerMusica(const std::string &nome) {
+    for (auto it = musicas.begin(); it != musicas.end(); it++) {
+        if (it->getNome() == nome) {
+            musicas.erase(it);
+            return true;
         }
     }
-    std::cout << "EXCEÇÃO Musica nao encontrada." << std::endl;
-    return 0;
-*/
-    return 0;
-};
+    return false;
+}
 
 
 
@@ -102,22 +73,6 @@ void MusicaContainer::getAll(){
         cout << "\n Nome do artista: " << musicas[i].nomeArtista << endl;
         cout << "\n Nome do album: " << musicas[i].nomeAlbum << endl;
 
-    }
-
-};
-
-
-void MusicaContainer::reproduzirMusica(){
-
-    string n;
-    cout << " Por favor insira: "  << endl;
-    cout << "Nome da musica a reproduzir: " << endl;
-    getline(std::cin, n);
-
-    for (int i = 0; i < musicas.size(); i++) {
-        if (musicas[i].nome == n) {
-            musicas[i].reproduzir();
-        }
     }
 
 };

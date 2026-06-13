@@ -26,7 +26,8 @@ class Musica{
         Musica(string nom, int dur, int ano, string let, string gen, string cam, string artst, string nomeAlbm);
         ~Musica();
 
-        void reproduzir();
+        std::string verLetra();
+        void reproduzir() const;
 
         int getAnoDeLancamento() const;
         int getDuracao() const;

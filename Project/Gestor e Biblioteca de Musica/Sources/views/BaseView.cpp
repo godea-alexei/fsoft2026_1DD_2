@@ -51,7 +51,6 @@ void listarAtributos(Artista artista)
 void listarAtributos(ListaReproducao listaReproducao)
 {
     std::cout << "Nome: " << listaReproducao.getNome() << std::endl;
-    std::cout << "Ano de criacao: " << listaReproducao.getDataCriacao() << std::endl;
     std::cout << "Duracao: " << listaReproducao.getDuracao() << std::endl;
     std::cout << "Audio: " << std::endl;
     if (listaReproducao.getMusicas().size() > 0){
@@ -66,7 +65,7 @@ void listarAtributos(ListaReproducao listaReproducao)
 void listarAtributos(Album album)
 {
     std::cout << "Nome: " << album.getNome() << std::endl;
-    std::cout << "Ano de lancamento: " << album.getDataCriacao() << std::endl;
+    std::cout << "Ano de lancamento: " << album.getAnoLancamento() << std::endl;
     std::cout << "Duracao: " << album.getDuracao() << std::endl;
     std::cout << "Audio: " << std::endl;
     if (album.getMusicas().size() > 0){

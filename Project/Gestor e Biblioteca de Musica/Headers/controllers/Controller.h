@@ -65,6 +65,8 @@ class Controller{
 		ArtistaContainer artistaContainer;
 
 		Controller();
+		void guardarDados();
+		void carregarDados();
 		void run();
 };
 

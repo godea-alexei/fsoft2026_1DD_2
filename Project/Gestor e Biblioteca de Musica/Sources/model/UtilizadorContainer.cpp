@@ -38,4 +38,8 @@ Utilizador *UtilizadorContainer::procurarUtilizador(const string& nome) {
     return nullptr;
 }
 
+const std::vector<Utilizador> &UtilizadorContainer::getUtilizadores() const {
+    return utilizadores;
+}
+
 
