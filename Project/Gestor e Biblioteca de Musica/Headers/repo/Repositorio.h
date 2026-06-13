@@ -17,7 +17,6 @@ using json = nlohmann::json;
 
 class Repositorio {
 
-
     public:
 
         static string diretorioJSON;
@@ -44,6 +43,8 @@ class Repositorio {
         static void eliminarLista(std::string n);
 
         static json lerFicheiroJSON(string caminho);
+
+        Repositorio();
 
 };
 

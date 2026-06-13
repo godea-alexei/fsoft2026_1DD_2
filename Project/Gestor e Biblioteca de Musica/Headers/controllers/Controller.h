@@ -5,6 +5,11 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include "MusicaContainer.h"
+#include "ListaReproducaoContainer.h"
+#include "Artistacontainer.h"
+#include "EditoraContainer.h"
+#include "AlbumContainer.h"
 
 #include "AlbumContainer.h"
 #include "Artistacontainer.h"
@@ -33,6 +38,8 @@ class Controller{
 
 		Utilizador* utilizadorAtual = nullptr;
 
+		Utilizador* utilizadorAtual = nullptr;
+
 		void runConta();
 		void runPesquisa();
 		void runEscolherPesquisa();
@@ -49,6 +56,14 @@ class Controller{
 		void runRelacionarArtista();
 
 	public:
+
+		UtilizadorContainer utilizadorContainer;
+		EditoraContainer editoraContainer;
+		MusicaContainer musicaContainer;
+		ListaReproducaoContainer listaReproducaoConteiner;
+		AlbumContainer albumContainer;
+		ArtistaContainer artistaContainer;
+
 		Controller();
 		void guardarDados();
 		void carregarDados();

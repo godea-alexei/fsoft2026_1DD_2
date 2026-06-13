@@ -5,18 +5,19 @@
 #include "Musica.h"
 #include "Editora.h"
 #include "iostream"
-#include "list"
-
+#include "vector"
 
 
 void listarObjeto(Artista artista)
 {
     std::cout << "Artista: " << artista.nome << std::endl;
 }
+
 void listarObjeto(ListaReproducao listaReproducao)
 {
     std::cout << "Lista de Reproducao: " << listaReproducao.getNome() << std::endl;
 }
+
 void listarObjeto(Album album)
 {
     std::cout << "Album: " << album.getNome() << std::endl;
@@ -25,6 +26,7 @@ void listarObjeto(Musica musica)
 {
     std::cout << "Musica: " << musica.getNome() << std::endl;
 }
+
 void listarObjeto(Editora editora)
 {
     std::cout << "Editora: " << editora.nome << std::endl;

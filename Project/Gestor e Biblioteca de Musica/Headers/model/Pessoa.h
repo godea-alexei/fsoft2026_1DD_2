@@ -1,13 +1,14 @@
 #ifndef PESSOA_H
 #define PESSOA_H
 #include <string>
+using namespace std;
 
 class Pessoa{
     public:
-        std::string nome;
+        string nome;
         int anoNascimento;
 
-        std::string getNome() const;
+        string getNome() const;
         int getIdade () const;
         int getAnoNascimento() const;
         Pessoa();
