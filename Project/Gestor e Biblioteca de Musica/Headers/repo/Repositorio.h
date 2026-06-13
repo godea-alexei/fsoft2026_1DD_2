@@ -6,11 +6,12 @@
 #include <ListaReproducao.h>
 #include <EditoraContainer.h>
 #include <Utilizador.h>
+#include <AlbumContainer.h>
+#include <MusicaContainer.h>
 #include <string.h>
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
-using namespace std;
 
 
 
@@ -21,26 +22,26 @@ class Repositorio {
 
         static string diretorioJSON;
 
-        static void carregarMusicas();
-        void carregarEditoras(EditoraContainer& editoraContainer, ArtistaContainer& artistaContainer);
-        std::vector<Artista> carregarArtistas();
+        std::vector<Musica> carregarMusicas();
+        std::vector<Editora> carregarEditoras(ArtistaContainer& artistas);
+        std::vector<Artista> carregarArtistas(AlbumContainer& albuns);
         std::vector<Utilizador> carregarUtilizadores();
-        std::vector<ListaReproducao> carregarListas();
-        std::vector<Album> carregarAlbuns();
+        std::vector<ListaReproducao> carregarListas(MusicaContainer& musicas);
+        std::vector<Album> carregarAlbuns(MusicaContainer& musicas);
 
         static void guardarMusica(Musica m);
-        static void guardarEditora(const Editora& e);
-        static void guardarArtista(const Artista& a);
-        static void guardarAlbum(Album a);
-        static void guardarUtilizador(Utilizador u);
-        static void guardarLista(ListaReproducao l);
+        static void guardarEditora(const std::vector<Editora>& e);
+        static void guardarArtista(const std::vector<Artista>& a);
+        static void guardarAlbum(const std::vector<Album>& a);
+        static void guardarUtilizador(const std::vector<Utilizador>& u);
+        static void guardarLista(const std::vector<ListaReproducao>& l);
 
-        static void eliminarMusica(string n);
-        static void eliminarEditora(string n);
-        static void eliminarArtista(string n);
-        static void eliminarAlbum(string n);
-        static void eliminarUtilizador(string n);
-        static void eliminarLista(string n);
+        static void eliminarMusica(std::string n);
+        static void eliminarEditora(std::string n);
+        static void eliminarArtista(std::string n);
+        static void eliminarAlbum(std::string n);
+        static void eliminarUtilizador(std::string n);
+        static void eliminarLista(std::string n);
 
         static json lerFicheiroJSON(string caminho);
 

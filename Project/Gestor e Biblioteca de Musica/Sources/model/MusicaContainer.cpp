@@ -13,9 +13,9 @@ void MusicaContainer::adicionarMusica(const Musica &musica) {
 }
 
 Musica *MusicaContainer::procurarMusica(const std::string &nome) {
-    for (auto& musica : musicas) {
-        if (musica.getNome() == nome) {
-            return &musica;
+    for (Musica& m : musicas) {
+        if (m.getNome() == nome) {
+            return &m;
         }
     }
     return nullptr;

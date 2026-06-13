@@ -50,6 +50,8 @@ class Controller{
 
 	public:
 		Controller();
+		void guardarDados();
+		void carregarDados();
 		void run();
 };
 

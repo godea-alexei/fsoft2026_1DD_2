@@ -13,7 +13,7 @@ int View::menuPrincipal(){
         cout<<"\n\n********** Menu Principal **********\n";
         cout<<"1 - Pesquisar \n"<<endl;
         cout<<"2 - Listas de Reproducao \n"<<endl;
-        cout<<"3 - Musica \n"<<endl;
+        cout<<"3 - Musicas \n"<<endl;
         cout<<"4 - Albums \n"<<endl;
         cout<<"5 - Editoras \n"<<endl;
         cout<<"6 - Artistas \n"<<endl;

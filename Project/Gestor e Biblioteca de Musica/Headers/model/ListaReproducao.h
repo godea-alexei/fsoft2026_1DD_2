@@ -10,7 +10,6 @@
 class ListaReproducao {
 protected:
     std::string nome;
-    int dataCriacao;
     std::string criador;
     vector<Musica*> musicas;
 
@@ -18,11 +17,9 @@ public:
 
     ListaReproducao();
 
-    ListaReproducao(std::string nome , int dataCriacao, std::string criador);
+    ListaReproducao(std::string nome , std::string criador);
 
     std::string getNome() const;
-
-    int getDataCriacao() const;
 
     int getDuracao() const;
 

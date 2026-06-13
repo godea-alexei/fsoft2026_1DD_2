@@ -27,7 +27,7 @@ private:
 
 
         std::string verLetra();
-        void reproduzir();
+        void reproduzir() const;
 
         ~Musica();
 
