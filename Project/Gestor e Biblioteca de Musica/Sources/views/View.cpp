@@ -76,7 +76,7 @@ int View::menuMusica() {
     int op = -1;
     do {
         cout << "\n\n>>> Opcoes - Musicas <<<\n";
-        cout << "1 - Listar Musicas\n";
+        cout << "1 - Ver Musicas\n";
         cout << "2 - Adicionar Musica\n";
         cout << "3 - Remover Musica\n";
         cout << "4 - Reproduzir Musica\n";
