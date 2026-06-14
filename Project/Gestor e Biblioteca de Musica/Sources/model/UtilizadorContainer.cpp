@@ -25,7 +25,7 @@ bool UtilizadorContainer::autenticar(
         if (u.getNome() == nome &&
             u.getPalavraPasse() == palavraPasse) {
             return true;
-        }
+            }
     }
     return false;
 }
@@ -38,4 +38,6 @@ Utilizador *UtilizadorContainer::procurarUtilizador(const string& nome) {
     return nullptr;
 }
 
-
+const std::vector<Utilizador> &UtilizadorContainer::getUtilizadores() const {
+    return utilizadores;
+}

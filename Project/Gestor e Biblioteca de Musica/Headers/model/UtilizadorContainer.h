@@ -21,6 +21,10 @@ public:
 
     Utilizador* procurarUtilizador(
         const std::string& nome);
+
+    const std::vector<Utilizador>& getUtilizadores() const;
 };
+
+
 
 #endif //UTILIZADORCONTAINER_H

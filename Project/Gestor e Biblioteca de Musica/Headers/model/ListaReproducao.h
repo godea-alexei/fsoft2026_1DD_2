@@ -13,15 +13,13 @@ class ListaReproducao {
   public:
   
     std::string nome;
-    int dataCriacao;
     std::string criador;
     vector<Musica*> musicas;
     int duracao;
-    //int anoCriacao;
   
     ListaReproducao();
 
-    ListaReproducao(std::string nome , int dataCriacao, std::string criador);
+    ListaReproducao(std::string nome, std::string criador);
 
     std::string getNome() const;
 

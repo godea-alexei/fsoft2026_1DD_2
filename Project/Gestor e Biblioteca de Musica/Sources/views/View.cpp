@@ -13,7 +13,7 @@ int View::menuPrincipal(){
         cout<<"\n\n********** Menu Principal **********\n";
         cout<<"1 - Pesquisar \n"<<endl;
         cout<<"2 - Listas de Reproducao \n"<<endl;
-        cout<<"3 - Musica \n"<<endl;
+        cout<<"3 - Musicas \n"<<endl;
         cout<<"4 - Albums \n"<<endl;
         cout<<"5 - Editoras \n"<<endl;
         cout<<"6 - Artistas \n"<<endl;
@@ -88,7 +88,6 @@ int View::menuMusica() {
         cout << "1 - Ver Musicas\n";
         cout << "2 - Adicionar Musica\n";
         cout << "3 - Remover Musica\n";
-        cout << "4 - Reproduzir Musica\n";
         cout << "\n0 - Voltar ao Menu Principal\n";
         op = Utils::getNumber("Opcao");
     } while (op < 0 || op > 3);

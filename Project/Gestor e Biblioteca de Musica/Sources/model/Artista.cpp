@@ -68,4 +68,3 @@ const std::vector<Album *> &Artista::getAlbuns() const {
 
 
 Artista::~Artista(){}
-

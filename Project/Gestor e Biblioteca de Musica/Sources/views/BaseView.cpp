@@ -5,19 +5,18 @@
 #include "Musica.h"
 #include "Editora.h"
 #include "iostream"
-#include "vector"
+#include "list"
+
 
 
 void listarObjeto(Artista artista)
 {
     std::cout << "Artista: " << artista.nome << std::endl;
 }
-
 void listarObjeto(ListaReproducao listaReproducao)
 {
     std::cout << "Lista de Reproducao: " << listaReproducao.getNome() << std::endl;
 }
-
 void listarObjeto(Album album)
 {
     std::cout << "Album: " << album.getNome() << std::endl;
@@ -26,7 +25,6 @@ void listarObjeto(Musica musica)
 {
     std::cout << "Musica: " << musica.getNome() << std::endl;
 }
-
 void listarObjeto(Editora editora)
 {
     std::cout << "Editora: " << editora.nome << std::endl;
@@ -51,7 +49,6 @@ void listarAtributos(Artista artista)
 void listarAtributos(ListaReproducao listaReproducao)
 {
     std::cout << "Nome: " << listaReproducao.getNome() << std::endl;
-    std::cout << "Ano de criacao: " << listaReproducao.getDataCriacao() << std::endl;
     std::cout << "Duracao: " << listaReproducao.getDuracao() << std::endl;
     std::cout << "Audio: " << std::endl;
     if (listaReproducao.getMusicas().size() > 0){
@@ -66,7 +63,7 @@ void listarAtributos(ListaReproducao listaReproducao)
 void listarAtributos(Album album)
 {
     std::cout << "Nome: " << album.getNome() << std::endl;
-    std::cout << "Ano de lancamento: " << album.getDataCriacao() << std::endl;
+    std::cout << "Ano de lancamento: " << album.getAnoLancamento() << std::endl;
     std::cout << "Duracao: " << album.getDuracao() << std::endl;
     std::cout << "Audio: " << std::endl;
     if (album.getMusicas().size() > 0){
@@ -102,4 +99,3 @@ void listarAtributos(Editora editora)
         std::cout << "  Nenhum artista associado a editora" << std::endl;
     }
 }
-

@@ -1,6 +1,16 @@
 [
     {
         "artistas": [],
+        "nome": "Candlelight Records"
+    },
+    {
+        "artistas": [
+            "Ne Obliviscaris"
+        ],
+        "nome": "Season Of Mist"
+    },
+    {
+        "artistas": [],
         "nome": "Nuclear Blast Records"
     }
 ]

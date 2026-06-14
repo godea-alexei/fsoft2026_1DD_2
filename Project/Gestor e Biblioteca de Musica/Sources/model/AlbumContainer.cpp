@@ -6,9 +6,9 @@ void AlbumContainer::adicionarAlbum(const Album &album) {
 }
 
 Album *AlbumContainer::procurarAlbum(const string &nome) {
-    for (auto& album : albuns) {
-        if (album.getNome() == nome) {
-            return &album;
+    for (Album& a : albuns) {
+        if (a.getNome() == nome) {
+            return &a;
         }
     }
     return nullptr;
@@ -34,7 +34,3 @@ bool AlbumContainer::removerAlbum(const string &nome) {
 const vector<Album> &AlbumContainer::getAlbuns() const {
     return albuns;
 }
-
-
-
-

@@ -1,3 +1,47 @@
 [
-
+    {
+        "anoDeLancamento": 1999,
+        "caminho": "\"C:\\Users\\faixe\\Downloads\\AdvancedCorpseTumor.mp3\"",
+        "duracao": 4,
+        "genero": "Death Metal Tecnico",
+        "letra": "aa",
+        "nome": "Advanced Corpse Tumor",
+        "nomeArtista": "Necrophagist"
+    },
+    {
+        "anoDeLancamento": 1996,
+        "caminho": "\"C:\\Users\\faixe\\Downloads\\Morningrise\\To Bid You Farewell.mp3\"",
+        "duracao": 11,
+        "genero": "Metal Progressivo",
+        "letra": "I am awaiting the sunrise\nGazing modestly through the coldest morning\nOnce it came, you lied\nEmbracing us over autumn's proud treetops\n\nI stand motionless\nIn a parade of falling rain\nYour voice I cannot hear\nAs I am falling again\n\nDevotion eludes and in sadness I lumber\nIn my own ashes, I am standing without a soul\nShe wept and whispered: I know...\n\nWe walked into the night\nAm I to bid you farewell?\nWhy can't you see that I try?\nWhen every tear I shed is for you?",
+        "nome": "To Bid You Farewell",
+        "nomeArtista": "Opeth"
+    },
+    {
+        "anoDeLancamento": 1996,
+        "caminho": "\"C:\\Users\\faixe\\Downloads\\Morningrise\\Advent.mp3\"",
+        "duracao": 14,
+        "genero": "Death Metal Progressivo",
+        "letra": "aaa",
+        "nome": "Advent",
+        "nomeArtista": "Opeth"
+    },
+    {
+        "anoDeLancamento": 1996,
+        "caminho": "\"C:\\Users\\faixe\\Downloads\\Morningrise\\Black Rose Immortal.mp3\"",
+        "duracao": 20,
+        "genero": "Death Metal Progressivo",
+        "letra": "aaa",
+        "nome": "Black Rose Immortal",
+        "nomeArtista": "Opeth"
+    },
+    {
+        "anoDeLancamento": 1996,
+        "caminho": "\"C:\\Users\\faixe\\Downloads\\Morningrise\\The Night And The Silent Water.mp3\"",
+        "duracao": 11,
+        "genero": "Death Metal Progressivo",
+        "letra": "letraa",
+        "nome": "The Night And The Silent Water",
+        "nomeArtista": "Opeth"
+    }
 ]

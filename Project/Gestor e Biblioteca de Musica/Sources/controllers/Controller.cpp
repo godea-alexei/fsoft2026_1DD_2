@@ -11,14 +11,40 @@
 using namespace std;
 
 Controller::Controller() {
+    vector<Musica> musicas = repositorio.carregarMusicas();
+
+    for (const auto& m : musicas) {
+        musicaContainer.adicionarMusica(m);
+    }
+
+    vector<Album> albuns = repositorio.carregarAlbuns(musicaContainer);
+
+    for (const auto& a : albuns) {
+        albumContainer.adicionarAlbum(a);
+    }
+
+    vector<ListaReproducao> listas = repositorio.carregarListas(musicaContainer);
+
+    for (const auto& l : listas) {
+        listaReproducaoContainer.adicionarLista(l);
+    }
+
+    vector<Artista> artistas = repositorio.carregarArtistas(albumContainer);
+
+    for (const auto& a : artistas) {
+        artistaContainer.adicionarArtista(a);
+    }
+
+    vector<Editora> editoras = repositorio.carregarEditoras(artistaContainer);
+    for (const auto& e : editoras) {
+        editoraContainer.adicionarEditora(e);
+    }
+
     vector<Utilizador> utilizadores = repositorio.carregarUtilizadores();
-    vector<ListaReproducao> listas = repositorio.carregarListas();
-    repositorio.carregarEditoras(editoraContainer, artistaContainer);
 
     for (const auto& u : utilizadores) {
         utilizadorContainer.adicionarUtilizador(u);
     }
-
 
 }
 
@@ -98,8 +124,6 @@ void Controller::runRegisto() {
     palavraPasse);
 
     utilizadorContainer.adicionarUtilizador(utilizador);
-
-    repositorio.guardarUtilizador(utilizador);
 
     contaView.sucessoRegisto();
 }
@@ -383,6 +407,10 @@ void Controller::runEscolherPesquisa() {
                         opcao = this->view.musicaEmLista();
                         switch(opcao) {
                             case 1: {
+                                if (listaReproducao->getCriador() != utilizadorAtual->getNome() ) {
+                                    cout << "So o criador da Lista de Reproducao tem permissao para alterar a lista  de reproducao: " << listaReproducao->getNome() << endl;
+                                    break;
+                                }
                                 string nomeM = Utils::getString("Insira o nome da Musica");
 
                                 Musica* musica = musicaContainer.procurarMusica(nomeM);
@@ -401,6 +429,10 @@ void Controller::runEscolherPesquisa() {
                                 break;
                             }
                             case 2: {
+                                if (listaReproducao->getCriador() != utilizadorAtual->getNome() ) {
+                                    cout << "So o criador da Lista de Reproducao tem permissao para alterar a lista  de reproducao: " << listaReproducao->getNome() << endl;
+                                    break;
+                                }
                                 string nomeM = Utils::getString("Insira o nome da musica");
 
                                 Musica* musica = musicaContainer.procurarMusica(nomeM);
@@ -461,15 +493,9 @@ void Controller::runListaReproducao() {
                     break;
                 }
 
-                time_t t = time(0);
-                tm* now = localtime(&t);
-                int ano = now->tm_year + 1900;
-
-                ListaReproducao lista(nome, ano, utilizadorAtual->getNome());
+                ListaReproducao lista(nome, utilizadorAtual->getNome());
 
                 listaReproducaoContainer.adicionarLista(lista);
-
-                repositorio.guardarLista(lista);
 
                 cout << "Lista de Reproducao criada com sucesso!" << endl;
                 }
@@ -499,22 +525,8 @@ void Controller::runMusica() {
     do {
         op = this->view.menuMusica();
         switch(op) {
-            /*
             case 1:
-                MusicaContainer::removerMusica();
-                break;
-            case 2: //adicionar musica
-                MusicaContainer::adicionarMusica();
-                break;
-            case 3: // Remover Musica
-                MusicaContainer::removerMusica();
-                break;
-            case 4: // reproduzir Musica
-                MusicaContainer::reproduzirMusica();
-                break;
-              */
-          case 1:    
-            {
+                {
                     const auto& musicas = musicaContainer.getMusicas();
 
                     if (musicas.empty()) {
@@ -524,11 +536,10 @@ void Controller::runMusica() {
 
                     cout << ">>> MUSICAS <<<" << endl;
                     for (const auto& m : musicas) {
-                        cout << "- " << m.getNome() << " ("<< m.getAnoDeLancamento() << "): " << m.getNomeArtista() << endl;
+                        cout << "- " << m->getNome() << " ("<< m->getAnoDeLancamento() << "): " << m->getNomeArtista() << endl;
                     }
-              
-                    break;    
-            }
+                }
+                break;
             case 2:
                 {
                     string nome = Utils::getString("Digite o Titulo da Musica");
@@ -558,6 +569,18 @@ void Controller::runMusica() {
                 {
                     string nome = Utils::getString("Digite o nome da Musica que quer remover");
 
+                    if (musicaContainer.existeMusica(nome)) {
+                        for (const auto& a : albumContainer.getAlbuns()) {
+                            string nomeA = a.getNome();
+                            Album* album = albumContainer.procurarAlbum(nomeA);
+                            album->removerMusica(nome);
+                        }
+                        for (const auto& l : listaReproducaoContainer.getListas()) {
+                            string nomeL = l.getNome();
+                            ListaReproducao* lista = listaReproducaoContainer.procurar(nomeL);
+                            lista->removerMusica(nome);
+                        }
+                    }
                     if (musicaContainer.removerMusica(nome)) {
                         repositorio.eliminarMusica(nome);
                         cout << "A Musica " << nome << " foi removida com sucesso." << endl;
@@ -610,14 +633,20 @@ void Controller::runAlbum() {
 
                 albumContainer.adicionarAlbum(album);
 
-                repositorio.guardarAlbum(album);
-
                 cout << "Album adicionado com sucesso!" << endl;
                 }
                 break;
             case 3:
                 {
                     string nome = Utils::getString("Digite o nome do Album que quer remover");
+
+                    if (albumContainer.existeAlbum(nome)) {
+                        for (const auto& a : artistaContainer.getArtistas()) {
+                            string nomeA = a.getNome();
+                            Artista* artista = artistaContainer.procurarArtista(nomeA);
+                            artista->removerAlbum(nome);
+                        }
+                    }
 
                     if (albumContainer.removerAlbum(nome)) {
                         repositorio.eliminarAlbum(nome);
@@ -666,7 +695,6 @@ void Controller::runEditora() {
                     }
 
                     editoraContainer.adicionarEditora(nome);
-                    repositorio.guardarEditora(nome);
                     cout << "Editora adicionada com sucesso!" << endl;
                 }
                 break;
@@ -730,7 +758,16 @@ void Controller::runArtista() {
                 {
                     string nome = Utils::getString("Digite o nome do artista que quer remover");
 
+                     if (artistaContainer.existeArtista(nome)) {
+                        for (const auto& e : editoraContainer.getEditoras()) {
+                            string nomeE = e.getNome();
+                            Editora* editora = editoraContainer.procurar(nomeE);
+                            editora->removerArtista(nome);
+                        }
+                    }
+
                     if (artistaContainer.removerArtista(nome)) {
+                        repositorio.eliminarArtista(nome);
                         cout << "O artista " << nome << " foi removido com sucesso." << endl;
                     }
                     else
@@ -761,5 +798,10 @@ void Controller::runPartilhar() {
     } while(op != 0);
 }
 
-
-
+void Controller::guardarDados() {
+    repositorio.guardarUtilizador(utilizadorContainer.getUtilizadores());
+    repositorio.guardarArtista(artistaContainer.getArtistas());
+    repositorio.guardarEditora(editoraContainer.getEditoras());
+    repositorio.guardarAlbum(albumContainer.getAlbuns());
+    repositorio.guardarLista(listaReproducaoContainer.getListas());
+}
