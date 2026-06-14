@@ -7,39 +7,15 @@
         "nomeLista": "Lista1"
     },
     {
-        "Musicas": [],
-        "anoCriacao": 2026,
-        "criador": "Anao",
-        "duracao": 0,
-        "nomeLista": "Metal2"
-    },
-    {
         "Musicas": [
             "Advanced Corpse Tumor",
             "To Bid You Farewell",
-            "Advent"
+            "Advent",
+            "Nectar"
         ],
         "anoCriacao": 0,
         "criador": "Ricardo",
-        "duracao": 29,
+        "duracao": 39,
         "nomeLista": "Metal"
-    },
-    {
-        "Musicas": [],
-        "anoCriacao": 2026,
-        "criador": "Anao",
-        "duracao": 0,
-        "nomeLista": "Metal2026:57:11"
-    },
-    {
-        "Musicas": [
-            "Advanced Corpse Tumor",
-            "To Bid You Farewell",
-            "Advent"
-        ],
-        "anoCriacao": 2026,
-        "criador": "Anao",
-        "duracao": 29,
-        "nomeLista": "Metal12:1:12"
     }
 ]

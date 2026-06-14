@@ -37,5 +37,5 @@ void ContaView::falhaRegisto() {
 }
 
 void ContaView::falhaLogin() {
-    cout << "Credenciais erradas. Tente iniciar sessão novamente.\n";
+    cout << "Credenciais erradas. Tente iniciar sessao novamente.\n";
 }

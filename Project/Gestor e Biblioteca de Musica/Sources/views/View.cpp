@@ -64,7 +64,7 @@ int View::menuLista() {
         cout << "3 - Remover Lista de Reproducao\n";
         cout << "4 - Adicionar Musica a Lista de Reproducao\n";
         cout << "5 - Remover Musica da Lista de Reproducao\n";
-        cout << "6 - Abrir lista de reprodução\n";
+        cout << "6 - Abrir lista de reproducao\n";
         cout << "\n0 - Voltar \n";
         op = Utils::getNumber("Opcao");
     } while (op < 0 || op > 6);
