@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BackendCodeEditorMiscSettings">
-    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="3" type="long" />
+    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="4" type="long" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
   </component>
   <component name="CMakePresetLoader">{
@@ -33,7 +33,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0557b5de-b1c4-4f5c-a039-73671eb434f9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/controllers/Controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/controllers/Controller.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/views/View.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/views/View.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testes/test_musica.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/testes/testMusica.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +69,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "CMake Application.Gestor_e_Biblioteca_de_Musica.executor": "Run",
+    "CTest Application.All CTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -77,7 +83,7 @@
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "ctest.advertisement.all.test.configuration.is.created": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "C:/Users/godea/Desktop/FINAL DEFINITIVO/Project/Gestor e Biblioteca de Musica",
     "node.js.detected.package.eslint": "true",
@@ -103,11 +109,6 @@
       </method>
     </configuration>
     <configuration name="Gestor_e_Biblioteca_de_Musica" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Gestor_e_Biblioteca_de_Musica" TARGET_NAME="Gestor_e_Biblioteca_de_Musica" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Gestor_e_Biblioteca_de_Musica" RUN_TARGET_NAME="Gestor_e_Biblioteca_de_Musica">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -163,7 +164,8 @@
       <workItem from="1781426560683" duration="13000" />
       <workItem from="1781426591043" duration="5545000" />
       <workItem from="1781437236914" duration="1612000" />
-      <workItem from="1781446576708" duration="18727000" />
+      <workItem from="1781446576708" duration="17219000" />
+      <workItem from="1781467492118" duration="315000" />
     </task>
     <servers />
   </component>

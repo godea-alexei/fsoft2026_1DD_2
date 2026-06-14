@@ -251,10 +251,6 @@ void Controller::runListaReproducao() {
                         Utils::printMessage(msg);
                         break;
                     }
-                    else {
-                        for (const auto& l : listas) {baseView.listarObjeto(l);}
-                    }
-
 
                     msg = ">>> AS SUAS LISTAS DE REPRODUCAO <<<";
                     Utils::printMessage(msg);

@@ -88,7 +88,7 @@ enable_testing()
 
 
 add_executable(testes
-        testes/test_musica.cpp
+        testes/testMusica.cpp
         Sources/model/Musica.cpp
         Sources/model/MusicaContainer.cpp
 )
