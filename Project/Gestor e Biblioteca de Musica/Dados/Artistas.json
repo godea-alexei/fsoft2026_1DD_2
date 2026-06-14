@@ -5,7 +5,9 @@
         "nome": "Opeth"
     },
     {
-        "albums": [],
+        "albums": [
+            "Citadel"
+        ],
         "anoNascimento": 2003,
         "nome": "Ne Obliviscaris"
     }

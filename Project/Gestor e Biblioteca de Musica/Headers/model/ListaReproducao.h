@@ -23,8 +23,6 @@ class ListaReproducao {
 
     std::string getNome() const;
 
-    int getDataCriacao() const;
-
     int getDuracao() const;
 
     void adicionarMusica(Musica* musica);

@@ -28,6 +28,15 @@
     },
     {
         "anoDeLancamento": 1996,
+        "caminho": "\"C:\\Users\\faixe\\Downloads\\Morningrise\\Nectar.mp3\"",
+        "duracao": 10,
+        "genero": "Death Metal Progressivo",
+        "letra": "letra",
+        "nome": "Nectar",
+        "nomeArtista": "Opeth"
+    },
+    {
+        "anoDeLancamento": 1996,
         "caminho": "\"C:\\Users\\faixe\\Downloads\\Morningrise\\Black Rose Immortal.mp3\"",
         "duracao": 20,
         "genero": "Death Metal Progressivo",

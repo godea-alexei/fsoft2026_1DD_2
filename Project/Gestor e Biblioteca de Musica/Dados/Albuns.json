@@ -3,10 +3,16 @@
         "Musicas": [
             "Advent",
             "The Night And The Silent Water",
+            "Nectar",
             "Black Rose Immortal",
             "To Bid You Farewell"
         ],
         "anoLancamento": 1996,
         "nomeAlbum": "Morningrise"
+    },
+    {
+        "Musicas": [],
+        "anoLancamento": 2014,
+        "nomeAlbum": "Citadel"
     }
 ]
