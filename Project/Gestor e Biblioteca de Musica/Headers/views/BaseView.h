@@ -20,7 +20,7 @@ public:
         void listarAtributos(Artista artista); //views Artista
         void listarAtributos(ListaReproducao listaReproducao); //views Lista reprodução
         void listarAtributos(Album album); //views albums
-        void listarAtributos(Musica musica); //views Musica
+        static void listarAtributos(Musica* musica); //views Musica
         void listarAtributos(Editora editora); //editora
 
 

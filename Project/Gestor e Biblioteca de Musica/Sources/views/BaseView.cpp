@@ -75,15 +75,13 @@ void listarAtributos(Album album)
     }
 }
 
-void listarAtributos(Musica musica)
+void BaseView::listarAtributos(Musica* musica)
 {
-    std::cout << "Nome: " << musica.getNome() << std::endl;
-    std::cout << "Duração: " << musica.getDuracao() << std::endl;
-    std::cout << "Ano de Lançamento: " << musica.getAnoDeLancamento() << std::endl;
-    std::cout << "Letra: " << musica.getLetra() << std::endl;
-    std::cout << "Género: " << musica.getGenero() << std::endl;
-    std::cout << "Caminho: " << musica.getCaminho() << std::endl;
-    std::cout << "Artista: " << musica.getNomeArtista() << std::endl;
+    cout << ">>> " << musica->getNome() << " <<<" << endl;
+    cout << "Duracao: " << musica->getDuracao() << " minutos" <<endl;
+    cout << "Ano de Lancamento: " << musica->getAnoDeLancamento() << endl;
+    cout << "Genero: " << musica->getGenero() << endl;
+    cout << "Artista: " << musica->getNomeArtista() << endl;
 }
 
 void listarAtributos(Editora editora)

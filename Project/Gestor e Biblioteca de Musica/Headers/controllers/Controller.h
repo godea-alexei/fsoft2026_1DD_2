@@ -29,7 +29,7 @@ private:
 	Repositorio repositorio;
 
 
-
+	string msg = "";
 
 	Utilizador* utilizadorAtual = nullptr;
 

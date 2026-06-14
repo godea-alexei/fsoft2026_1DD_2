@@ -72,6 +72,6 @@ int Utils::getNumber(const std::string& label) {
     return number;
 }
 
-std::string printMessage(string* msg) {
-
+void Utils::printMessage(string& msg) {
+    cout << msg << endl;
 }
