@@ -23,7 +23,7 @@ class Musica{
         Musica(std::string nom, int dur, int ano, std::string let, std::string gen, std::string cam, std::string artst);
         ~Musica();
 
-        void reproduzir();
+        void reproduzir() const;
 
         int getAnoDeLancamento() const;
         int getDuracao() const;

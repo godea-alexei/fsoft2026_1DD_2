@@ -2,6 +2,8 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include "windows.h"
+#include <shellapi.h>
 
 
 
@@ -29,8 +31,6 @@ Musica::Musica(
 Musica::~Musica(){}
 
 std::string Musica::getLetra() const {
-
-    std::cout << letra << std::endl;
     return letra;
 
 };
@@ -43,10 +43,15 @@ std::string Musica::getNome() const {
     return nome;
 }
 
-void Musica::reproduzir(){
-    std::string comando = "start \"\" \"" + caminho + "\"";
-    system(comando.c_str());
-
+void Musica::reproduzir() const
+{
+    ShellExecute(
+        NULL,
+        "open",
+        caminho.c_str(),
+        NULL,
+        NULL,
+        SW_SHOWNORMAL);
 };
 
 int Musica::getAnoDeLancamento() const {

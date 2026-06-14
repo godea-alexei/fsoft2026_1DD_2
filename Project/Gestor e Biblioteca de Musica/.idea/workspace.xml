@@ -28,29 +28,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0557b5de-b1c4-4f5c-a039-73671eb434f9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dados/Albuns.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dados/Albuns.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dados/Artista.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dados/Editoras.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dados/Editoras.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dados/Listas.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dados/Listas.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dados/Musicas.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dados/Musicas.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dados/Utilizadores.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dados/Utilizadores.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Headers/controllers/Controller.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/controllers/Controller.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/repo/Repositorio.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/repo/Repositorio.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/views/Utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/views/Utils.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/controllers/Controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/controllers/Controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/Album.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/Album.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/ArtistaContainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/ArtistaContainer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/Editora.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/Editora.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/ListaReproducaoContainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/ListaReproducaoContainer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/MusicaContainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/MusicaContainer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/Partilha.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/Partilha.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/UtilizadorContainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/UtilizadorContainer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/repo/Repositorio.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/repo/Repositorio.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/model/Musica.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/Musica.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/views/BaseView.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/views/BaseView.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/views/Utils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/views/Utils.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/views/View.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/views/View.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,12 +96,12 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="Gestor_e_Biblioteca_de_Musica" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Gestor_e_Biblioteca_de_Musica" TARGET_NAME="Gestor_e_Biblioteca_de_Musica" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Gestor_e_Biblioteca_de_Musica" RUN_TARGET_NAME="Gestor_e_Biblioteca_de_Musica">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Gestor_e_Biblioteca_de_Musica" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Gestor_e_Biblioteca_de_Musica" TARGET_NAME="Gestor_e_Biblioteca_de_Musica" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Gestor_e_Biblioteca_de_Musica" RUN_TARGET_NAME="Gestor_e_Biblioteca_de_Musica">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -138,6 +122,7 @@
       <workItem from="1781426560683" duration="13000" />
       <workItem from="1781426591043" duration="5545000" />
       <workItem from="1781437236914" duration="1612000" />
+      <workItem from="1781446576708" duration="2647000" />
     </task>
     <servers />
   </component>

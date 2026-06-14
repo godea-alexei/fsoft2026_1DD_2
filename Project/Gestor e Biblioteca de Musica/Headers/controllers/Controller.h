@@ -13,6 +13,7 @@
 
 
 class Controller{
+private:
 
 	public:
 
@@ -20,7 +21,8 @@ class Controller{
 		ContaView contaView;
 		Utils utils;
 		BaseView baseView;
-		Utilizador* utilizadorAtual;
+		Utilizador* utilizadorAtual = nullptr;
+		string msg = "";
 
 		void runConta();
 		void runPesquisa();

@@ -423,7 +423,7 @@ void Controller::runMusica() {
                 }
             case 4: { //reprodução
 
-              string nome = Utils::getString("Digite o Titulo da Musica: ");
+              string nome = Utils::getString("Digite o Titulo da Musica");
               if (musicaContainer.existeMusica(nome)) {
                   musicaContainer.procurarMusica(nome)->reproduzir();
                   break;
