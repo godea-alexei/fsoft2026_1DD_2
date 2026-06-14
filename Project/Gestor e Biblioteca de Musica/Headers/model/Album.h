@@ -12,10 +12,10 @@ private:
     int anoLancamento;
 
 public:
-        Album();
-        Album(std::string nome, int anoLancamento);
+    Album();
+    Album(std::string nome, int anoLancamento);
 
-        int getAnoLancamento() const;
+    int getAnoLancamento() const;
 };
 
 #endif //ALBUM_H

@@ -32,10 +32,3 @@ bool ListaReproducaoContainer::removerLista(const string& nome) {
 const vector<ListaReproducao>& ListaReproducaoContainer::getListas() const {
     return listas;
 }
-
-
-
-
-
-
-

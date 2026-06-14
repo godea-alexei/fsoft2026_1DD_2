@@ -1,6 +1,8 @@
 #include "Musica.h"
 #include <string>
 #include <iostream>
+#include "windows.h"
+#include <shellapi.h>
 
 using namespace std;
 
@@ -40,12 +42,16 @@ string Musica::getNome() const {
     return nome;
 }
 
-void Musica::reproduzir(){
-    string comando = "start \"\" \"" + caminho + "\"";
-    system(comando.c_str());
-
-
-};
+void Musica::reproduzir() const
+{
+    ShellExecute(
+        NULL,
+        "open",
+        caminho.c_str(),
+        NULL,
+        NULL,
+        SW_SHOWNORMAL);
+}
 
 int Musica::getAnoDeLancamento() const {
     return anoDeLancamento;
@@ -66,11 +72,3 @@ string Musica::getLetra() const {
 std::string Musica::getNomeArtista() const {
     return nomeArtista;
 }
-
-
-
-
-
-
-
-

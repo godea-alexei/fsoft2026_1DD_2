@@ -71,3 +71,7 @@ int Utils::getNumber(const std::string& label) {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     return number;
 }
+
+void Utils::printMessage(string& msg) {
+    cout << msg << endl;
+}

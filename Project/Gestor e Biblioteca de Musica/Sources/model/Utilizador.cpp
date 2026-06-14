@@ -24,4 +24,3 @@ bool Utilizador::validarPalavraPasse(
     if (pass.length() < 1) return false;
     else return true;
 }
-
