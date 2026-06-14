@@ -847,6 +847,13 @@ void Controller::runPartilhar() {
                 cout << "Lista de reproducao partilhada com " << nomeDestinatario << " com sucesso!\n";
 
                 break;
+            }case 3: { //listar musicas partilhadas
+
+                for (auto& m : utilizadorAtual->musicasPartilhadas) {
+                    std::cout << m << std::endl;
+                    std::cout << "---------------------------------------" << std::endl;
+                }
+                break;
             }
             default:
                 break;
