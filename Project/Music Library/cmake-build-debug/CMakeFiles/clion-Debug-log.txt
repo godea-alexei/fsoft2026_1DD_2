@@ -1,1 +1,0 @@
-CMakeLists.txt not found in C:\Users\faixe\Documents\GitHub\fsoft2026_1DD_2\Project\Music Library Select CMakeLists.txt

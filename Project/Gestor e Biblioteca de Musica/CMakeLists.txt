@@ -10,7 +10,6 @@ include_directories(Headers/exceptions)
 include_directories(Headers/model)
 include_directories(Headers/views)
 include_directories(Sources)
-
 add_executable(Gestor_e_Biblioteca_de_Musica
         Headers/controllers/Controller.h
         Headers/model/Album.h
@@ -63,11 +62,7 @@ add_executable(Gestor_e_Biblioteca_de_Musica
         Headers/exceptions/InseridoTipoIncorreto.h
         Sources/model/Partilha.cpp
         Headers/model/Partilha.h)
-
 target_link_libraries(Gestor_e_Biblioteca_de_Musica winmm)
-
-
-
 include(FetchContent)
 FetchContent_Declare(
         json
@@ -76,3 +71,34 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(json)
 target_link_libraries(Gestor_e_Biblioteca_de_Musica nlohmann_json::nlohmann_json)
+
+
+
+
+FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG release-1.12.1   
+)
+
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+
+
+add_executable(testes
+        testes/test_musica.cpp
+        Sources/model/Musica.cpp
+        Sources/model/MusicaContainer.cpp
+)
+
+
+target_link_libraries(testes
+        gtest_main
+        nlohmann_json::nlohmann_json
+)
+
+
+include(GoogleTest)
+gtest_discover_tests(testes)
