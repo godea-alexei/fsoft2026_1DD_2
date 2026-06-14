@@ -1,31 +1,24 @@
 #ifndef EDITORA_H
 #define EDITORA_H
 #include <vector>
-
 #include "Artista.h"
 #include <string>
+using namespace std;
 
 class Editora {
 public:
-    std::string nome;
-    std::vector<Artista*> artistas;
 
+    string nome;
+    vector<Artista*> artistas;
     Editora();
-    Editora(std::string nome);
-
-    std::string getNome() const;
+    Editora(string nome);
+    string getNome() const;
 
     void adicionarArtista(Artista* artista);
-
     bool removerArtista(const string& nome);
-
     bool existeArtista(const string& nome);
-
-    Artista* procurarArtista(const std::string& nome);
-
-    const std::vector<Artista*>& getArtistas() const;
-
-
+    Artista* procurarArtista(const string& nome);
+    const vector<Artista*>& getArtistas() const;
 
 };
 

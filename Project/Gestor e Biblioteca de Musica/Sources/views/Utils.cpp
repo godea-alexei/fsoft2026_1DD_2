@@ -1,10 +1,11 @@
 #include "Utils.h"
 #include <stdexcept>
-#include <algorithm>
 #include <cctype>
 #include <iostream>
 #include <limits>
-using namespace std;
+#include <sstream>
+#include <cmath>
+
 
 /*
 float Utils::getFloat(const std::string& s) {
@@ -46,32 +47,34 @@ bool Utils::validarPass(const std::string& s) {
 
 
 std::string Utils::getString(const std::string& s) {
-    string input;
-    cout<<s<<": ";
-    getline (cin, input);
+    std::string input;
+    std::cout<<s<<": ";
+    getline (std::cin, input);
     return input;
 }
 
 
 int Utils::getNumber(const std::string& label) {
+
     int number;
     bool flag = false;
     do{
-        cout<<label<<": ";
+
+        std::cout<<label<<": ";
         flag = false;
-        cin >> number;
-        if(cin.fail()){
-            cout << "Nao e um numero, por favor insira um numero" << endl;
-            cin.clear(); //corrects stream
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        std::cin >> number;
+
+        if(std::cin.fail()){
+            std::cout << "Nao e um numero, por favor insira um numero" << std::endl;
+            std::cin.clear(); //corrects stream
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             flag = true;
         }
     }while(flag == true);
-    cin.clear(); //corrects stream
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return number;
-}
 
-void Utils::printMessage(string& msg) {
-    cout << msg << endl;
+    std::cin.clear(); //corrects stream
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    return number;
+
 }

@@ -6,44 +6,55 @@
 #include <ListaReproducao.h>
 #include <EditoraContainer.h>
 #include <Utilizador.h>
-#include <AlbumContainer.h>
-#include <MusicaContainer.h>
-#include <string.h>
+#include "MusicaContainer.h"
+#include "ListaReproducaoContainer.h"
+#include "AlbumContainer.h"
 #include <nlohmann/json.hpp>
+#include <UtilizadorContainer.h>
 
 using json = nlohmann::json;
+using namespace std;
 
 
 
 class Repositorio {
 
+    public:
 
-public:
+        static string diretorioJSON;
 
-    static string diretorioJSON;
+        static void carregarMusicas(MusicaContainer mC);
+        static void carregarEditoras(EditoraContainer eC, ArtistaContainer aC);
+        static void carregarArtistas(ArtistaContainer aC, AlbumContainer alC);
+        static void carregarAlbums(AlbumContainer alC, MusicaContainer mC);
+        static void carregarUtilizadores(UtilizadorContainer uC);
+        static void carregarListas(ListaReproducaoContainer lC, MusicaContainer mC);
+        static void carregarAlbuns(AlbumContainer aC);
 
-    std::vector<Musica> carregarMusicas();
-    std::vector<Editora> carregarEditoras(ArtistaContainer& artistas);
-    std::vector<Artista> carregarArtistas(AlbumContainer& albuns);
-    std::vector<Utilizador> carregarUtilizadores();
-    std::vector<ListaReproducao> carregarListas(MusicaContainer& musicas);
-    std::vector<Album> carregarAlbuns(MusicaContainer& musicas);
+        //static void carregarTudo(MusicaContainer mC, EditoraContainer eC, ArtistaContainer aC, AlbumContainer alC, ListaReproducaoContainer lC);
 
-    static void guardarMusica(Musica m);
-    static void guardarEditora(const std::vector<Editora>& e);
-    static void guardarArtista(const std::vector<Artista>& a);
-    static void guardarAlbum(const std::vector<Album>& a);
-    static void guardarUtilizador(const std::vector<Utilizador>& u);
-    static void guardarLista(const std::vector<ListaReproducao>& l);
+        static void guardarMusica(Musica m);
+        static void guardarEditora(const Editora& e);
+        static void guardarArtista(const Artista& a);
+        static void guardarAlbum(Album a);
+        static void guardarUtilizador(Utilizador u);
+        static void guardarLista(ListaReproducao l);
 
-    static void eliminarMusica(std::string n);
-    static void eliminarEditora(std::string n);
-    static void eliminarArtista(std::string n);
-    static void eliminarAlbum(std::string n);
-    static void eliminarUtilizador(std::string n);
-    static void eliminarLista(std::string n);
+        // >>> CORRECAO: adicionados valores por omissao aos parametros-container destes metodos,
+        // >>> para que as chamadas do Controller com apenas o nome compilem. Os corpos nao foram
+        // >>> alterados: nestes metodos os containers ou estao em codigo ja comentado ou (no caso
+        // >>> da editora) ficam vazios por omissao, preservando o comportamento (eliminacao no JSON).
+        static void eliminarMusica(string n);
+        static void eliminarEditora(string n);
+        static void eliminarArtista(string n);
+        static void eliminarAlbum(string n);
+        static void eliminarUtilizador(string n);
+        static void eliminarLista(string n);
 
-    static json lerFicheiroJSON(string caminho);
+
+        static json lerFicheiroJSON(string caminho);
+
+        Repositorio();
 
 };
 

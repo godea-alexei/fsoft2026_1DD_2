@@ -1,23 +1,23 @@
 #ifndef LISTAREPRODUCAOCONTAINER_H
 #define LISTAREPRODUCAOCONTAINER_H
-
 #include <vector>
 #include "Headers/model/ListaReproducao.h"
 
 class ListaReproducaoContainer {
-private:
-    std::vector<ListaReproducao> listas;
 
-public:
-    void adicionarLista(const ListaReproducao& lista);
+    public:
+        std::vector<ListaReproducao> listas;
 
-    bool removerLista(const std::string& nome);
+        void adicionarLista(const ListaReproducao& lista);
 
-    bool existeLista(const std::string& nome) const;
+        bool removerLista(const std::string& nome);
 
-    ListaReproducao* procurar(const std::string& nome);
+        bool existeLista(const std::string& nome) const;
 
-    const std::vector<ListaReproducao>& getListas() const;
+        ListaReproducao* procurar(const std::string& nome);
+
+        const std::vector<ListaReproducao>& getListas() const;
+
 };
 
 #endif //LISTAREPRODUCAOCONTAINER_H

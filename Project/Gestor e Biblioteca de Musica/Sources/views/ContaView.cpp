@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "ContaView.h"
 #include "Utils.h"
 
@@ -38,5 +37,5 @@ void ContaView::falhaRegisto() {
 }
 
 void ContaView::falhaLogin() {
-    cout << "Credenciais erradas. Tente iniciar sessao novamente.\n";
+    cout << "Credenciais erradas. Tente iniciar sessão novamente.\n";
 }

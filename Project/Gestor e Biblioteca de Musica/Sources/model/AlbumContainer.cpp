@@ -1,14 +1,17 @@
 #include "AlbumContainer.h"
-using namespace std;
+#include "Album.h"
+#include <string>
+#include <iostream>
+#include <vector>
 
 void AlbumContainer::adicionarAlbum(const Album &album) {
     albuns.push_back(album);
 }
 
 Album *AlbumContainer::procurarAlbum(const string &nome) {
-    for (Album& a : albuns) {
-        if (a.getNome() == nome) {
-            return &a;
+    for (auto& album : albuns) {
+        if (album.getNome() == nome) {
+            return &album;
         }
     }
     return nullptr;
@@ -34,3 +37,7 @@ bool AlbumContainer::removerAlbum(const string &nome) {
 const vector<Album> &AlbumContainer::getAlbuns() const {
     return albuns;
 }
+
+
+
+

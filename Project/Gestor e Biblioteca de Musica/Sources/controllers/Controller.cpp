@@ -1,56 +1,28 @@
 #include <iostream>
 #include <string>
-#include <list>
 #include <ctime>
 #include "Controller.h"
+#include "BaseView.h"
 #include "Utils.h"
 #include "../../Headers/repo/Repositorio.h"
 #include "ContaView.h"
 #include "UtilizadorContainer.h"
 #include "EditoraContainer.h"
-#include "BaseView.h"
-using namespace std;
+#include "Musica.h"
+#include "Partilha.h"
 
-Controller::Controller() {
-    vector<Musica> musicas = repositorio.carregarMusicas();
 
-    for (const auto& m : musicas) {
-        musicaContainer.adicionarMusica(m);
-    }
 
-    vector<Album> albuns = repositorio.carregarAlbuns(musicaContainer);
+Controller::Controller() {}
 
-    for (const auto& a : albuns) {
-        albumContainer.adicionarAlbum(a);
-    }
+Controller::~Controller(){}
 
-    vector<ListaReproducao> listas = repositorio.carregarListas(musicaContainer);
 
-    for (const auto& l : listas) {
-        listaReproducaoContainer.adicionarLista(l);
-    }
-
-    vector<Artista> artistas = repositorio.carregarArtistas(albumContainer);
-
-    for (const auto& a : artistas) {
-        artistaContainer.adicionarArtista(a);
-    }
-
-    vector<Editora> editoras = repositorio.carregarEditoras(artistaContainer);
-    for (const auto& e : editoras) {
-        editoraContainer.adicionarEditora(e);
-    }
-
-    vector<Utilizador> utilizadores = repositorio.carregarUtilizadores();
-
-    for (const auto& u : utilizadores) {
-        utilizadorContainer.adicionarUtilizador(u);
-    }
-
-}
-
-//implementa os menus
-void Controller::runConta(){
+// ─────────────────────────────────────────────
+//  Menu principal
+// ─────────────────────────────────────────────
+//Printa os menus
+void Controller::run(){
     int op = -1;
     do{
         op = this->view.menuPrincipal();
@@ -77,10 +49,12 @@ void Controller::runConta(){
 }
 
 
+
+
 // ─────────────────────────────────────────────
 //  CONTA
 // ─────────────────────────────────────────────
-void Controller::run() {
+void Controller::runConta() {
     int op = -1;
     do {
         op = this->view.menuConta();
@@ -95,65 +69,63 @@ void Controller::run() {
     } while(op != 0);
 }
 
-// ─────────────────────────────────────────────
-//  Gestão de Registo
-// ─────────────────────────────────────────────
 
+// ─────────────────────────────────────────────
+//  Fazer Registo
+// ─────────────────────────────────────────────
 void Controller::runRegisto() {
-    ContaView contaView;
 
-    string nome = contaView.getNome();
-    int anoNascimento = contaView.getAnoNascimento();
-    string palavraPasse = contaView.getPalavraPasse();
-    string palavraPasseConfirmation = contaView.getPalavraPasseConfirmation();
+    //ContaView contaView;
+    string nome = this->contaView.getNome();
+    int anoNascimento = this->contaView.getAnoNascimento();
+    string palavraPasse = this->contaView.getPalavraPasse();
+    string palavraPasseConfirmation = this->contaView.getPalavraPasseConfirmation();
 
     if (utilizadorContainer.existeUtilizador(nome)) {
-        msg = "Ja existe um utilizador com o nome " + nome + ".";
-        Utils::printMessage(msg);
+        cout << "Ja existe um utilizador com o nome " << nome << "." << endl;
         return;
     }
 
-    if (!Utilizador::validarPalavraPasse(
-        palavraPasse,
-        palavraPasseConfirmation)) {
+    if (!Utilizador::validarPalavraPasse( palavraPasse, palavraPasseConfirmation)) {
         contaView.falhaRegisto();
         return;
     }
 
-    Utilizador utilizador(
-    nome,
-    anoNascimento,
-    palavraPasse);
+    Utilizador utilizador(nome, anoNascimento, palavraPasse);
 
-    utilizadorContainer.adicionarUtilizador(utilizador);
-
-    contaView.sucessoRegisto();
+    //utilizadorContainer.adicionarUtilizador(utilizador);
+    //repositorio.guardarUtilizador(utilizador);
+    //contaView.sucessoRegisto();
+    utilizadorContainer.utilizadores.push_back(utilizador);
+    repositorio.guardarUtilizador(utilizador);
+    cout<<"utilizador registado com sucesso";
 }
 
 // ─────────────────────────────────────────────
-//  Gestão de Login
+//  Fazer Login
 // ─────────────────────────────────────────────
 void Controller::runLogin() {
-    ContaView contaView;
-    bool isLogged = false;
 
-
+    //ContaView contaView;
+    //bool isLogged = false;
     string nome = contaView.getNome();
     string palavraPasse = contaView.getPalavraPasse();
 
     if (utilizadorContainer.autenticar(nome, palavraPasse)) {
-        Utilizador* u = utilizadorContainer.procurarUtilizador(nome);
-        utilizadorAtual = u;
+        //Utilizador* u = utilizadorContainer.procurarUtilizador(nome);
+        utilizadorAtual = utilizadorContainer.procurarUtilizador(nome);
         contaView.sucessoLogin();
-        msg = "Bem vindo/a, " + nome + "!!";
-        Utils::printMessage(msg);
-        isLogged = true;
-    }
-    else contaView.falhaLogin();
+        //cout << "Bem vindo/a, " << nome << "!!" << endl;
+        //isLogged = true;
+        run();
+    }else contaView.falhaLogin();
 
-    if (isLogged == true) runConta();
+    //if (isLogged == true) run();
 
 }
+
+
+
 
 // ─────────────────────────────────────────────
 //  ESCOLHER PESQUISA  (1º nível — tipo de pesquisa)
@@ -163,346 +135,75 @@ void Controller::runEscolherPesquisa() {
     do {
         op = this->view.menuEscolhaPesquisa();
         switch(op) {
-            case 1:
+            case 1: //procurar musica
                 {
                     string titulo = Utils::getString("Insira o titulo da Musica");
                     Musica* musica = musicaContainer.procurarMusica(titulo);
-
                     if (musica == nullptr) {
-                        msg = "Musica nao encontrada.";
-                        Utils::printMessage(msg);
-                        break;
-                    }
-                    BaseView::listarAtributos(musica);
-
-                    int opcao = -1;
-                    do {
-                        opcao = this->view.menuPesquisa();
-                        switch(opcao) {
-                            case 1:
-                                musica->reproduzir();
-                                break;
-                            case 2:
-                                msg = "Letra da Musica " + musica->getNome(); + ":";
-                                Utils::printMessage(msg);
-                                msg = musica->getNome();
-                                Utils::printMessage(msg);
-                            default:
-                                break;
-                        }
-                    }
-                    while(opcao != 0);
+                        cout << "Musica nao existe.\n";
+                        break;}
+                    baseView.listarAtributos(*musica);
+                    //runMusica();
+                    break;
                 }
-                break;
-            case 2:
+            case 2: // procurar album
                 {
+
                     string nome = Utils::getString("Insira o nome do Album");
                     Album* album = albumContainer.procurarAlbum(nome);
                     if (album == nullptr) {
-                        msg = "Album nao encontrado";
-                        Utils::printMessage(msg);
+                        cout << "Album nao encontrado.\n";
                         break;
                     }
-                    cout << ">>> " << nome << " (" << album->getDuracao() <<" minutos) <<<" << endl;
-                    const auto& musicas = album->getMusicas();
-                    if (musicas.empty()) {
-                        msg = "Sem Musicas";
-                        Utils::printMessage(msg);
-                    }
-                    else {
-                        for (const auto& m : musicas) {
-                            msg = "- " + m->getNome(); + " (" + to_string(m->getDuracao()) + " minutos)";
-                            Utils::printMessage(msg);
-                        }
-                    }
-                    int opcao = -1;
-                    do {
-                        opcao = this->view.musicaEmAlbum();
-                        switch(opcao) {
-                            case 1: {
-                                string nomeM = Utils::getString("Insira o nome da Musica");
 
-                                Musica* musica = musicaContainer.procurarMusica(nomeM);
-
-                                if (musica == nullptr) {
-                                    msg = "Musica nao existe.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                if (album->existeMusica(nomeM)) {
-                                    msg = "Musica ja esta adicionada a este album.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-
-                                album->adicionarMusica(musica);
-                                msg = "Musica adicionada com sucesso! ";
-                                Utils::printMessage(msg);
-                                break;
-                            }
-                            case 2: {
-                                string nomeM = Utils::getString("Insira o nome da musica");
-
-                                Musica* musica = musicaContainer.procurarMusica(nomeM);
-
-                                if (musica == nullptr) {
-                                    msg = "Musica nao existe.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                if (!album->existeMusica(nomeM)) {
-                                    msg = "Musica nao esta associada a este album.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                album->removerMusica(nomeM);
-                                msg = "Musica removida com sucesso!";
-                                Utils::printMessage(msg);
-                                break;
-                            }
-                            default:
-                                break;
-                        }
-                    }
-                    while(opcao != 0);
+                    baseView.listarAtributos(*album);
+                    //runAlbum();
+                    break;
                 }
-                break;
-            case 3:
+
+            case 3: // procurar editora
                 {
                     string nome = Utils::getString("Insira o nome da editora");
                     Editora* editora = editoraContainer.procurar(nome);
                     if (editora == nullptr) {
-                        msg = "Editora nao encontrada";
-                        Utils::printMessage(msg);
+                        cout << "Editora nao encontrada.\n";
                         break;
                     }
-                    msg = ">>> " + nome + " <<<";
-                    Utils::printMessage(msg);
-                    const auto& artistas = editora->getArtistas();
-                    if (artistas.empty()) {
-                        msg = "Sem artistas associados";
-                        Utils::printMessage(msg);
-                    }
-                    else {
-                        for (const auto& a : artistas) {
-                            msg = "- " + a->getNome() + ": " + to_string(a->getIdade()) + " anos";
-                            Utils::printMessage(msg);
-                        }
-                    }
-                    int opcao = -1;
-                    do {
-                        opcao = this->view.artistaEmEditora();
-                        switch(opcao) {
-                            case 1: {
-                                string nomeA = Utils::getString("Insira o nome do artista");
-
-                                Artista* artista = artistaContainer.procurarArtista(nomeA);
-
-                                if (artista == nullptr) {
-                                    msg = "Artista nao existe.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                if (editora->existeArtista(nomeA)) {
-                                    msg = "Artista ja esta associado a esta editora.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-
-                                editora->adicionarArtista(artista);
-                                msg = "Artista adicionada com sucesso!";
-                                Utils::printMessage(msg);
-                                break;
-                            }
-                            case 2: {
-                                string nomeA = Utils::getString("Insira o nome do artista");
-
-                                Artista* artista = artistaContainer.procurarArtista(nomeA);
-
-                                if (artista == nullptr) {
-                                    msg = "Artista nao existe.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                if (!editora->existeArtista(nomeA)) {
-                                    msg = "Artista nao esta associado a esta editora.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                editora->removerArtista(nomeA);
-                                msg = "Artista removido com sucesso!";
-                                Utils::printMessage(msg);
-                                break;
-                            }
-                            default:
-                                break;
-                        }
-                    }
-                    while(opcao != 0);
+                    baseView.listarAtributos(*editora);
+                    //runEditora();
+                    break;
                 }
-                break;
-            case 4:
-                {
-                    string nome = Utils::getString("Insira o nome do artista");
-                    Artista* artista = artistaContainer.procurarArtista(nome);
-                    if (artista == nullptr) {
-                        msg = "Artista nao encontrado.";
-                        Utils::printMessage(msg);
-                        break;
-                    }
-                    msg = ">>> " + nome + " <<<";
-                    const auto& albuns = artista->getAlbuns();
-                    if (albuns.empty()) {
-                        msg = "Sem Albuns associados.";
-                        Utils::printMessage(msg);
-                    }
-                    else {
-                        for (const auto& a : albuns) {
-                            msg = "- " + a->getNome() + " (" + to_string(a->getAnoLancamento()) + ")";
-                            Utils::printMessage(msg);
-                        }
-                    }
-                    int opcao = -1;
-                    do {
-                        opcao = this->view.albumEmArtista();
-                        switch(opcao) {
-                            case 1: {
-                                string nomeA = Utils::getString("Insira o nome do Album");
 
-                                Album* album = albumContainer.procurarAlbum(nomeA);
-
-                                if (album == nullptr) {
-                                    msg = "Album nao existe.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                if (artista->existeAlbum(nomeA)) {
-                                    msg = "Album ja esta associado a este artista.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-
-                                artista->adicionarAlbum(album);
-                                msg = "Album adicionado com sucesso! ";
-                                Utils::printMessage(msg);
-                                break;
-                            }
-                            case 2: {
-                                string nomeA = Utils::getString("Insira o nome do album");
-
-                                Album* album = albumContainer.procurarAlbum(nomeA);
-
-                                if (album == nullptr) {
-                                    msg = "Album nao existe.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                if (!artista->existeAlbum(nomeA)) {
-                                    msg = "Album nao esta associado ao artista.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                artista->removerAlbum(nomeA);
-                                msg = "Album removido com sucesso! ";
-                                Utils::printMessage(msg);
-                                break;
-                            }
-                            default:
-                                break;
-                        }
-                    }
-                    while(opcao != 0);
+            case 4: {
+                string nome = Utils::getString("Insira o nome do artista");
+                Artista* artista = artistaContainer.procurarArtista(nome);
+                if (artista == nullptr) {
+                    cout << "Artista nao encontrado.\n";
+                    break;
                 }
+                baseView.listarAtributos(*artista);
+                //runArtista();
                 break;
-            case 5:
-                {
-                    string nome = Utils::getString("Insira o nome da Lista de Reproducao");
-                    ListaReproducao* listaReproducao = listaReproducaoContainer.procurar(nome);
-                    if (listaReproducao == nullptr) {
-                        msg = "Lista de Reproducao nao encontrada";
-                        Utils::printMessage(msg);
-                        break;
-                    }
-                    msg = ">>> " + nome + " (" + to_string(listaReproducao->getDuracao()) + " minutos) <<<";
-                    Utils::printMessage(msg);
-                    const auto& musicas = listaReproducao->getMusicas();
-                    if (musicas.empty()) {
-                        msg = "Sem Musicas.";
-                        Utils::printMessage(msg);
-                    }
-                    else {
-                        for (const auto& m : musicas) {
-                            msg = "- " + m->getNome() + " (" + to_string(m->getDuracao()) + " minutos)";
-                            Utils::printMessage(msg);
-                        }
-                    }
-                    int opcao = -1;
-                    do {
-                        opcao = this->view.musicaEmLista();
-                        switch(opcao) {
-                            case 1: {
-                                if (listaReproducao->getCriador() != utilizadorAtual->getNome() ) {
-                                    msg = "So o criador da Lista de Reproducao tem permissao para alterar a lista  de reproducao: " + listaReproducao->getNome();
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                string nomeM = Utils::getString("Insira o nome da Musica");
-
-                                Musica* musica = musicaContainer.procurarMusica(nomeM);
-
-                                if (musica == nullptr) {
-                                    msg = "Musica nao existe.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                if (listaReproducao->existeMusica(nomeM)) {
-                                    msg = "Musica ja esta adicionada a esta Lista de Reproducao.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-
-                                listaReproducao->adicionarMusica(musica);
-                                msg = "Musica adicionada com sucesso! ";
-                                Utils::printMessage(msg);
-                                break;
-                            }
-                            case 2: {
-                                if (listaReproducao->getCriador() != utilizadorAtual->getNome() ) {
-                                    msg = "So o criador da Lista de Reproducao tem permissao para alterar a lista  de reproducao: " + listaReproducao->getNome();
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                string nomeM = Utils::getString("Insira o nome da musica");
-
-                                Musica* musica = musicaContainer.procurarMusica(nomeM);
-
-                                if (musica == nullptr) {
-                                    msg = "Musica nao existe.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                if (!listaReproducao->existeMusica(nomeM)) {
-                                    msg = "Musica nao esta associada a esta Lista de Reproducao.";
-                                    Utils::printMessage(msg);
-                                    break;
-                                }
-                                listaReproducao->removerMusica(nomeM);
-                                msg = "Musica removida com sucesso! ";
-                                Utils::printMessage(msg);
-                                break;
-                            }
-                            default:
-                                break;
-                        }
-                    }
-                    while(opcao != 0);
+            }
+            case 5: {
+                string nome = Utils::getString("Insira o nome da Lista de Reproducao");
+                ListaReproducao* listaReproducao = listaReproducaoContainer.procurar(nome);
+                if (listaReproducao == nullptr) {
+                    cout << "Lista de Reproducao nao encontrada.\n";
+                    break;
                 }
+                baseView.listarAtributos(*listaReproducao);
+                //runListaReproducao();
                 break;
+            }
             default:
                 break;
         }
     } while(op != 0);
 }
+
+
+
 
 
 // ─────────────────────────────────────────────
@@ -513,51 +214,113 @@ void Controller::runListaReproducao() {
     do {
         op = this->view.menuLista();
         switch(op) {
-            case 1: {
-                    const auto& listas = listaReproducaoContainer.getListas();
+            case 1: { //listar playlists
 
+                    const auto& listas = listaReproducaoContainer.getListas();
                     if (listas.empty()) {
-                        msg = "Ainda nao foram adicionadas listas de reproducao.";
-                        Utils::printMessage(msg);
+                        cout << "Ainda nao foram adicionadas listas de reproducao.\n";
                         break;
                     }
-                    msg = ">>> LISTAS DE REPRODUCAO <<<";
-                    Utils::printMessage(msg);
 
+
+                    cout << ">>> AS SUAS LISTAS DE REPRODUCAO <<<" << endl;
                     for (const auto& l : listas) {
-                        msg = "- " + l.getNome();
-                        Utils::printMessage(msg);
+                        if (l.getCriador() == utilizadorAtual->getNome()){ //VERIFICAÇÂO DO DONO DA LISTA
+                            baseView.listarObjeto(l);
+                        }
                     }
+
                 }
                 break;
-            case 2: {
-                string nome = Utils::getString("Digite o nome da Lista de Reproducao");
+            case 2: { //criar lista
 
+                string nome = Utils::getString("Digite o nome da Lista de Reproducao");
                 if (listaReproducaoContainer.existeLista(nome)) {
-                    msg = "Essa Lista de Reproducao ja foi adicionada...";
-                    Utils::printMessage(msg);
+                    cout << "Essa Lista de Reproducao ja foi adicionada...\n";
                     break;
                 }
 
-                ListaReproducao lista(nome, utilizadorAtual->getNome());
+                time_t t = time(0);
+                tm* now = localtime(&t);
+                int ano = now->tm_year + 1900;
 
+                ListaReproducao lista = ListaReproducao(nome, ano, utilizadorAtual->getNome());
                 listaReproducaoContainer.adicionarLista(lista);
+                repositorio.guardarLista(lista);
 
-                msg = "Lista de Reproducao criada com sucesso!";
-                Utils::printMessage(msg);
-                }
+                cout << "Lista de Reproducao criada com sucesso!" << endl;
                 break;
-            case 3: {
+
+            }
+            case 3: { //apagar lista
+
                     string nome = Utils::getString("Digite o nome da Lista de Reproducao que quer remover");
 
                     if (listaReproducaoContainer.removerLista(nome)) {
                         repositorio.eliminarLista(nome);
-                        msg = "A Lista de Reproducao " + nome + " foi removida com sucesso.";
+                        cout << "A Lista de Reproducao " << nome << " foi removida com sucesso." << endl;
                     }
-                    else msg = "A Lista de Reproducao nao foi encontrada.";
-                    Utils::printMessage(msg);
+                    else
+                        cout << "A Lista de Reproducao nao foi encontrada." << endl;
+
+                    break;
+
+            }
+            case 4: { //adicionar musica á lista
+
+                string nomeLista = Utils::getString("Insira o nome da Lista");
+                ListaReproducao* listaReproducao = listaReproducaoContainer.procurar(nomeLista);
+                if (listaReproducao == nullptr) {
+                    cout << "Nao existe.\n";
+                    break;
                 }
+
+                string nomeMusica = Utils::getString("Insira o nome da Musica");
+                Musica* musica = musicaContainer.procurarMusica(nomeMusica);
+                if (musica == nullptr) {
+                    cout << "Musica nao existe.\n";
+                    break;
+                }
+
+                if (listaReproducao->existeMusica(nomeMusica)) {
+                    cout << "Musica ja esta adicionada a esta Lista de Reproducao.\n";
+                    break;
+                }
+
+                listaReproducao->adicionarMusica(musica);
+                repositorio.eliminarLista(nomeLista);
+                repositorio.guardarLista(*listaReproducao);
+                cout << "Musica adicionada com sucesso! " << endl;
                 break;
+
+            }
+            case 5: { //eliminar musica da playlist
+                string nomeLista = Utils::getString("Insira o nome da Lista");
+                ListaReproducao* listaReproducao = listaReproducaoContainer.procurar(nomeLista);
+                if (listaReproducao == nullptr) {
+                    cout << "Nao existe.\n";
+                    break;
+                }
+
+                string nomeMusica = Utils::getString("Insira o nome da musica");
+                Musica* musica = musicaContainer.procurarMusica(nomeMusica);
+                if (musica == nullptr) {
+                    cout << "Musica nao existe.\n";
+                    break;
+                }
+
+                if (!listaReproducao->existeMusica(nomeMusica)) {
+                    cout << "Musica nao esta associada a esta Lista de Reproducao.\n";
+                    break;
+                }
+
+                listaReproducao->removerMusica(nomeMusica);
+                repositorio.eliminarLista(nomeLista);
+                repositorio.guardarLista(*listaReproducao);
+                cout << "Musica removida com sucesso! " << endl;
+                break;
+
+            }
             default:
                 break;
         }
@@ -572,26 +335,29 @@ void Controller::runMusica() {
     do {
         op = this->view.menuMusica();
         switch(op) {
-            case 1:
-                {
+          case 1: //listr musicas
+            {
                     const auto& musicas = musicaContainer.getMusicas();
 
                     if (musicas.empty()) {
-                        msg = "Ainda nao foram adicionadas Musicas.";
-                        Utils::printMessage(msg);
+                        cout << "Ainda nao foram adicionadas Musicas.\n";
                         break;
                     }
 
-                    msg = ">>> MUSICAS <<<";
+                    cout << ">>> MUSICAS <<<" << endl;
                     for (const auto& m : musicas) {
-                        msg = "- " + m->getNome() + " (" + to_string(m->getAnoDeLancamento()) + "): " + m->getNomeArtista();
-                        Utils::printMessage(msg);
+                        baseView.listarObjeto(m);
                     }
-                }
-                break;
-            case 2:
+              
+                    break;    
+            }
+            case 2: //adicionar musica
                 {
                     string nome = Utils::getString("Digite o Titulo da Musica");
+                    if (musicaContainer.existeMusica(nome)) {
+                      cout << "Essa Musica ja foi adicionada..." << endl;
+                      break;
+                    }
                     int dur = Utils::getNumber("Digite a duracao da musica (em minutos)");
                     int ano = Utils::getNumber("Digite o ano de lancamento da musica");
                     string letra = Utils::getString("Digite a letra da musica");
@@ -601,45 +367,34 @@ void Controller::runMusica() {
 
                     Musica musica = Musica(nome, dur, ano, letra, genero, caminho, artista);
 
-                    if (musicaContainer.existeMusica(nome)) {
-                        msg = "Essa Musica ja foi adicionada...";
-                        Utils::printMessage(msg);
-                        break;
-                    }
-
                     musicaContainer.adicionarMusica(musica);
-
                     Repositorio::guardarMusica(musica);
 
                     break;
 
                 }
-
-            case 3:
+            case 3: //eliminar de musicas
                 {
                     string nome = Utils::getString("Digite o nome da Musica que quer remover");
-
-                    if (musicaContainer.existeMusica(nome)) {
-                        for (const auto& a : albumContainer.getAlbuns()) {
-                            string nomeA = a.getNome();
-                            Album* album = albumContainer.procurarAlbum(nomeA);
-                            album->removerMusica(nome);
-                        }
-                        for (const auto& l : listaReproducaoContainer.getListas()) {
-                            string nomeL = l.getNome();
-                            ListaReproducao* lista = listaReproducaoContainer.procurar(nomeL);
-                            lista->removerMusica(nome);
-                        }
-                    }
                     if (musicaContainer.removerMusica(nome)) {
                         repositorio.eliminarMusica(nome);
-                        msg = "A Musica " + nome + " foi removida com sucesso.";
+                        cout << "A Musica " << nome << " foi removida com sucesso." << endl;
                     }
-                    else msg = "A musica nao foi encontrada.";
-                    Utils::printMessage(msg);
+                    else
+                        cout << "A musica nao foi encontrada." << endl;
+
                     break;
                 }
+            case 4: { //reprodução
 
+              string nome = Utils::getString("Digite o Titulo da Musica: ");
+              if (musicaContainer.existeMusica(nome)) {
+                  musicaContainer.procurarMusica(nome)->reproduzir();
+                  break;
+              }
+              cout << "Musica nao encontrada" << endl;
+              break;
+          }
             default:
                 break;
         }
@@ -658,58 +413,98 @@ void Controller::runAlbum() {
                     const auto& albuns = albumContainer.getAlbuns();
 
                     if (albuns.empty()) {
-                        msg = "Ainda nao foram adicionados Albuns.";
-                        Utils::printMessage(msg);
+                        cout << "Ainda nao foram adicionados Albuns.\n";
                         break;
                     }
 
-                    msg = ">>> ALBUNS <<<";
-                    Utils::printMessage(msg);
+                    cout << ">>> ALBUNS <<<" << endl;
                     for (const auto& a : albuns) {
-                        msg = "- " + a.getNome();
-                        Utils::printMessage(msg);
+                        baseView.listarObjeto(a);
                     }
-                }
                 break;
-            case 2:
-                {
+            }
+            case 2:{
+
                 string nome = Utils::getString("Digite o nome do Album");
 
                 if (albumContainer.existeAlbum(nome)) {
-                    msg = "Esse Album ja foi adicionado...";
-                    Utils::printMessage(msg);
+                    cout << "Esse Album ja foi adicionado...\n";
                     break;
                 }
                 int ano = Utils::getNumber("Digite o ano de lancamento do Album");
 
-                Album album(nome, ano);
-
+                Album album = Album(nome, ano);
                 albumContainer.adicionarAlbum(album);
+                repositorio.guardarAlbum(album);
 
-                msg = "Album adicionado com sucesso!";
-                Utils::printMessage(msg);
-                }
+                cout << "Album adicionado com sucesso!" << endl;
                 break;
+            }
             case 3:
                 {
                     string nome = Utils::getString("Digite o nome do Album que quer remover");
-
-                    if (albumContainer.existeAlbum(nome)) {
-                        for (const auto& a : artistaContainer.getArtistas()) {
-                            string nomeA = a.getNome();
-                            Artista* artista = artistaContainer.procurarArtista(nomeA);
-                            artista->removerAlbum(nome);
-                        }
-                    }
-
                     if (albumContainer.removerAlbum(nome)) {
                         repositorio.eliminarAlbum(nome);
-                        msg = "O Album " + nome + " foi removido com sucesso.";
+                        cout << "O Album " << nome << " foi removido com sucesso." << endl;
+                    }
+                    else
+                        cout << "O Album nao foi encontrado." << endl;
+
+                    break;
                 }
-                    else msg = "O Album nao foi encontrado.";
-                    Utils::printMessage(msg);
+            case 4: {
+
+                string nomeAlbum = Utils::getString("Insira o nome do Album");
+                Album* album = albumContainer.procurarAlbum(nomeAlbum);
+                if (album == nullptr) {
+                    cout << "Nao existe.\n";
+                    break;
                 }
+
+                string nomeMusica = Utils::getString("Insira o nome da Musica");
+                Musica* musica = musicaContainer.procurarMusica(nomeMusica);
+                if (musica == nullptr) {
+                    cout << "Musica nao existe.\n";
+                    break;
+                }
+
+                if (album->existeMusica(nomeMusica)) {
+                    cout << "Musica ja foi adicionada a este album.\n";
+                    break;
+                }
+
+                album->adicionarMusica(musica);
+                repositorio.eliminarAlbum(nomeAlbum);
+                repositorio.guardarAlbum(*album);
+                cout << "Musica adicionada com sucesso! " << endl;
                 break;
+            }
+            case 5: {
+                string nomeAlbum = Utils::getString("Insira o nome do Album");
+                Album* album = albumContainer.procurarAlbum(nomeAlbum);
+                if (album == nullptr) {
+                    cout << "Nao existe.\n";
+                    break;
+                }
+
+                string nomeMusica = Utils::getString("Insira o nome da musica");
+                Musica* musica = musicaContainer.procurarMusica(nomeMusica);
+                if (musica == nullptr) {
+                    cout << "Musica nao existe.\n";
+                    break;
+                }
+
+                if (!album->existeMusica(nomeMusica)) {
+                    cout << "Musica nao esta associada a este album.\n";
+                    break;
+                }
+
+                album->removerMusica(nomeMusica);
+                repositorio.eliminarAlbum(nomeAlbum);
+                repositorio.guardarAlbum(*album);
+                cout << "Musica removida com sucesso! " << endl;
+                break;
+            }
             default:
                 break;
         }
@@ -727,34 +522,27 @@ void Controller::runEditora() {
             case 1:
                 {
                     const auto& editoras = editoraContainer.getEditoras();
-
                     if (editoras.empty()) {
-                        msg = "Ainda nao foram adicionadas editoras.";
-                        Utils::printMessage(msg);
+                        cout << "Ainda nao foram adicionadas editoras.\n";
                         break;
                     }
-
-                    msg = ">>> EDITORAS <<<";
-                    Utils::printMessage(msg);
+                    cout << ">>> EDITORAS <<<" << endl;
                     for (const auto& e : editoras) {
-                        msg = "- " + e.getNome();
-                        Utils::printMessage(msg);
+                        baseView.listarObjeto(e);
                     }
                 }
                 break;
             case 2:
                 {
                     string nome = Utils::getString("Digite o nome da editora");
-
                     if (editoraContainer.existeEditora(nome)) {
-                        msg = "Essa editora ja foi adicionada...";
-                        Utils::printMessage(msg);
+                        cout << "Essa editora ja foi adicionada...\n";
                         break;
                     }
-
-                    editoraContainer.adicionarEditora(nome);
-                    msg = "Editora adicionada com sucesso!";
-                    Utils::printMessage(msg);
+                    Editora editora = Editora(nome);
+                    editoraContainer.adicionarEditora(editora);
+                    repositorio.guardarEditora(editora);
+                    cout << "Editora adicionada com sucesso!" << endl;
                 }
                 break;
             case 3:
@@ -763,12 +551,66 @@ void Controller::runEditora() {
 
                     if (editoraContainer.removerEditora(nome)) {
                         repositorio.eliminarEditora(nome);
-                        msg = "A editora " + nome + " foi removida com sucesso.";
+                        cout << "A editora " << nome << " foi removida com sucesso." << endl;
                     }
-                    else msg = "A editora nao foi encontrada.";
-                    Utils::printMessage(msg);
+                    else
+                        cout << "A editora nao foi encontrada." << endl;
                 }
                 break;
+            case 4: {
+                string nomeEditora = Utils::getString("Insira o nome da editora: ");
+                Editora* editora = editoraContainer.procurar(nomeEditora);
+                if (editora == nullptr) {
+                    cout << "Editora nao existe.\n";
+                    break;
+                }
+
+                string nomeArtista = Utils::getString("Insira o nome do artista a associar: ");
+                Artista* artista = artistaContainer.procurarArtista(nomeArtista);
+                if (artista == nullptr) {
+                    cout << "Artista nao existe.\n";
+                    break;
+                }
+                if (editora->existeArtista(nomeArtista)) {
+                    cout << "Artista ja esta associado a esta editora.\n";
+                    break;
+                }
+
+                editora->adicionarArtista(artista);
+                repositorio.eliminarEditora(nomeEditora);
+                repositorio.guardarEditora(*editora);
+                cout << "Artista adicionado com sucesso! " << endl;
+                break;
+
+            }
+            case 5: {
+
+                string nomeEditora = Utils::getString("Insira o nome da editora: ");
+                Editora* editora = editoraContainer.procurar(nomeEditora);
+                if (editora == nullptr) {
+                    cout << "Editora nao existe.\n";
+                    break;
+                }
+
+                string nomeA = Utils::getString("Insira o nome do artista");
+                Artista* artista = artistaContainer.procurarArtista(nomeA);
+                if (artista == nullptr) {
+                    cout << "Artista nao existe.\n";
+                    break;
+                }
+
+                if (!editora->existeArtista(nomeA)) {
+                    cout << "Artista nao esta associado a editora.\n";
+                    break;
+                }
+
+                editora->removerArtista(nomeA);
+                repositorio.eliminarEditora(nomeEditora);
+                repositorio.guardarEditora(*editora);
+                cout << "Artista removido com sucesso! " << endl;
+                break;
+
+            }
             default:
                 break;
         }
@@ -783,68 +625,123 @@ void Controller::runArtista() {
     do {
         op = this->view.menuArtista();
         switch(op) {
-            case 1:
+            case 1: //listar artistas
                 {
                     const auto& artistas = artistaContainer.getArtistas();
-
                     if (artistas.empty()) {
-                        msg = "Ainda nao foram adicionados artistas.";
-                        Utils::printMessage(msg);
+                        cout << "Ainda nao foram adicionados artistas.\n";
                         break;
                     }
 
-                    msg = ">>> ARTISTAS <<<";
+                    cout << ">>> ARTISTAS <<<" << endl;
                     for (const auto& a : artistas) {
-                        msg = "- " + a.getNome() + ": " + to_string(a.getIdade()) + " anos";
-                        Utils::printMessage(msg);
+                        baseView.listarObjeto(a);
                     }
                 }
 
                 break;
-            case 2:
-                {
-                    string nome = Utils::getString("Digite o nome do artista");
-                    int ano = Utils::getNumber("Digite a data de nascimento/fundacao do artista");
+            case 2: //adicionar artistas
+            {
+                string nome = Utils::getString("Digite o nome do artista");
+                int ano = Utils::getNumber("Digite a data de nascimento/fundacao do artista");
 
-                    if (artistaContainer.existeArtista(nome)) {
-                        msg = "Esse artista ja foi adicionado...";
-                        Utils::printMessage(msg);
-                        break;
-                    }
-
-                    artistaContainer.adicionarArtista(Artista(nome, ano));
-                    msg = "Artista adicionado com sucesso!";
-                    Utils::printMessage(msg);
+                if (artistaContainer.existeArtista(nome)) {
+                    cout << "Esse artista ja foi adicionado...\n";
+                    break;
                 }
+                Artista artista = Artista(nome, ano);
+                artistaContainer.adicionarArtista(artista);
+                repositorio.guardarArtista(artista);
+
+                cout << "Artista adicionado com sucesso!" << endl;
+
                 break;
-            case 3:
-                {
-                    string nome = Utils::getString("Digite o nome do artista que quer remover");
 
-                     if (artistaContainer.existeArtista(nome)) {
-                        for (const auto& e : editoraContainer.getEditoras()) {
-                            string nomeE = e.getNome();
-                            Editora* editora = editoraContainer.procurar(nomeE);
-                            editora->removerArtista(nome);
-                        }
-                    }
+            }
+            case 3: {
 
-                    if (artistaContainer.removerArtista(nome)) {
-                        repositorio.eliminarArtista(nome);
-                        msg = "O artista " + nome + " foi removido com sucesso.";
-                    }
-                    else msg = "O artista nao foi encontrado.";
-                    Utils::printMessage(msg);
+                string nome = Utils::getString("Digite o nome do artista que quer remover");
+                if (artistaContainer.removerArtista(nome)) {
+                    repositorio.eliminarArtista(nome);
+                    cout << "O artista " << nome << " foi removido com sucesso." << endl;
                 }
+                else
+                    cout << "O artista nao foi encontrado." << endl;
+
                 break;
+
+            }
+            case 4: {
+
+                string nomeArtista = Utils::getString("Insira o nome do Artista: ");
+                Artista* artista = artistaContainer.procurarArtista(nomeArtista);
+                if (artista == nullptr) {
+                    cout << "Nao existe.\n";
+                    break;
+                }
+
+                string nomeAlbum = Utils::getString("Insira o nome do Album");
+                Album* album = albumContainer.procurarAlbum(nomeAlbum);
+                if (album == nullptr) {
+                    cout << "Album nao existe.\n";
+                    break;
+                }
+
+                if (artista->existeAlbum(nomeAlbum)) {
+                    cout << "Album ja esta associado a este artista.\n";
+                    break;
+                }
+                artista->adicionarAlbum(album);
+                repositorio.eliminarArtista(nomeArtista);
+                repositorio.guardarArtista(*artista);
+                cout << "Album adicionado com sucesso! " << endl;
+
+                break;
+
+            }
+            case 5: {
+
+                string nomeArtista = Utils::getString("Insira o nome do Artista: ");
+                Artista* artista = artistaContainer.procurarArtista(nomeArtista);
+                if (artista == nullptr) {
+                    cout << "Nao existe.\n";
+                    break;
+                }
+
+                string nomeAlbum = Utils::getString("Insira o nome do album");
+                Album* album = albumContainer.procurarAlbum(nomeAlbum);
+                if (album == nullptr) {
+                    cout << "Album nao existe.\n";
+                    break;
+                }
+
+                if (!artista->existeAlbum(nomeAlbum)) {
+                    cout << "Album nao esta associado ao artista.\n";
+                    break;
+                }
+
+                artista->removerAlbum(nomeAlbum);
+                repositorio.eliminarArtista(nomeArtista);
+                repositorio.guardarArtista(*artista);
+                cout << "Album removido com sucesso! " << endl;
+
+                break;
+
+            }
+
             default:
                 break;
         }
     } while(op != 0);
 }
 
+
+
+
+
+
 // ─────────────────────────────────────────────
-//  PARTILHAR
+//  PARTILHA
 // ─────────────────────────────────────────────
 void Controller::runPartilhar() {
     int op = -1;
@@ -852,19 +749,59 @@ void Controller::runPartilhar() {
         op = this->view.menuPartilha();
         switch(op) {
             case 1: // Partilhar Musica
+            {
+
+                string nomeDestinatario = Utils::getString("Insire nome do utilizador com quem queres partilhar");
+                Utilizador* destinatario = utilizadorContainer.procurarUtilizador(nomeDestinatario);
+                if (destinatario == nullptr) {
+                    cout << "Esse utilizador nao existe.\n";
+                    return;
+                }
+
+                string nomeMusica = Utils::getString("Insere nome da musica que queres partilhar");
+                if (!musicaContainer.existeMusica(nomeMusica)) {
+                    cout << "Essa musica nao existe.\n";
+                    return;
+                }
+
+                string mensagem = "O utilizador " + utilizadorAtual->getNome() + " acha que podes gostar desta musica: " + nomeMusica;
+                Partilha::partilharMusica(destinatario,mensagem);
+                cout << "Musica partilhada com " << nomeDestinatario << " com sucesso!\n";
+
                 break;
+
+            }
             case 2: // Partilhar Lista de Reproducao
+            {
+                string nomeDestinatario = Utils::getString("Nome do utilizador com quem queres partilhar");
+                Utilizador* destinatario = utilizadorContainer.procurarUtilizador(nomeDestinatario);
+                if (destinatario == nullptr) {
+                    cout << "Esse utilizador nao existe.\n";
+                    return;
+                }
+
+                string nomeLista = Utils::getString("Nome da lista de reproducao que queres partilhar");
+                ListaReproducao* original = listaReproducaoContainer.procurar(nomeLista);
+                if (original == nullptr) {
+                    cout << "Essa lista de reproducao nao existe.\n";
+                    return;
+                }
+
+                Partilha::partilharLista(destinatario, original, listaReproducaoContainer);
+
+                cout << "Lista de reproducao partilhada com " << nomeDestinatario << " com sucesso!\n";
+
                 break;
+            }
             default:
                 break;
         }
     } while(op != 0);
 }
 
-void Controller::guardarDados() {
-    repositorio.guardarUtilizador(utilizadorContainer.getUtilizadores());
-    repositorio.guardarArtista(artistaContainer.getArtistas());
-    repositorio.guardarEditora(editoraContainer.getEditoras());
-    repositorio.guardarAlbum(albumContainer.getAlbuns());
-    repositorio.guardarLista(listaReproducaoContainer.getListas());
-}
+
+
+
+
+
+

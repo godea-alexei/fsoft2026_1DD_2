@@ -1,21 +1,21 @@
 #include "EditoraContainer.h"
+#include <vector>
+#include <string>
 
-using namespace std;
+
 
 void EditoraContainer::adicionarEditora(const Editora &editora) {
     editoras.push_back(editora);
 }
 
-bool EditoraContainer::existeEditora(const string& nome) const{
+bool EditoraContainer::existeEditora(const std::string& nome) const{
     for (const auto& e : editoras) {
         if (e.getNome() == nome) return true;
     }
     return false;
 }
 
-
-
-bool EditoraContainer::removerEditora(const string& nome) {
+bool EditoraContainer::removerEditora(const std::string& nome) {
     for (auto it = editoras.begin(); it != editoras.end(); it++) {
         if (it->getNome() == nome) {
             editoras.erase(it);
@@ -25,7 +25,7 @@ bool EditoraContainer::removerEditora(const string& nome) {
     return false;
 }
 
-const vector<Editora>& EditoraContainer::getEditoras() const {
+const std::vector<Editora>& EditoraContainer::getEditoras() const {
     return editoras;
 }
 

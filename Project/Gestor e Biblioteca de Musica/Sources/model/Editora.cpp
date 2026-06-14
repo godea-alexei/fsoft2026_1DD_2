@@ -48,3 +48,5 @@ Artista *Editora::procurarArtista(const std::string &nome) {
 const std::vector<Artista*>& Editora::getArtistas() const {
     return artistas;
 }
+
+

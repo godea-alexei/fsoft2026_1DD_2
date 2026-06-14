@@ -1,30 +1,25 @@
 #ifndef UTILIZADORCONTAINER_H
 #define UTILIZADORCONTAINER_H
-
 #include "utilizador.h"
 #include <vector>
+#include <string>
 
 class UtilizadorContainer {
-private:
-    std::vector<Utilizador> utilizadores;
 
-public:
-    UtilizadorContainer();
+    public:
 
-    void adicionarUtilizador(const Utilizador& utilizador);
+        std::vector<Utilizador> utilizadores;
 
-    bool existeUtilizador(const std::string& nome) const;
+        UtilizadorContainer();
 
-    bool autenticar(
-        const std::string& nome,
-        const std::string& palavraPasse) const;
+        void adicionarUtilizador(const Utilizador& utilizador);
 
-    Utilizador* procurarUtilizador(
-        const std::string& nome);
+        bool existeUtilizador(const std::string& nome) const;
 
-    const std::vector<Utilizador>& getUtilizadores() const;
+        bool autenticar(const std::string& nome, const std::string& palavraPasse) const;
+
+        Utilizador* procurarUtilizador(const std::string& nome);
+
 };
-
-
 
 #endif //UTILIZADORCONTAINER_H
