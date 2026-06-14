@@ -2,20 +2,12 @@
 #include "ContaView.h"
 #include "Utils.h"
 #include "UtilizadorContainer.h"
-#include <iostream>
-#include <string>
-#include <vector>
 #include "MusicaContainer.h"
 #include "ListaReproducaoContainer.h"
 #include "Artistacontainer.h"
 #include "EditoraContainer.h"
 #include "AlbumContainer.h"
-#include "AlbumContainer.h"
-#include "Artistacontainer.h"
 #include "BaseView.h"
-#include "EditoraContainer.h"
-#include "ListaReproducaoContainer.h"
-#include "MusicaContainer.h"
 #include "repo/Repositorio.h"
 
 
@@ -28,7 +20,7 @@ class Controller{
 		ContaView contaView;
 		Utils utils;
 		BaseView baseView;
-		Utilizador* utilizadorAtual = nullptr;
+		Utilizador* utilizadorAtual;
 
 		void runConta();
 		void runPesquisa();
@@ -45,7 +37,7 @@ class Controller{
 		UtilizadorContainer utilizadorContainer;
 		EditoraContainer editoraContainer;
 		MusicaContainer musicaContainer;
-		ListaReproducaoContainer listaReproducaoContainer; // >>> CORRECAO: nome do membro estava 'listaReproducaoConteiner' (erro de escrita); o Controller.cpp ja usava 'listaReproducaoContainer'
+		ListaReproducaoContainer listaReproducaoContainer;
 		AlbumContainer albumContainer;
 		ArtistaContainer artistaContainer;
 		Repositorio repositorio;

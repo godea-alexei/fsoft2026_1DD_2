@@ -39,7 +39,7 @@ bool Editora::removerArtista(const string &nome) {
 
 Artista *Editora::procurarArtista(const std::string &nome) {
     for (auto& artista : artistas) {
-        if (getNome() == nome) return artista;
+        if (artista->getNome() == nome) return artista;
     }
     return nullptr;
 }

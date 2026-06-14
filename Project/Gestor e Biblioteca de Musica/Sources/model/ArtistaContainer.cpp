@@ -4,8 +4,7 @@
 #include <string>
 #include <algorithm>
 
-// >>> CORRECAO: o construtor e o destrutor estavam declarados em Artistacontainer.h mas nao
-// >>> definidos, causando erro de linking (ArtistaContainer e usado como membro do Controller).
+
 ArtistaContainer::ArtistaContainer() {}
 ArtistaContainer::~ArtistaContainer() {}
 

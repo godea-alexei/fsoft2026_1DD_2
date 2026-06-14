@@ -7,11 +7,10 @@
 
 UtilizadorContainer::UtilizadorContainer(){}
 
-/*
+
 void UtilizadorContainer::adicionarUtilizador(const Utilizador& utilizador) {
     utilizadores.push_back(utilizador);
-};
-*/
+}
 
 //verifica se utilizador com nome=nome existe
 bool UtilizadorContainer::existeUtilizador(const string& nome) const {

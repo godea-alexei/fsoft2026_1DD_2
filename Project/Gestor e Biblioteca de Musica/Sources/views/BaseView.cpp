@@ -8,9 +8,6 @@
 #include "vector"
 
 
-// >>> CORRECAO: os metodos de BaseView estavam definidos como funcoes livres (sem 'BaseView::'),
-// >>> por isso as chamadas baseView.listarObjeto(...) / baseView.listarAtributos(...) ficavam por
-// >>> resolver na ligacao (undefined reference). Adicionado o qualificador 'BaseView::' a todas.
 
 void BaseView::listarObjeto(Artista artista)
 {

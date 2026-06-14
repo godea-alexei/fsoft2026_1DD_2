@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BackendCodeEditorMiscSettings">
-    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="4" type="long" />
+    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="3" type="long" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
   </component>
   <component name="CMakePresetLoader">{
@@ -28,43 +28,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0557b5de-b1c4-4f5c-a039-73671eb434f9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Headers/model/Partilha.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sources/model/Partilha.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dados/Albuns.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dados/Albuns.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dados/Artista.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dados/Editoras.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dados/Editoras.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dados/Listas.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dados/Listas.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dados/Musicas.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dados/Musicas.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dados/Utilizadores.json" beforeDir="false" afterPath="$PROJECT_DIR$/Dados/Utilizadores.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Headers/controllers/Controller.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/controllers/Controller.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/Album.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/Album.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/AlbumContainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/AlbumContainer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/Artista.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/Artista.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/Artistacontainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/Artistacontainer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/Editora.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/Editora.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/EditoraContainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/EditoraContainer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/ListaReproducao.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/ListaReproducao.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/ListaReproducaoContainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/ListaReproducaoContainer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/Musica.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/Musica.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/MusicaContainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/MusicaContainer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/Pessoa.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/Pessoa.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/Utilizador.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/Utilizador.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/model/UtilizadorContainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/model/UtilizadorContainer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Headers/repo/Repositorio.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/repo/Repositorio.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Headers/views/BaseView.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/views/BaseView.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Headers/views/Utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Headers/views/Utils.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/controllers/Controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/controllers/Controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/AlbumContainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/AlbumContainer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/Artista.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/Artista.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/model/Album.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/Album.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/model/ArtistaContainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/ArtistaContainer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/EditoraContainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/EditoraContainer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/ListaReproducao.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/ListaReproducao.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/model/Editora.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/Editora.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/model/ListaReproducaoContainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/ListaReproducaoContainer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/Musica.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/Musica.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/model/MusicaContainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/MusicaContainer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/model/Utilizador.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/Utilizador.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/model/Partilha.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/Partilha.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/model/UtilizadorContainer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/model/UtilizadorContainer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/repo/Repositorio.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/repo/Repositorio.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/views/BaseView.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/views/BaseView.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/views/ContaView.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/views/ContaView.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/views/Utils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/views/Utils.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/views/View.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/views/View.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
@@ -101,6 +84,7 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
@@ -111,7 +95,7 @@
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/godea/Desktop/Final C/Project/Gestor e Biblioteca de Musica&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/godea/Desktop/FINAL DEFINITIVO/Project/Gestor e Biblioteca de Musica&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -128,6 +112,11 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Gestor_e_Biblioteca_de_Musica" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Gestor_e_Biblioteca_de_Musica" TARGET_NAME="Gestor_e_Biblioteca_de_Musica" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Gestor_e_Biblioteca_de_Musica" RUN_TARGET_NAME="Gestor_e_Biblioteca_de_Musica">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -144,6 +133,11 @@
       <workItem from="1781333199551" duration="21198000" />
       <workItem from="1781418046506" duration="3394000" />
       <workItem from="1781421587735" duration="15000" />
+      <workItem from="1781424089955" duration="125000" />
+      <workItem from="1781424278915" duration="1076000" />
+      <workItem from="1781426560683" duration="13000" />
+      <workItem from="1781426591043" duration="5545000" />
+      <workItem from="1781437236914" duration="1612000" />
     </task>
     <servers />
   </component>

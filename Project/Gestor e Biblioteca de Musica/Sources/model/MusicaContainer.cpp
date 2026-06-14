@@ -44,7 +44,7 @@ const std::vector<Musica>& MusicaContainer::getMusicas() const {
 void MusicaContainer::reproduzirMusica(std::string n) {
 
     for (int i = 0; i < musicas.size(); i++) {
-        if (musicas[i].getNome() == n) { // >>> CORRECAO: 'nome' e privado em Musica; usado o getter publico getNome()
+        if (musicas[i].getNome() == n) {
             musicas[i].reproduzir();
         }
     }

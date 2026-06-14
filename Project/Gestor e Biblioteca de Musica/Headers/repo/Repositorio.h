@@ -7,14 +7,9 @@
 #include <EditoraContainer.h>
 #include <Utilizador.h>
 #include "MusicaContainer.h"
-#include "ListaReproducaoContainer.h"
 #include "AlbumContainer.h"
 #include <nlohmann/json.hpp>
-#include <UtilizadorContainer.h>
-
 using json = nlohmann::json;
-using namespace std;
-
 
 
 class Repositorio {
@@ -23,15 +18,13 @@ class Repositorio {
 
         static string diretorioJSON;
 
-        static void carregarMusicas(MusicaContainer mC);
-        static void carregarEditoras(EditoraContainer eC, ArtistaContainer aC);
-        static void carregarArtistas(ArtistaContainer aC, AlbumContainer alC);
-        static void carregarAlbums(AlbumContainer alC, MusicaContainer mC);
-        static void carregarUtilizadores(UtilizadorContainer uC);
-        static void carregarListas(ListaReproducaoContainer lC, MusicaContainer mC);
-        static void carregarAlbuns(AlbumContainer aC);
+        std::vector<Musica> carregarMusicas();
+        std::vector<Editora> carregarEditoras(ArtistaContainer& artistas);
+        std::vector<Artista> carregarArtistas(AlbumContainer& albuns);
+        std::vector<Utilizador> carregarUtilizadores();
+        std::vector<ListaReproducao> carregarListas(MusicaContainer& musicas);
+        std::vector<Album> carregarAlbuns(MusicaContainer& musicas);
 
-        //static void carregarTudo(MusicaContainer mC, EditoraContainer eC, ArtistaContainer aC, AlbumContainer alC, ListaReproducaoContainer lC);
 
         static void guardarMusica(Musica m);
         static void guardarEditora(const Editora& e);
@@ -40,10 +33,6 @@ class Repositorio {
         static void guardarUtilizador(Utilizador u);
         static void guardarLista(ListaReproducao l);
 
-        // >>> CORRECAO: adicionados valores por omissao aos parametros-container destes metodos,
-        // >>> para que as chamadas do Controller com apenas o nome compilem. Os corpos nao foram
-        // >>> alterados: nestes metodos os containers ou estao em codigo ja comentado ou (no caso
-        // >>> da editora) ficam vazios por omissao, preservando o comportamento (eliminacao no JSON).
         static void eliminarMusica(string n);
         static void eliminarEditora(string n);
         static void eliminarArtista(string n);

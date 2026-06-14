@@ -64,9 +64,10 @@ int View::menuLista() {
         cout << "3 - Remover Lista de Reproducao\n";
         cout << "4 - Adicionar Musica a Lista de Reproducao\n";
         cout << "5 - Remover Musica da Lista de Reproducao\n";
+        cout << "6 - Abrir lista de reprodução\n";
         cout << "\n0 - Voltar \n";
         op = Utils::getNumber("Opcao");
-    } while (op < 0 || op > 5);
+    } while (op < 0 || op > 6);
     return op;
 }
 
@@ -144,56 +145,6 @@ int View::menuPartilha() {
 
 
 
-/*
-int View::artistaEmEditora() {
-    int op = -1;
-    do {
-        cout << "\n\n1 - Adicionar Artista a Editora\n";
-        cout << "2 - Remover Artista da Editora\n";
-        cout << "\n0 - Voltar ao Menu de Pesquisa\n";
-        op = Utils::getNumber("Opcao");
-    }
-    while (op < 0 || op > 2);
-    return op;
-}
-
-int View::albumEmArtista() {
-    int op = -1;
-    do {
-        cout << "\n\n1 - Adicionar Album ao Artista\n";
-        cout << "2 - Remover Album do Artista\n";
-        cout << "\n0 - Voltar ao Menu de Pesquisa\n";
-        op = Utils::getNumber("Opcao");
-    }
-    while (op < 0 || op > 2);
-    return op;
-}
-
-//AAAAAAAAAAAAAAAAAa
-int View::musicaEmAlbum() {
-    int op = -1;
-    do {
-        cout << "\n\n1 - Adicionar Musica ao Album\n";
-        cout << "2 - Remover Musica do Album\n";
-        cout << "\n0 - Voltar ao Menu de Pesquisa\n";
-        op = Utils::getNumber("Opcao");
-    }
-    while (op < 0 || op > 2);
-    return op;
-}
-
-int View::musicaEmLista() {
-    int op = -1;
-    do {
-        cout << "\n\n1 - Adicionar Musica a Lista de Reproducao\n";
-        cout << "2 - Remover Musica da Lista de Reproducao\n";
-        cout << "\n0 - Voltar ao Menu de Pesquisa\n";
-        op = Utils::getNumber("Opcao");
-    }
-    while (op < 0 || op > 2);
-    return op;
-}
-*/
 
 
 

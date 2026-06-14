@@ -1,4 +1,3 @@
-#include <list>
 #include <string>
 #include <Album.h>
 using namespace std;

@@ -1,18 +1,19 @@
 #include "ListaReproducaoContainer.h"
 #include <string>
-#include <iostream>
 #include <vector>
-
+#include "Controller.h"
 
 
 void ListaReproducaoContainer::adicionarLista(const ListaReproducao &lista) {
-    listas.push_back(lista);
+        listas.push_back(lista);
+
 }
 
 bool ListaReproducaoContainer::existeLista(const std::string& nome) const{
-    for (const auto& lista : listas) {
-        if (lista.getNome() == nome) return true;
-    }
+        for (const auto& lista : listas) {
+            if (lista.getNome() == nome) return true;
+        }
+
     return false;
 }
 

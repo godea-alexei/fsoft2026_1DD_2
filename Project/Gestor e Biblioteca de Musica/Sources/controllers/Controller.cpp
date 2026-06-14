@@ -13,7 +13,45 @@
 
 
 
-Controller::Controller() {}
+Controller::Controller() {
+
+    vector<Musica> musicas = repositorio.carregarMusicas();
+
+    for (const auto& m : musicas) {
+        musicaContainer.adicionarMusica(m);
+    }
+
+    vector<Album> albuns = repositorio.carregarAlbuns(musicaContainer);
+
+    for (const auto& a : albuns) {
+        albumContainer.adicionarAlbum(a);
+    }
+
+    vector<ListaReproducao> listas = repositorio.carregarListas(musicaContainer);
+
+    for (const auto& l : listas) {
+        listaReproducaoContainer.adicionarLista(l);
+    }
+
+    vector<Artista> artistas = repositorio.carregarArtistas(albumContainer);
+
+    for (const auto& a : artistas) {
+        artistaContainer.adicionarArtista(a);
+    }
+
+    vector<Editora> editoras = repositorio.carregarEditoras(artistaContainer);
+    for (const auto& e : editoras) {
+        editoraContainer.adicionarEditora(e);
+    }
+
+    vector<Utilizador> utilizadores = repositorio.carregarUtilizadores();
+
+    for (const auto& u : utilizadores) {
+        utilizadorContainer.adicionarUtilizador(u);
+    }
+
+
+}
 
 Controller::~Controller(){}
 
@@ -75,7 +113,6 @@ void Controller::runConta() {
 // ─────────────────────────────────────────────
 void Controller::runRegisto() {
 
-    //ContaView contaView;
     string nome = this->contaView.getNome();
     int anoNascimento = this->contaView.getAnoNascimento();
     string palavraPasse = this->contaView.getPalavraPasse();
@@ -93,9 +130,6 @@ void Controller::runRegisto() {
 
     Utilizador utilizador(nome, anoNascimento, palavraPasse);
 
-    //utilizadorContainer.adicionarUtilizador(utilizador);
-    //repositorio.guardarUtilizador(utilizador);
-    //contaView.sucessoRegisto();
     utilizadorContainer.utilizadores.push_back(utilizador);
     repositorio.guardarUtilizador(utilizador);
     cout<<"utilizador registado com sucesso";
@@ -106,21 +140,14 @@ void Controller::runRegisto() {
 // ─────────────────────────────────────────────
 void Controller::runLogin() {
 
-    //ContaView contaView;
-    //bool isLogged = false;
     string nome = contaView.getNome();
     string palavraPasse = contaView.getPalavraPasse();
 
     if (utilizadorContainer.autenticar(nome, palavraPasse)) {
-        //Utilizador* u = utilizadorContainer.procurarUtilizador(nome);
         utilizadorAtual = utilizadorContainer.procurarUtilizador(nome);
         contaView.sucessoLogin();
-        //cout << "Bem vindo/a, " << nome << "!!" << endl;
-        //isLogged = true;
         run();
     }else contaView.falhaLogin();
-
-    //if (isLogged == true) run();
 
 }
 
@@ -128,7 +155,7 @@ void Controller::runLogin() {
 
 
 // ─────────────────────────────────────────────
-//  ESCOLHER PESQUISA  (1º nível — tipo de pesquisa)
+//  ESCOLHER PESQUISA
 // ─────────────────────────────────────────────
 void Controller::runEscolherPesquisa() {
     int op = -1;
@@ -143,7 +170,6 @@ void Controller::runEscolherPesquisa() {
                         cout << "Musica nao existe.\n";
                         break;}
                     baseView.listarAtributos(*musica);
-                    //runMusica();
                     break;
                 }
             case 2: // procurar album
@@ -157,7 +183,6 @@ void Controller::runEscolherPesquisa() {
                     }
 
                     baseView.listarAtributos(*album);
-                    //runAlbum();
                     break;
                 }
 
@@ -170,7 +195,6 @@ void Controller::runEscolherPesquisa() {
                         break;
                     }
                     baseView.listarAtributos(*editora);
-                    //runEditora();
                     break;
                 }
 
@@ -182,7 +206,6 @@ void Controller::runEscolherPesquisa() {
                     break;
                 }
                 baseView.listarAtributos(*artista);
-                //runArtista();
                 break;
             }
             case 5: {
@@ -193,7 +216,6 @@ void Controller::runEscolherPesquisa() {
                     break;
                 }
                 baseView.listarAtributos(*listaReproducao);
-                //runListaReproducao();
                 break;
             }
             default:
@@ -201,7 +223,6 @@ void Controller::runEscolherPesquisa() {
         }
     } while(op != 0);
 }
-
 
 
 
@@ -256,13 +277,13 @@ void Controller::runListaReproducao() {
 
                     string nome = Utils::getString("Digite o nome da Lista de Reproducao que quer remover");
 
-                    if (listaReproducaoContainer.removerLista(nome)) {
-                        repositorio.eliminarLista(nome);
-                        cout << "A Lista de Reproducao " << nome << " foi removida com sucesso." << endl;
+                    if (listaReproducaoContainer.existeLista(nome) && listaReproducaoContainer.procurar(nome)->criador == utilizadorAtual->getNome()) {
+                        if (listaReproducaoContainer.removerLista(nome)) {
+                            repositorio.eliminarLista(nome);
+                            cout << "A Lista de Reproducao " << nome << " foi removida com sucesso." << endl;
+                        }
                     }
-                    else
-                        cout << "A Lista de Reproducao nao foi encontrada." << endl;
-
+                    cout << "A Lista de Reproducao nao foi encontrada." << endl;
                     break;
 
             }
@@ -290,6 +311,9 @@ void Controller::runListaReproducao() {
                 listaReproducao->adicionarMusica(musica);
                 repositorio.eliminarLista(nomeLista);
                 repositorio.guardarLista(*listaReproducao);
+                ListaReproducao a = *listaReproducao;
+                listaReproducaoContainer.removerLista(nomeMusica);
+                listaReproducaoContainer.adicionarLista(a);
                 cout << "Musica adicionada com sucesso! " << endl;
                 break;
 
@@ -317,9 +341,21 @@ void Controller::runListaReproducao() {
                 listaReproducao->removerMusica(nomeMusica);
                 repositorio.eliminarLista(nomeLista);
                 repositorio.guardarLista(*listaReproducao);
+                ListaReproducao a = *listaReproducao;
+                listaReproducaoContainer.removerLista(nomeMusica);
+                listaReproducaoContainer.adicionarLista(a);
                 cout << "Musica removida com sucesso! " << endl;
                 break;
 
+            }case 6: { //ver musicas numa playlist
+                string nomeLista = Utils::getString("Insira o nome da Lista");
+                ListaReproducao* listaReproducao = listaReproducaoContainer.procurar(nomeLista);
+                if (listaReproducao == nullptr) {
+                    cout << "Nao existe.\n";
+                    break;
+                }
+                baseView.listarAtributos(*listaReproducao);
+                break;
             }
             default:
                 break;
@@ -476,6 +512,9 @@ void Controller::runAlbum() {
                 album->adicionarMusica(musica);
                 repositorio.eliminarAlbum(nomeAlbum);
                 repositorio.guardarAlbum(*album);
+                Album a = *album;
+                albumContainer.removerAlbum(nomeAlbum);
+                albumContainer.adicionarAlbum(a);
                 cout << "Musica adicionada com sucesso! " << endl;
                 break;
             }
@@ -502,6 +541,9 @@ void Controller::runAlbum() {
                 album->removerMusica(nomeMusica);
                 repositorio.eliminarAlbum(nomeAlbum);
                 repositorio.guardarAlbum(*album);
+                Album a = *album;
+                albumContainer.removerAlbum(nomeAlbum);
+                albumContainer.adicionarAlbum(a);
                 cout << "Musica removida com sucesso! " << endl;
                 break;
             }
@@ -579,6 +621,10 @@ void Controller::runEditora() {
                 editora->adicionarArtista(artista);
                 repositorio.eliminarEditora(nomeEditora);
                 repositorio.guardarEditora(*editora);
+                Editora a = *editora;
+                editoraContainer.removerEditora(nomeEditora);
+                editoraContainer.adicionarEditora(a);
+
                 cout << "Artista adicionado com sucesso! " << endl;
                 break;
 
@@ -607,6 +653,9 @@ void Controller::runEditora() {
                 editora->removerArtista(nomeA);
                 repositorio.eliminarEditora(nomeEditora);
                 repositorio.guardarEditora(*editora);
+                Editora a = *editora;
+                editoraContainer.removerEditora(nomeEditora);
+                editoraContainer.adicionarEditora(a);
                 cout << "Artista removido com sucesso! " << endl;
                 break;
 
@@ -671,7 +720,7 @@ void Controller::runArtista() {
                 break;
 
             }
-            case 4: {
+            case 4: { //adicionar album ao artista
 
                 string nomeArtista = Utils::getString("Insira o nome do Artista: ");
                 Artista* artista = artistaContainer.procurarArtista(nomeArtista);
@@ -694,12 +743,15 @@ void Controller::runArtista() {
                 artista->adicionarAlbum(album);
                 repositorio.eliminarArtista(nomeArtista);
                 repositorio.guardarArtista(*artista);
+                Artista a = *artista;
+                artistaContainer.removerArtista(nomeArtista);
+                artistaContainer.adicionarArtista(a);
                 cout << "Album adicionado com sucesso! " << endl;
 
                 break;
 
             }
-            case 5: {
+            case 5: { //remover album do artista
 
                 string nomeArtista = Utils::getString("Insira o nome do Artista: ");
                 Artista* artista = artistaContainer.procurarArtista(nomeArtista);
@@ -723,6 +775,9 @@ void Controller::runArtista() {
                 artista->removerAlbum(nomeAlbum);
                 repositorio.eliminarArtista(nomeArtista);
                 repositorio.guardarArtista(*artista);
+                Artista a = *artista;
+                artistaContainer.removerArtista(nomeArtista);
+                artistaContainer.adicionarArtista(a);
                 cout << "Album removido com sucesso! " << endl;
 
                 break;
