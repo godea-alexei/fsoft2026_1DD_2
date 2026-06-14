@@ -5,34 +5,44 @@
 #include "Musica.h"
 #include "Editora.h"
 #include "iostream"
-#include "list"
+#include "vector"
 
 
+// >>> CORRECAO: os metodos de BaseView estavam definidos como funcoes livres (sem 'BaseView::'),
+// >>> por isso as chamadas baseView.listarObjeto(...) / baseView.listarAtributos(...) ficavam por
+// >>> resolver na ligacao (undefined reference). Adicionado o qualificador 'BaseView::' a todas.
 
-void listarObjeto(Artista artista)
+void BaseView::listarObjeto(Artista artista)
 {
     std::cout << "Artista: " << artista.nome << std::endl;
 }
-void listarObjeto(ListaReproducao listaReproducao)
+
+void BaseView::listarObjeto(ListaReproducao listaReproducao)
 {
     std::cout << "Lista de Reproducao: " << listaReproducao.getNome() << std::endl;
 }
-void listarObjeto(Album album)
+
+void BaseView::listarObjeto(Album album)
 {
     std::cout << "Album: " << album.getNome() << std::endl;
 }
-void listarObjeto(Musica musica)
+void BaseView::listarObjeto(Musica musica)
 {
     std::cout << "Musica: " << musica.getNome() << std::endl;
 }
-void listarObjeto(Editora editora)
+
+void BaseView::listarObjeto(Editora editora)
 {
     std::cout << "Editora: " << editora.nome << std::endl;
 }
 
 
 
-void listarAtributos(Artista artista)
+
+
+
+
+void BaseView::listarAtributos(Artista artista)
 {
     std::cout << "Nome: " << artista.nome << std::endl;
     std::cout << "Idade: " << artista.getIdade() << std::endl;
@@ -46,9 +56,10 @@ void listarAtributos(Artista artista)
     }
 }
 
-void listarAtributos(ListaReproducao listaReproducao)
+void BaseView::listarAtributos(ListaReproducao listaReproducao)
 {
     std::cout << "Nome: " << listaReproducao.getNome() << std::endl;
+    std::cout << "Ano de criacao: " << listaReproducao.getDataCriacao() << std::endl;
     std::cout << "Duracao: " << listaReproducao.getDuracao() << std::endl;
     std::cout << "Audio: " << std::endl;
     if (listaReproducao.getMusicas().size() > 0){
@@ -60,10 +71,10 @@ void listarAtributos(ListaReproducao listaReproducao)
     }
 }
 
-void listarAtributos(Album album)
+void BaseView::listarAtributos(Album album)
 {
     std::cout << "Nome: " << album.getNome() << std::endl;
-    std::cout << "Ano de lancamento: " << album.getAnoLancamento() << std::endl;
+    std::cout << "Ano de lancamento: " << album.getDataCriacao() << std::endl;
     std::cout << "Duracao: " << album.getDuracao() << std::endl;
     std::cout << "Audio: " << std::endl;
     if (album.getMusicas().size() > 0){
@@ -71,20 +82,22 @@ void listarAtributos(Album album)
             std::cout << "Nome da Musica: " << musica->getNome()  << std::endl;
         }
     }else {
-        std::cout << "A lista de reproducao nao possui musicas" << std::endl;
+        std::cout << "Album nao possui musicas" << std::endl;
     }
 }
 
-void BaseView::listarAtributos(Musica* musica)
+void BaseView::listarAtributos(Musica musica)
 {
-    cout << ">>> " << musica->getNome() << " <<<" << endl;
-    cout << "Duracao: " << musica->getDuracao() << " minutos" <<endl;
-    cout << "Ano de Lancamento: " << musica->getAnoDeLancamento() << endl;
-    cout << "Genero: " << musica->getGenero() << endl;
-    cout << "Artista: " << musica->getNomeArtista() << endl;
+    std::cout << "Nome: " << musica.getNome() << std::endl;
+    std::cout << "Duração: " << musica.getDuracao() << std::endl;
+    std::cout << "Ano de Lançamento: " << musica.getAnoDeLancamento() << std::endl;
+    std::cout << "Letra: " << musica.getLetra() << std::endl;
+    std::cout << "Género: " << musica.getGenero() << std::endl;
+    std::cout << "Caminho: " << musica.getCaminho() << std::endl;
+    std::cout << "Artista: " << musica.getNomeArtista() << std::endl;
 }
 
-void listarAtributos(Editora editora)
+void BaseView::listarAtributos(Editora editora)
 {
 
     std::cout << "Nome da Editora: " << editora.getNome() << std::endl;

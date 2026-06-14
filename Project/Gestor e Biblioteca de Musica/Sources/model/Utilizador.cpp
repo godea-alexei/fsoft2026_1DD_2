@@ -1,24 +1,21 @@
 #include "Utilizador.h"
-using namespace std;
 
 Utilizador::Utilizador(){};
 
-Utilizador::Utilizador(
-    string nome,
-    int anoNascimento,
-    string palavraPasse)
-    :Pessoa(nome, anoNascimento)
-{
+Utilizador::Utilizador(std::string nome, int anoNascimento, std::string palavraPasse) : Pessoa(nome, anoNascimento){
     this->palavraPasse = palavraPasse;
 }
+
+Utilizador::~Utilizador(){}
 
 string Utilizador::getPalavraPasse() const {
     return palavraPasse;
 }
 
+//verifica se as passes inseridas sao iguais
 bool Utilizador::validarPalavraPasse(
-    const string& pass,
-    const string& confirmacao) {
+    const std::string& pass,
+    const std::string& confirmacao) {
     if (pass != confirmacao) return false;
 
     if (pass.length() < 1) return false;

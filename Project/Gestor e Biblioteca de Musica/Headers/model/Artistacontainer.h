@@ -1,22 +1,33 @@
 #ifndef ARTISTACONTAINER_H
 #define ARTISTACONTAINER_H
-
+#include <string>
 #include <vector>
 #include "Artista.h"
 
+
+
 class ArtistaContainer {
-private:
-    std::vector<Artista> artistas;
 
-public:
-    void adicionarArtista(const Artista& artista);
+    public:
 
-    bool removerArtista(const std::string& nome);
+        vector<Artista> artistas;
 
-    bool existeArtista(const std::string& nome) const;
+        ArtistaContainer();
+        ~ArtistaContainer();
 
-    Artista* procurarArtista(const std::string& nome);
+    /*
+        void adicionarArtista(string nome, int ano);
+        void removerArtista(string nome);
+        Artista* procurarArtista(string nome);
+        vector<Artista*>& getAll();
+    */
 
-    const std::vector<Artista>& getArtistas() const;
+        void adicionarArtista(const Artista& artista);
+        bool removerArtista(const std::string& nome);
+        Artista* procurarArtista(const std::string& nome);
+        const std::vector<Artista>& getArtistas() const;
+        bool existeArtista(const std::string& nome);
+
 };
+
 #endif

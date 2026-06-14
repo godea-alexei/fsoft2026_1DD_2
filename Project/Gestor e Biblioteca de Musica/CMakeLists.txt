@@ -60,7 +60,9 @@ add_executable(Gestor_e_Biblioteca_de_Musica
         Sources/exceptions/ForaDosLimites.cpp
         Headers/exceptions/ForaDosLimites.h
         Sources/exceptions/InseridoTipoIncorreto.cpp
-        Headers/exceptions/InseridoTipoIncorreto.h)
+        Headers/exceptions/InseridoTipoIncorreto.h
+        Sources/model/Partilha.cpp
+        Headers/model/Partilha.h)
 
 target_link_libraries(Gestor_e_Biblioteca_de_Musica winmm)
 

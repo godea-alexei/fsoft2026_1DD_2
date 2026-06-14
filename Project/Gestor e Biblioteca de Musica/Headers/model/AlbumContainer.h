@@ -2,21 +2,24 @@
 #define ALBUMCONTAINER_H
 #include "Album.h"
 #include <vector>
+#include <string>
+#include <iostream>
 
 class AlbumContainer {
-private:
-        std::vector<Album> albuns;
 
-public:
-        void adicionarAlbum(const Album& album);
+        public:
 
-        bool removerAlbum(const string& nome);
+                std::vector<Album> albuns;
 
-        bool existeAlbum(const string& nome) const;
+                void adicionarAlbum(const Album& album);
 
-        Album* procurarAlbum(const string& nome);
+                bool removerAlbum(const string& nome);
 
-        const std::vector<Album>& getAlbuns() const;
+                bool existeAlbum(const string& nome) const;
+
+                Album* procurarAlbum(const string& nome);
+
+                const std::vector<Album>& getAlbuns() const;
 };
 
 #endif //ALBUMCONTAINER_H

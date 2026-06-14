@@ -2,14 +2,14 @@
 #include <list>
 #include <Musica.h>
 #include <ListaReproducao.h>
-using namespace std;
 
-ListaReproducao::ListaReproducao() {
 
-}
 
-ListaReproducao::ListaReproducao(string nome, string criador) {
+ListaReproducao::ListaReproducao(){}
+
+ListaReproducao::ListaReproducao(std::string nome, int dataCriacao, std::string criador) {
     this->nome = nome;
+    this->dataCriacao = dataCriacao;
     this->criador = criador;
 }
 
@@ -19,6 +19,10 @@ string ListaReproducao::getNome() const {
 
 string ListaReproducao::getCriador() const {
     return criador;
+}
+
+int ListaReproducao::getDataCriacao() const {
+    return dataCriacao;
 }
 
 int ListaReproducao::getDuracao() const {
@@ -51,7 +55,7 @@ Musica *ListaReproducao::procurarMusica(const std::string& titulo) {
 }
 
 
-bool ListaReproducao::removerMusica(const string& titulo) {
+bool ListaReproducao::removerMusica(const std::string& titulo) {
     for (auto it =  musicas.begin(); it != musicas.end(); it++) {
         if ((*it)->getNome() == titulo) {
             musicas.erase(it);
@@ -64,10 +68,5 @@ bool ListaReproducao::removerMusica(const string& titulo) {
 const vector<Musica*>& ListaReproducao::getMusicas() const {
     return musicas;
 }
-
-
-
-
-
 
 ListaReproducao::~ListaReproducao(){}

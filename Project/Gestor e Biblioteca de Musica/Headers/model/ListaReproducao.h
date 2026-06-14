@@ -1,10 +1,8 @@
 #ifndef LISTADEREPRODUCAO_H
 #define LISTADEREPRODUCAO_H
 #include <string>
-#include <list>
 #include <Musica.h>
 #include <vector>
-#include <Utilizador.h>
 using namespace  std;
 
 
@@ -13,15 +11,19 @@ class ListaReproducao {
   public:
   
     std::string nome;
+    int dataCriacao;
     std::string criador;
     vector<Musica*> musicas;
     int duracao;
+    //int anoCriacao;
   
     ListaReproducao();
 
-    ListaReproducao(std::string nome, std::string criador);
+    ListaReproducao(std::string nome , int dataCriacao, std::string criador);
 
     std::string getNome() const;
+
+    int getDataCriacao() const;
 
     int getDuracao() const;
 

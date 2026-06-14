@@ -1,21 +1,21 @@
 #include "Musica.h"
 #include <string>
 #include <iostream>
-#include "windows.h"
-#include <shellapi.h>
+#include <sstream>
 
-using namespace std;
+
 
 Musica::Musica(){}
 
 Musica::Musica(
-    string nome,
+    std::string nome,
     int duracao,
     int anoDeLancamento,
-    string letra,
-    string genero,
-    string caminho,
-    string nomeArtista){
+    std::string letra,
+    std::string genero,
+    std::string caminho,
+    std::string nomeArtista){
+
     this->nome = nome;
     this->duracao = duracao;
     this->anoDeLancamento = anoDeLancamento;
@@ -23,13 +23,14 @@ Musica::Musica(
     this->genero = genero;
     this->caminho = caminho;
     this->nomeArtista = nomeArtista;
+
 };
 
 Musica::~Musica(){}
 
-string Musica::verLetra(){
+std::string Musica::getLetra() const {
 
-    cout << letra << endl;
+    std::cout << letra << std::endl;
     return letra;
 
 };
@@ -38,37 +39,36 @@ int Musica::getDuracao() const {
     return duracao;
 }
 
-string Musica::getNome() const {
+std::string Musica::getNome() const {
     return nome;
 }
 
-void Musica::reproduzir() const
-{
-    ShellExecute(
-        NULL,
-        "open",
-        caminho.c_str(),
-        NULL,
-        NULL,
-        SW_SHOWNORMAL);
-}
+void Musica::reproduzir(){
+    std::string comando = "start \"\" \"" + caminho + "\"";
+    system(comando.c_str());
+
+};
 
 int Musica::getAnoDeLancamento() const {
     return anoDeLancamento;
 }
 
-string Musica::getCaminho() const {
+std::string Musica::getCaminho() const {
     return caminho;
 }
 
-string Musica::getGenero() const {
+std::string Musica::getGenero() const {
     return genero;
-}
-
-string Musica::getLetra() const {
-    return letra;
 }
 
 std::string Musica::getNomeArtista() const {
     return nomeArtista;
 }
+
+
+
+
+
+
+
+

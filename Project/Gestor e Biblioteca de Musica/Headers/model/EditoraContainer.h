@@ -1,23 +1,25 @@
 #ifndef EDITORACONTAINER_H
 #define EDITORACONTAINER_H
-
 #include <vector>
+#include <string>
 #include "Editora.h"
 
 class EditoraContainer {
-private:
-    std::vector<Editora> editoras;
 
-public:
-    void adicionarEditora(const Editora& editora);
+    public:
 
-    bool existeEditora(const string& nome) const;
+        std::vector<Editora> editoras;
 
-    bool removerEditora(const string& nome);
+        void adicionarEditora(const Editora& editora);
 
-    const vector<Editora>& getEditoras() const;
+        bool existeEditora(const string& nome) const;
 
-    Editora* procurar(const std::string& nome);
+        bool removerEditora(const string& nome);
+
+        const vector<Editora>& getEditoras() const;
+
+        Editora* procurar(const std::string& nome);
+
 };
 
 #endif //EDITORACONTAINER_H

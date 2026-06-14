@@ -11,7 +11,6 @@ public:
     static bool validarPass(const std::string& s);
     static std::string getString(const std::string& s);
     static int getNumber(const std::string& s);
-    static void printMessage(std::string& msg);
 };
 
 
