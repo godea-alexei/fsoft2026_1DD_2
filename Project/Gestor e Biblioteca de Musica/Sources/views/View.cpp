@@ -137,9 +137,10 @@ int View::menuPartilha() {
         cout << "\n\n>>> Opcoes - Partilha <<<\n";
         cout << "1 - Partilhar Musica\n";
         cout << "2 - Partilhar Lista de Reproducao\n";
+        cout << "3 - Listar musicas partilhadas\n";
         cout << "\n0 - Voltar \n";
         op = Utils::getNumber("Opcao");
-    } while (op < 0 || op > 2);
+    } while (op < 0 || op > 3);
     return op;
 }
 

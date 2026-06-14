@@ -934,6 +934,13 @@ void Controller::runPartilhar() {
                 Utils::printMessage(msg);
 
                 break;
+            }case 3: { //listar musicas partilhadas
+
+                for (auto& m : utilizadorAtual->musicasPartilhadas) {
+                    std::cout << m << std::endl;
+                    std::cout << "---------------------------------------" << std::endl;
+                }
+                break;
             }
             default:
                 break;
