@@ -52,14 +52,6 @@ add_executable(Gestor_e_Biblioteca_de_Musica
         Headers/views/BaseView.h
         Sources/repo/Repositorio.cpp
         Headers/repo/Repositorio.h
-        Sources/exceptions/ElementoJaExiste.cpp
-        Headers/exceptions/ElementoJaExiste.h
-        Sources/exceptions/ElementoNaoExiste.cpp
-        Headers/exceptions/ElementoNaoExiste.h
-        Sources/exceptions/ForaDosLimites.cpp
-        Headers/exceptions/ForaDosLimites.h
-        Sources/exceptions/InseridoTipoIncorreto.cpp
-        Headers/exceptions/InseridoTipoIncorreto.h
         Sources/model/Partilha.cpp
         Headers/model/Partilha.h)
 target_link_libraries(Gestor_e_Biblioteca_de_Musica winmm)
